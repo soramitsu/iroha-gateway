@@ -1,0 +1,6 @@
+package: github.com/soramitsu/iroha-gateway
+import:
+- package: github.com/goadesign/goa
+  version: v1.2.0
+  subpackages:
+  - design/apidsl
