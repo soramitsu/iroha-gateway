@@ -32,4 +32,5 @@ const (
 	descriptionPermissionSubtract              = "ability to remove some amount from account"
 	descriptionPermissionRead                  = "ability to access some amount from account"
 	descriptionPermissionAssetName             = "asset name"
+	descriptionSignatory                       = "URL encoded signatory"
 )

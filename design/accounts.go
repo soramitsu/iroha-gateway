@@ -78,7 +78,7 @@ var _ = Resource("accounts", func() {
 		Routing(POST("/"))
 		Description("add an account")
 		Payload(AddAccountRequest)
-		Response(Created)
+		Response(Created, MessageResponse)
 		Response(BadRequest, MessageResponse)
 		Response(InternalServerError, MessageResponse)
 	})
@@ -105,7 +105,7 @@ var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
 	Attribute("timestamp", String, func() {
 		Description(descriptionTimestamp)
 		Example(exampleTimestamp)
-		Pattern(`[0-9]{1,18}`)
+		Pattern(timestampPattern)
 	})
 
 	Required("alias", "creator", "hash", "signature", "timestamp")

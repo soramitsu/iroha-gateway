@@ -610,6 +610,37 @@ definitions:
     - timestamp
     title: DeleteAccountRequest
     type: object
+  DeleteSignatoryRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      timestamp: "1494693347"
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: DeleteSignatoryRequest
+    type: object
   Message:
     description: Basic response (default view)
     example:
@@ -918,6 +949,85 @@ definitions:
     - asset
     title: Permissions
     type: object
+  Signatories:
+    description: Signatories media type (default view)
+    example:
+      code: 200
+      message: success
+      signatories:
+      - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+    properties:
+      code:
+        description: response code
+        example: 200
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: success
+        type: string
+      signatories:
+        example:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          example: In minima quod fugiat quasi.
+          type: string
+        type: array
+    required:
+    - message
+    - code
+    - signatories
+    title: 'Mediatype identifier: application/vnd.signatories+json; view=default'
+    type: object
+  SignatoryRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signatories:
+      - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      timestamp: "1494693347"
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      signatories:
+        description: Account Signatories
+        example:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          example: Culpa distinctio.
+          type: string
+        type: array
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - signatories
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: SignatoryRequest
+    type: object
   UpdateAccountRequest:
     example:
       alias: sate
@@ -956,6 +1066,44 @@ definitions:
     - timestamp
     title: UpdateAccountRequest
     type: object
+  UpdateQuorumRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      quorum: 1
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      timestamp: "1494693347"
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      quorum:
+        description: 最低限必要な数
+        example: 1
+        format: int64
+        type: integer
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - quorum
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: UpdateQuorumRequest
+    type: object
 host: localhost:8080
 info:
   title: The Iroha API
@@ -966,8 +1114,8 @@ paths:
       description: get all accounts
       operationId: accounts#getAll
       produces:
-      - application/vnd.message+json
       - application/vnd.accounts+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
@@ -1000,6 +1148,8 @@ paths:
       responses:
         "201":
           description: Created
+          schema:
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
@@ -1072,8 +1222,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.account+json
       - application/vnd.message+json
+      - application/vnd.account+json
       responses:
         "200":
           description: OK
@@ -1127,14 +1277,164 @@ paths:
       summary: update accounts
       tags:
       - accounts
+  /accounts/{target}/quorum:
+    put:
+      operationId: quorum#update
+      parameters:
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateQuorumRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: update quorum
+      tags:
+      - quorum
+  /accounts/{target}/signatories:
+    get:
+      operationId: signatories#getAll
+      parameters:
+      - description: Public key of URL-encoded creator's account
+        in: query
+        name: creator
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: false
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.signatories+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Signatories'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll signatories
+      tags:
+      - signatories
+    post:
+      operationId: signatories#add
+      parameters:
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/SignatoryRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: add signatories
+      tags:
+      - signatories
+  /accounts/{target}/signatories/{sig}:
+    delete:
+      operationId: signatories#delete
+      parameters:
+      - description: URL encoded signatory
+        in: path
+        name: sig
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteSignatoryRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: delete signatories
+      tags:
+      - signatories
 produces:
 - application/json
 - application/xml
 - application/gob
 - application/x-gob
-responses:
-  Created:
-    description: Created
 schemes:
 - http
 swagger: "2.0"

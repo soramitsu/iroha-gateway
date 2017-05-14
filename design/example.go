@@ -15,6 +15,7 @@ const (
 	examplePermissionDomainName = "sampleledger"    // TODO
 	examplePermissionLedgerName = "sampledomain"    // TODO
 	examplePermissionAssetName  = "sampleassetname" // TODO
+	exampleSignatory = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D"
 )
 
 var (
