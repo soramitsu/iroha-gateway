@@ -24,6 +24,8 @@ const (
 	exampleAssetValue           = 10.1
 	exampleAssetSender          = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
 	exampleAssetReceiver        = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
+	exampleTransactionCommand   = "PUT/accounts"
+	exampleTransactionPublicKey = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
 )
 
 var (

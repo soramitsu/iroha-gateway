@@ -35,7 +35,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Commodi rerum quisquam distinctio.
+          example: Quisquam distinctio rerum et debitis.
           type: string
         type: array
     required:
@@ -133,7 +133,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Et debitis perspiciatis.
+          example: Culpa distinctio.
           type: string
         type: array
     required:
@@ -1225,7 +1225,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Quasi asperiores suscipit nihil occaecati.
+          example: Suscipit nihil occaecati sit facilis magnam.
           type: string
         type: array
     required:
@@ -1260,7 +1260,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Distinctio rerum in minima quod.
+          example: In minima quod fugiat quasi.
           type: string
         type: array
       signature:
@@ -1280,6 +1280,135 @@ definitions:
     - signature
     - timestamp
     title: SignatoryRequest
+    type: object
+  Signature:
+    example:
+      publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      timestamp: "1494693347"
+    properties:
+      publicKey:
+        description: transaction's public key
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - publicKey
+    - signature
+    - timestamp
+    title: Signature
+    type: object
+  Transaction:
+    example:
+      command: PUT/accounts
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signatures:
+      - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        timestamp: "1494693347"
+      timestamp: "1494693347"
+    properties:
+      command:
+        description: transaction's command type
+        example: PUT/accounts
+        type: string
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      signatures:
+        example:
+        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+          timestamp: "1494693347"
+        items:
+          $ref: '#/definitions/Signature'
+        type: array
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - command
+    - creator
+    - hash
+    - signatures
+    - timestamp
+    title: Transaction
+    type: object
+  Transactions:
+    description: Transactions media type (default view)
+    example:
+      code: 200
+      message: success
+      transactions:
+      - command: PUT/accounts
+        creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        signatures:
+        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+          timestamp: "1494693347"
+        timestamp: "1494693347"
+      - command: PUT/accounts
+        creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        signatures:
+        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+          timestamp: "1494693347"
+        timestamp: "1494693347"
+    properties:
+      code:
+        description: response code
+        example: 200
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: success
+        type: string
+      transactions:
+        example:
+        - command: PUT/accounts
+          creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+          signatures:
+          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+            signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+            timestamp: "1494693347"
+          timestamp: "1494693347"
+        - command: PUT/accounts
+          creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+          signatures:
+          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+            signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+            timestamp: "1494693347"
+          timestamp: "1494693347"
+        items:
+          $ref: '#/definitions/Transaction'
+        type: array
+    required:
+    - message
+    - code
+    - transactions
+    title: 'Mediatype identifier: application/vnd.transactions+json; view=default'
     type: object
   UpdateAccountRequest:
     example:
@@ -1964,6 +2093,53 @@ paths:
       summary: transfer assets
       tags:
       - assets
+  /transactions/{asset_uri}:
+    get:
+      operationId: transactions#getAll
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - description: Public key of creator's account
+        in: query
+        name: creator
+        required: true
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: query
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.transactions+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Transactions'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll transactions
+      tags:
+      - transactions
 produces:
 - application/json
 - application/xml

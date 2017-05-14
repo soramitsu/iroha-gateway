@@ -41,4 +41,6 @@ const (
 	descriptionAssetValue                      = "asset's value"
 	descriptionAssetSender                     = "sender's public key"
 	descriptionAssetReceiver                   = "receiver's public key"
+	descriptionTransactionCommand              = "transaction's command type"
+	descriptionTransactionPublicKey              = "transaction's public key"
 )
