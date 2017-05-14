@@ -35,7 +35,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Dolor commodi.
+          example: Commodi rerum quisquam distinctio.
           type: string
         type: array
     required:
@@ -133,7 +133,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Quisquam distinctio rerum et debitis.
+          example: Et debitis perspiciatis.
           type: string
         type: array
     required:
@@ -579,6 +579,228 @@ definitions:
     - account
     title: AddAccountRequest
     type: object
+  Asset:
+    example:
+      description: This is sample asset description.
+      domain_name: sampleDomainName
+      ledger_name: sampleLedgerName
+      name: sampleAssetName
+    properties:
+      description:
+        description: asset's description
+        example: This is sample asset description.
+        type: string
+      domain_name:
+        description: domain name to which asset belongs
+        example: sampleDomainName
+        type: string
+      ledger_name:
+        description: ledger name to which asset belongs
+        example: sampleLedgerName
+        type: string
+      name:
+        description: asset name
+        example: sampleAssetName
+        type: string
+    required:
+    - name
+    - domain_name
+    - ledger_name
+    title: Asset
+    type: object
+  AssetTransferRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      receiver: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      sender: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+      timestamp: "1494693347"
+      value: 10.1
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      receiver:
+        description: receiver's public key
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      sender:
+        description: sender's public key
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      target:
+        description: Public key of URL-encoded target's account
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+        pattern: '[0-9a-zA-Z-_.~]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+      value:
+        description: asset's value
+        example: 10.1
+        format: double
+        type: number
+    required:
+    - value
+    - sender
+    - receiver
+    - target
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: AssetTransferRequest
+    type: object
+  AssetValueRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+      timestamp: "1494693347"
+      value: 10.1
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      target:
+        description: Public key of URL-encoded target's account
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+        pattern: '[0-9a-zA-Z-_.~]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+      value:
+        description: asset's value
+        example: 10.1
+        format: double
+        type: number
+    required:
+    - value
+    - target
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: AssetValueRequest
+    type: object
+  Assets:
+    description: Assets media type (default view)
+    example:
+      assets:
+      - description: This is sample asset description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleAssetName
+      - description: This is sample asset description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleAssetName
+      code: 200
+      message: success
+    properties:
+      assets:
+        example:
+        - description: This is sample asset description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleAssetName
+        - description: This is sample asset description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleAssetName
+        items:
+          $ref: '#/definitions/Asset'
+        type: array
+      code:
+        description: response code
+        example: 200
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: success
+        type: string
+    required:
+    - message
+    - code
+    - assets
+    title: 'Mediatype identifier: application/vnd.assets+json; view=default'
+    type: object
+  CreateAssetRequest:
+    example:
+      asset:
+        description: This is sample asset description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleAssetName
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+      timestamp: "1494693347"
+    properties:
+      asset:
+        $ref: '#/definitions/Asset'
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      target:
+        description: Public key of URL-encoded target's account
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+        pattern: '[0-9a-zA-Z-_.~]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - target
+    - creator
+    - hash
+    - signature
+    - timestamp
+    - asset
+    title: CreateAssetRequest
+    type: object
   DeleteAccountRequest:
     example:
       creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -609,6 +831,37 @@ definitions:
     - signature
     - timestamp
     title: DeleteAccountRequest
+    type: object
+  DeleteAssetRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      timestamp: "1494693347"
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: DeleteAssetRequest
     type: object
   DeleteSignatoryRequest:
     example:
@@ -972,7 +1225,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: In minima quod fugiat quasi.
+          example: Quasi asperiores suscipit nihil occaecati.
           type: string
         type: array
     required:
@@ -1007,7 +1260,7 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         items:
-          example: Culpa distinctio.
+          example: Distinctio rerum in minima quod.
           type: string
         type: array
       signature:
@@ -1066,6 +1319,43 @@ definitions:
     - timestamp
     title: UpdateAccountRequest
     type: object
+  UpdateAssetRequest:
+    example:
+      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      description: This is sample asset description.
+      hash: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+      signature: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+      timestamp: "1494693347"
+    properties:
+      creator:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      description:
+        description: asset's description
+        example: This is sample asset description.
+        type: string
+      hash:
+        description: Transaction hash
+        example: e7e54a9e99df6d0519c0539ced3a81192e746d0de8fb688dc1a1848facc6c535
+        type: string
+      signature:
+        description: Transaction signature
+        example: jRTufWBBBN3UgkIfKER+R7BU+JLacUurgcNwbnd4diIDJwkp6fB4lBjHAN1CIiJS/LES4K2i6jcKbFxP+iLrAA==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - description
+    - creator
+    - hash
+    - signature
+    - timestamp
+    title: UpdateAssetRequest
+    type: object
   UpdateQuorumRequest:
     example:
       creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -1114,8 +1404,8 @@ paths:
       description: get all accounts
       operationId: accounts#getAll
       produces:
-      - application/vnd.accounts+json
       - application/vnd.message+json
+      - application/vnd.accounts+json
       responses:
         "200":
           description: OK
@@ -1430,6 +1720,250 @@ paths:
       summary: delete signatories
       tags:
       - signatories
+  /assets:
+    post:
+      operationId: assets#add
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CreateAssetRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: add assets
+      tags:
+      - assets
+  /assets/{asset_uri}:
+    delete:
+      operationId: assets#delete
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteAssetRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: delete assets
+      tags:
+      - assets
+    get:
+      operationId: assets#getAll
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - description: Public key of creator's account
+        in: query
+        name: creator
+        required: true
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: query
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.assets+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Assets'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll assets
+      tags:
+      - assets
+    put:
+      operationId: assets#update
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateAssetRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: update assets
+      tags:
+      - assets
+  /assets/{asset_uri}/add:
+    post:
+      operationId: assets#addValue
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/AssetValueRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: addValue assets
+      tags:
+      - assets
+  /assets/{asset_uri}/subtract:
+    post:
+      operationId: assets#subtractValue
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/AssetValueRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: subtractValue assets
+      tags:
+      - assets
+  /assets/{asset_uri}/transfer:
+    post:
+      operationId: assets#transfer
+      parameters:
+      - description: asset's uri
+        in: path
+        name: asset_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/AssetTransferRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: transfer assets
+      tags:
+      - assets
 produces:
 - application/json
 - application/xml

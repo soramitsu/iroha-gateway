@@ -33,4 +33,12 @@ const (
 	descriptionPermissionRead                  = "ability to access some amount from account"
 	descriptionPermissionAssetName             = "asset name"
 	descriptionSignatory                       = "URL encoded signatory"
+	descriptionAssetURI                        = "asset's uri" // TODO
+	descriptionAssetName                       = "asset name"
+	descriptionAssetDomainName                 = "domain name to which asset belongs"
+	descriptionAssetLedgerName                 = "ledger name to which asset belongs"
+	descriptionAssetDescription                = "asset's description"
+	descriptionAssetValue                      = "asset's value"
+	descriptionAssetSender                     = "sender's public key"
+	descriptionAssetReceiver                   = "receiver's public key"
 )

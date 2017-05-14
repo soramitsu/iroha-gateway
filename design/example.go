@@ -15,7 +15,15 @@ const (
 	examplePermissionDomainName = "sampleledger"    // TODO
 	examplePermissionLedgerName = "sampledomain"    // TODO
 	examplePermissionAssetName  = "sampleassetname" // TODO
-	exampleSignatory = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D"
+	exampleSignatory            = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D"
+	exampleAssetURI             = "ledger.domain.asset"
+	exampleAssetName            = "sampleAssetName"
+	exampleAssetDomainName      = "sampleDomainName"
+	exampleAssetLedgerName      = "sampleLedgerName"
+	exampleAssetDescription     = "This is sample asset description."
+	exampleAssetValue           = 10.1
+	exampleAssetSender          = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
+	exampleAssetReceiver        = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
 )
 
 var (
