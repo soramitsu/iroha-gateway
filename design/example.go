@@ -10,8 +10,8 @@ const (
 	exampleTimestamp            = "1494693347"
 	examplePubkey               = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
 	exampleQuorum               = 1
-	exampleMessage              = "success"
-	exampleCode                 = 200
+	exampleMessage              = "message"
+	exampleCode                 = 000
 	examplePermissionDomainName = "sampleledger"    // TODO
 	examplePermissionLedgerName = "sampledomain"    // TODO
 	examplePermissionAssetName  = "sampleassetname" // TODO

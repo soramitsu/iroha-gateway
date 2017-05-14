@@ -331,8 +331,8 @@ definitions:
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      code: 200
-      message: success
+      code: 0
+      message: message
     properties:
       accounts:
         description: accounts
@@ -525,12 +525,12 @@ definitions:
         type: array
       code:
         description: response code
-        example: 200
+        example: 0
         format: int64
         type: integer
       message:
         description: response message
-        example: success
+        example: message
         type: string
     required:
     - message
@@ -724,8 +724,8 @@ definitions:
         domain_name: sampleDomainName
         ledger_name: sampleLedgerName
         name: sampleAssetName
-      code: 200
-      message: success
+      code: 0
+      message: message
     properties:
       assets:
         example:
@@ -742,12 +742,12 @@ definitions:
         type: array
       code:
         description: response code
-        example: 200
+        example: 0
         format: int64
         type: integer
       message:
         description: response message
-        example: success
+        example: message
         type: string
     required:
     - message
@@ -897,17 +897,17 @@ definitions:
   Message:
     description: Basic response (default view)
     example:
-      code: 200
-      message: success
+      code: 0
+      message: message
     properties:
       code:
         description: response code
-        example: 200
+        example: 0
         format: int64
         type: integer
       message:
         description: response message
-        example: success
+        example: message
         type: string
     required:
     - message
@@ -1205,20 +1205,20 @@ definitions:
   Signatories:
     description: Signatories media type (default view)
     example:
-      code: 200
-      message: success
+      code: 0
+      message: message
       signatories:
       - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
       - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
     properties:
       code:
         description: response code
-        example: 200
+        example: 0
         format: int64
         type: integer
       message:
         description: response message
-        example: success
+        example: message
         type: string
       signatories:
         example:
@@ -1354,8 +1354,8 @@ definitions:
   Transactions:
     description: Transactions media type (default view)
     example:
-      code: 200
-      message: success
+      code: 0
+      message: message
       transactions:
       - command: PUT/accounts
         creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -1376,12 +1376,12 @@ definitions:
     properties:
       code:
         description: response code
-        example: 200
+        example: 0
         format: int64
         type: integer
       message:
         description: response message
-        example: success
+        example: message
         type: string
       transactions:
         example:
@@ -1641,8 +1641,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.message+json
       - application/vnd.account+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
@@ -2120,8 +2120,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.message+json
       - application/vnd.transactions+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
