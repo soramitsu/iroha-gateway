@@ -94,10 +94,6 @@ var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
-	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
 		Example(exampleSignature)
@@ -108,17 +104,13 @@ var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
 		Pattern(timestampPattern)
 	})
 
-	Required("alias", "creator", "hash", "signature", "timestamp")
+	Required("alias", "creator", "signature", "timestamp")
 })
 
 var DeleteAccountRequest = Type("DeleteAccountRequest", func() {
 	Attribute("creator", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
-	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
@@ -130,7 +122,7 @@ var DeleteAccountRequest = Type("DeleteAccountRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("creator", "hash", "signature", "timestamp")
+	Required("creator", "signature", "timestamp")
 
 })
 
@@ -138,10 +130,6 @@ var AddAccountRequest = Type("AddAccountRequest", func() {
 	Attribute("creator", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
-	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
@@ -154,7 +142,7 @@ var AddAccountRequest = Type("AddAccountRequest", func() {
 	})
 	Attribute("account", Account)
 
-	Required("creator", "hash", "signature", "timestamp", "account")
+	Required("creator", "signature", "timestamp", "account")
 })
 
 var Account = Type("Account", func() {

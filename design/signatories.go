@@ -72,11 +72,6 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 		Description(descriptionCreator)
 		Pattern(base64Pattern)
 	})
-	Attribute("hash", String, func() {
-		Example(exampleHash)
-		Description(descriptionHash)
-		Pattern(base64Pattern)
-	})
 	Attribute("signature", String, func() {
 		Example(exampleSignature)
 		Description(descriptionSignature)
@@ -88,7 +83,7 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 		Pattern(timestampPattern)
 	})
 
-	Required("signatories", "creator", "hash", "signature", "timestamp")
+	Required("signatories", "creator", "signature", "timestamp")
 })
 
 var SignatoriesResponse = MediaType("application/vnd.signatories+json", func() {
@@ -120,10 +115,6 @@ var DeleteSignatoryRequest = Type("DeleteSignatoryRequest", func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
-	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
 		Example(exampleSignature)
@@ -134,6 +125,5 @@ var DeleteSignatoryRequest = Type("DeleteSignatoryRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("creator", "hash", "signature", "timestamp")
-
+	Required("creator", "signature", "timestamp")
 })

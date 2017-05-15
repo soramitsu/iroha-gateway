@@ -34,10 +34,6 @@ var UpdateQuorumRequest = Type("UpdateQuorumRequest", func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
-	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
 		Example(exampleSignature)
@@ -48,5 +44,5 @@ var UpdateQuorumRequest = Type("UpdateQuorumRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("quorum", "creator", "hash", "signature", "timestamp")
+	Required("quorum", "creator", "signature", "timestamp")
 })

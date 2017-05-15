@@ -8,11 +8,11 @@ import (
 var _ = Resource("transactions", func() {
 	BasePath("/transactions")
 	Action("getAll", func() {
-		Routing(GET("/:asset_uri"))
+		Routing(GET("/:currency_uri"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 			Param("target", String, func() {
 				Pattern(`[0-9a-zA-Z-_.~]+`)
@@ -27,7 +27,7 @@ var _ = Resource("transactions", func() {
 				Description("If this value is true, you can only get transactions committed to ametsuchi")
 				Example(false)
 			})
-			Required("asset_uri", "target", "creator")
+			Required("currency_uri", "target", "creator")
 		})
 
 		Response(OK, TransactionsResponse)
@@ -46,10 +46,6 @@ var Transaction = Type("Transaction", func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
-	})
 	Attribute("signatures", ArrayOf(Signature))
 	Attribute("timestamp", String, func() {
 		Description(descriptionTimestamp)
@@ -57,7 +53,7 @@ var Transaction = Type("Transaction", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("command", "creator", "hash", "signatures", "timestamp")
+	Required("command", "creator", "signatures", "timestamp")
 })
 
 var Signature = Type("Signature", func() {

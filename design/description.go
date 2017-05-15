@@ -3,7 +3,6 @@ package design
 const (
 	descriptionAlias                           = "Account alias"
 	descriptionCreator                         = "Public key of creator's account"
-	descriptionHash                            = "Transaction hash"
 	descriptionSignature                       = "Transaction signature"
 	descriptionTimestamp                       = "Transaction timestamp"
 	descriptionPubkey                          = "Account Public Key"
@@ -33,14 +32,14 @@ const (
 	descriptionPermissionRead                  = "ability to access some amount from account"
 	descriptionPermissionAssetName             = "asset name"
 	descriptionSignatory                       = "URL encoded signatory"
-	descriptionAssetURI                        = "asset's uri" // TODO
-	descriptionAssetName                       = "asset name"
-	descriptionAssetDomainName                 = "domain name to which asset belongs"
-	descriptionAssetLedgerName                 = "ledger name to which asset belongs"
-	descriptionAssetDescription                = "asset's description"
-	descriptionAssetValue                      = "asset's value"
-	descriptionAssetSender                     = "sender's public key"
-	descriptionAssetReceiver                   = "receiver's public key"
+	descriptionCurrencyURI                     = "currency's uri" // TODO
+	descriptionCurrencyName                    = "currency name"
+	descriptionCurrencyDomainName              = "domain name to which currency belongs"
+	descriptionCurrencyLedgerName              = "ledger name to which currency belongs"
+	descriptionCurrencyDescription             = "currency's description"
+	descriptionCurrencyValue                   = "currency's value"
+	descriptionCurrencySender                  = "sender's public key"
+	descriptionCurrencyReceiver                = "receiver's public key"
 	descriptionTransactionCommand              = "transaction's command type"
-	descriptionTransactionPublicKey              = "transaction's public key"
+	descriptionTransactionPublicKey            = "transaction's public key"
 )

@@ -5,15 +5,15 @@ import (
 	. "github.com/goadesign/goa/design/apidsl"
 )
 
-var _ = Resource("assets", func() {
-	BasePath("/assets")
+var _ = Resource("currency", func() {
+	BasePath("/currency")
 
 	Action("getAll", func() {
-		Routing(GET("/:asset_uri"))
+		Routing(GET("/:currency_uri"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 			Param("target", String, func() {
 				Pattern(`[0-9a-zA-Z-_.~]+`)
@@ -28,32 +28,32 @@ var _ = Resource("assets", func() {
 				Description("If this value is true, you can only get transactions committed to ametsuchi")
 				Example(false)
 			})
-			Required("asset_uri", "target", "creator")
+			Required("currency_uri", "target", "creator")
 		})
 
-		Response(OK, AssetsResponse)
+		Response(OK, CurrencyResponse)
 		Response(BadRequest, MessageResponse)
 		Response(InternalServerError, MessageResponse)
 	})
 
 	Action("add", func() {
 		Routing(POST("/"))
-		Payload(CreateAssetRequest)
+		Payload(CreateCurrencyRequest)
 		Response(Created, MessageResponse)
 		Response(BadRequest, MessageResponse)
 		Response(InternalServerError, MessageResponse)
 	})
 
 	Action("update", func() {
-		Routing(PUT("/:asset_uri"))
+		Routing(PUT("/:currency_uri"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 		})
 
-		Payload(UpdateAssetRequest)
+		Payload(UpdateCurrencyRequest)
 
 		Response(OK, MessageResponse)
 		Response(BadRequest, MessageResponse)
@@ -61,15 +61,15 @@ var _ = Resource("assets", func() {
 	})
 
 	Action("delete", func() {
-		Routing(DELETE("/:asset_uri"))
+		Routing(DELETE("/:currency_uri"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 		})
 
-		Payload(DeleteAssetRequest)
+		Payload(DeleteCurrencyRequest)
 
 		Response(OK, MessageResponse)
 		Response(BadRequest, MessageResponse)
@@ -77,15 +77,15 @@ var _ = Resource("assets", func() {
 	})
 
 	Action("addValue", func() {
-		Routing(POST("/:asset_uri/add"))
+		Routing(POST("/:currency_uri/add"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 		})
 
-		Payload(AssetValueRequest)
+		Payload(CurrencyValueRequest)
 
 		Response(OK, MessageResponse)
 		Response(BadRequest, MessageResponse)
@@ -93,15 +93,15 @@ var _ = Resource("assets", func() {
 	})
 
 	Action("subtractValue", func() {
-		Routing(POST("/:asset_uri/subtract"))
+		Routing(POST("/:currency_uri/subtract"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 		})
 
-		Payload(AssetValueRequest)
+		Payload(CurrencyValueRequest)
 
 		Response(OK, MessageResponse)
 		Response(BadRequest, MessageResponse)
@@ -109,15 +109,15 @@ var _ = Resource("assets", func() {
 	})
 
 	Action("transfer", func() {
-		Routing(POST("/:asset_uri/transfer"))
+		Routing(POST("/:currency_uri/transfer"))
 		Params(func() {
-			Param("asset_uri", String, func() {
-				Description(descriptionAssetURI)
-				Example(exampleAssetURI)
+			Param("currency_uri", String, func() {
+				Description(descriptionCurrencyURI)
+				Example(exampleCurrencyURI)
 			})
 		})
 
-		Payload(AssetTransferRequest)
+		Payload(CurrencyTransferRequest)
 
 		Response(OK, MessageResponse)
 		Response(BadRequest, MessageResponse)
@@ -125,7 +125,7 @@ var _ = Resource("assets", func() {
 	})
 })
 
-var CreateAssetRequest = Type("CreateAssetRequest", func() {
+var CreateCurrencyRequest = Type("CreateCurrencyRequest", func() {
 	Attribute("target", String, func() {
 		Pattern(`[0-9a-zA-Z-_.~]+`)
 		Example(exampleTargetEncoded)
@@ -134,10 +134,6 @@ var CreateAssetRequest = Type("CreateAssetRequest", func() {
 	Attribute("creator", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
-	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
@@ -148,23 +144,19 @@ var CreateAssetRequest = Type("CreateAssetRequest", func() {
 		Example(exampleTimestamp)
 		Pattern(`[0-9]{1,18}`)
 	})
-	Attribute("asset", Asset)
+	Attribute("currency", Currency)
 
-	Required("target", "creator", "hash", "signature", "timestamp", "asset")
+	Required("target", "creator", "signature", "timestamp", "currency")
 })
 
-var UpdateAssetRequest = Type("UpdateAssetRequest", func() {
+var UpdateCurrencyRequest = Type("UpdateCurrencyRequest", func() {
 	Attribute("description", String, func() {
-		Example(exampleAssetDescription)
-		Description(descriptionAssetDescription)
+		Example(exampleCurrencyDescription)
+		Description(descriptionCurrencyDescription)
 	})
 	Attribute("creator", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
-	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
@@ -176,17 +168,13 @@ var UpdateAssetRequest = Type("UpdateAssetRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("description", "creator", "hash", "signature", "timestamp")
+	Required("description", "creator", "signature", "timestamp")
 })
 
-var DeleteAssetRequest = Type("DeleteAssetRequest", func() {
+var DeleteCurrencyRequest = Type("DeleteCurrencyRequest", func() {
 	Attribute("creator", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
-	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
@@ -198,13 +186,13 @@ var DeleteAssetRequest = Type("DeleteAssetRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("creator", "hash", "signature", "timestamp")
+	Required("creator", "signature", "timestamp")
 })
 
-var AssetValueRequest = Type("AssetValueRequest", func() {
+var CurrencyValueRequest = Type("CurrencyValueRequest", func() {
 	Attribute("value", Number, func() {
-		Description(descriptionAssetValue)
-		Example(exampleAssetValue)
+		Description(descriptionCurrencyValue)
+		Example(exampleCurrencyValue)
 	})
 	Attribute("target", String, func() {
 		Pattern(`[0-9a-zA-Z-_.~]+`)
@@ -215,10 +203,6 @@ var AssetValueRequest = Type("AssetValueRequest", func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
-	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
 		Example(exampleSignature)
@@ -229,22 +213,22 @@ var AssetValueRequest = Type("AssetValueRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("value", "target", "creator", "hash", "signature", "timestamp")
+	Required("value", "target", "creator", "signature", "timestamp")
 })
 
-var AssetTransferRequest = Type("AssetTransferRequest", func() {
+var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
 	Attribute("value", Number, func() {
-		Description(descriptionAssetValue)
-		Example(exampleAssetValue)
+		Description(descriptionCurrencyValue)
+		Example(exampleCurrencyValue)
 	})
 	Attribute("sender", String, func() {
-		Description(descriptionAssetSender)
-		Example(exampleAssetSender)
+		Description(descriptionCurrencySender)
+		Example(exampleCurrencySender)
 		Pattern(base64Pattern)
 	})
 	Attribute("receiver", String, func() {
-		Description(descriptionAssetReceiver)
-		Example(exampleAssetReceiver)
+		Description(descriptionCurrencyReceiver)
+		Example(exampleCurrencyReceiver)
 		Pattern(base64Pattern)
 	})
 	Attribute("target", String, func() {
@@ -256,10 +240,6 @@ var AssetTransferRequest = Type("AssetTransferRequest", func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
-	Attribute("hash", String, func() {
-		Description(descriptionHash)
-		Example(exampleHash)
-	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
 		Example(exampleSignature)
@@ -270,11 +250,11 @@ var AssetTransferRequest = Type("AssetTransferRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("value", "sender", "receiver", "target", "creator", "hash", "signature", "timestamp")
+	Required("value", "sender", "receiver", "target", "creator", "signature", "timestamp")
 
 })
 
-var AssetsResponse = MediaType("application/vnd.assets+json", func() {
+var CurrencyResponse = MediaType("application/vnd.currency+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -284,35 +264,39 @@ var AssetsResponse = MediaType("application/vnd.assets+json", func() {
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("assets", ArrayOf(Asset))
+		Attribute("currency", ArrayOf(Currency))
 
-		Required("message", "code", "assets")
+		Required("message", "code", "currency")
 	})
 
 	View("default", func() {
 		Attribute("message")
 		Attribute("code")
-		Attribute("assets")
+		Attribute("currency")
 	})
 })
 
-var Asset = Type("Asset", func() {
+var Currency = Type("Currency", func() {
 	Attribute("name", String, func() {
-		Example(exampleAssetName)
-		Description(descriptionAssetName)
+		Example(exampleCurrencyName)
+		Description(descriptionCurrencyName)
 	})
 	Attribute("domain_name", String, func() {
-		Example(exampleAssetDomainName)
-		Description(descriptionAssetDomainName)
+		Example(exampleCurrencyDomainName)
+		Description(descriptionCurrencyDomainName)
 	})
 	Attribute("ledger_name", String, func() {
-		Example(exampleAssetLedgerName)
-		Description(descriptionAssetLedgerName)
+		Example(exampleCurrencyLedgerName)
+		Description(descriptionCurrencyLedgerName)
 	})
 	Attribute("description", String, func() {
-		Example(exampleAssetDescription)
-		Description(descriptionAssetDescription)
+		Example(exampleCurrencyDescription)
+		Description(descriptionCurrencyDescription)
+	})
+	Attribute("value", Number, func() {
+		Description(descriptionCurrencyValue)
+		Example(exampleCurrencyValue)
 	})
 
-	Required("name", "domain_name", "ledger_name")
+	Required("name", "domain_name", "ledger_name", "value")
 })
