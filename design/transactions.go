@@ -19,7 +19,7 @@ var _ = Resource("transactions", func() {
 				Example(exampleTargetEncoded)
 				Description("Public key of URL-encoded target's account")
 			})
-			Param("creator", String, func() {
+			Param("creator_pubkey", String, func() {
 				Description(descriptionCreator)
 				Example(exampleCreator)
 			})
@@ -27,7 +27,7 @@ var _ = Resource("transactions", func() {
 				Description("If this value is true, you can only get transactions committed to ametsuchi")
 				Example(false)
 			})
-			Required("currency_uri", "target", "creator")
+			Required("currency_uri", "target", "creator_pubkey")
 		})
 
 		Response(OK, TransactionsResponse)
@@ -42,7 +42,7 @@ var Transaction = Type("Transaction", func() {
 		Description(descriptionTransactionCommand)
 		Example(exampleTransactionCommand)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -53,7 +53,7 @@ var Transaction = Type("Transaction", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("command", "creator", "signatures", "timestamp")
+	Required("command", "creator_pubkey", "signatures", "timestamp")
 })
 
 var Signature = Type("Signature", func() {

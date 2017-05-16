@@ -30,7 +30,7 @@ var UpdateQuorumRequest = Type("UpdateQuorumRequest", func() {
 		Description(descriptionQuorum)
 		Example(exampleQuorum)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -44,5 +44,5 @@ var UpdateQuorumRequest = Type("UpdateQuorumRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("quorum", "creator", "signature", "timestamp")
+	Required("quorum", "creator_pubkey", "signature", "timestamp")
 })

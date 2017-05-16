@@ -20,7 +20,7 @@ var _ = Resource("currency", func() {
 				Example(exampleTargetEncoded)
 				Description("Public key of URL-encoded target's account")
 			})
-			Param("creator", String, func() {
+			Param("creator_pubkey", String, func() {
 				Description(descriptionCreator)
 				Example(exampleCreator)
 			})
@@ -28,7 +28,7 @@ var _ = Resource("currency", func() {
 				Description("If this value is true, you can only get transactions committed to ametsuchi")
 				Example(false)
 			})
-			Required("currency_uri", "target", "creator")
+			Required("currency_uri", "target", "creator_pubkey")
 		})
 
 		Response(OK, CurrencyResponse)
@@ -131,7 +131,7 @@ var CreateCurrencyRequest = Type("CreateCurrencyRequest", func() {
 		Example(exampleTargetEncoded)
 		Description("Public key of URL-encoded target's account")
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -146,7 +146,7 @@ var CreateCurrencyRequest = Type("CreateCurrencyRequest", func() {
 	})
 	Attribute("currency", Currency)
 
-	Required("target", "creator", "signature", "timestamp", "currency")
+	Required("target", "creator_pubkey", "signature", "timestamp", "currency")
 })
 
 var UpdateCurrencyRequest = Type("UpdateCurrencyRequest", func() {
@@ -154,7 +154,7 @@ var UpdateCurrencyRequest = Type("UpdateCurrencyRequest", func() {
 		Example(exampleCurrencyDescription)
 		Description(descriptionCurrencyDescription)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -168,11 +168,11 @@ var UpdateCurrencyRequest = Type("UpdateCurrencyRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("description", "creator", "signature", "timestamp")
+	Required("description", "creator_pubkey", "signature", "timestamp")
 })
 
 var DeleteCurrencyRequest = Type("DeleteCurrencyRequest", func() {
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -186,7 +186,7 @@ var DeleteCurrencyRequest = Type("DeleteCurrencyRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("creator", "signature", "timestamp")
+	Required("creator_pubkey", "signature", "timestamp")
 })
 
 var CurrencyValueRequest = Type("CurrencyValueRequest", func() {
@@ -199,7 +199,7 @@ var CurrencyValueRequest = Type("CurrencyValueRequest", func() {
 		Description("Public key of URL-encoded target's account")
 		Example(exampleTargetEncoded)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -213,7 +213,7 @@ var CurrencyValueRequest = Type("CurrencyValueRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("value", "target", "creator", "signature", "timestamp")
+	Required("value", "target", "creator_pubkey", "signature", "timestamp")
 })
 
 var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
@@ -236,7 +236,7 @@ var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
 		Description("Public key of URL-encoded target's account")
 		Example(exampleTargetEncoded)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -250,7 +250,7 @@ var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("value", "sender", "receiver", "target", "creator", "signature", "timestamp")
+	Required("value", "sender", "receiver", "target", "creator_pubkey", "signature", "timestamp")
 
 })
 

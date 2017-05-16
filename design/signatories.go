@@ -19,7 +19,7 @@ var _ = Resource("signatories", func() {
 	Action("getAll", func() {
 		Routing(GET("/signatories"))
 		Params(func() {
-			Param("creator", String, func() {
+			Param("creator_pubkey", String, func() {
 				Pattern(urlEncodedPattern)
 				Example(exampleTargetEncoded)
 				Description("Public key of URL-encoded creator's account")
@@ -67,7 +67,7 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 		Example(exampleSignatories)
 		Description(descriptionSignatories)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Example(exampleCreator)
 		Description(descriptionCreator)
 		Pattern(base64Pattern)
@@ -83,7 +83,7 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 		Pattern(timestampPattern)
 	})
 
-	Required("signatories", "creator", "signature", "timestamp")
+	Required("signatories", "creator_pubkey", "signature", "timestamp")
 })
 
 var SignatoriesResponse = MediaType("application/vnd.signatories+json", func() {
@@ -111,7 +111,7 @@ var SignatoriesResponse = MediaType("application/vnd.signatories+json", func() {
 })
 
 var DeleteSignatoryRequest = Type("DeleteSignatoryRequest", func() {
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -125,5 +125,5 @@ var DeleteSignatoryRequest = Type("DeleteSignatoryRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("creator", "signature", "timestamp")
+	Required("creator_pubkey", "signature", "timestamp")
 })

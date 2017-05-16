@@ -1,0 +1,2038 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  Account:
+    example:
+      alias: sate
+      pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      quorum: 1
+      signatories:
+      - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+    properties:
+      alias:
+        description: Account alias
+        example: sate
+        pattern: '[0-9a-zA-Z]+'
+        type: string
+      pubkey:
+        description: Account Public Key
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      quorum:
+        description: 最低限必要な数
+        example: 1
+        maximum: 65535
+        minimum: 1
+        type: integer
+      signatories:
+        description: Account Signatories
+        example:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          example: Quisquam distinctio rerum et debitis.
+          type: string
+        type: array
+    required:
+    - alias
+    - pubkey
+    - signatories
+    - quorum
+    title: Account
+    type: object
+  AccountFull:
+    example:
+      alias: sate
+      permissions:
+        asset:
+        - account_give_permission: false
+          add: false
+          asset_name: sampleassetname
+          domain_name: sampleledger
+          ledger_name: sampledomain
+          read: false
+          subtract: false
+          transfer: false
+        - account_give_permission: false
+          add: false
+          asset_name: sampleassetname
+          domain_name: sampleledger
+          ledger_name: sampledomain
+          read: false
+          subtract: false
+          transfer: false
+        domain:
+        - account_add: false
+          account_give_permission: false
+          account_remove: false
+          asset_create: true
+          asset_remove: false
+          asset_update: false
+          domain_name: sampleledger
+          ledger_name: sampledomain
+        - account_add: false
+          account_give_permission: false
+          account_remove: false
+          asset_create: true
+          asset_remove: false
+          asset_update: false
+          domain_name: sampleledger
+          ledger_name: sampledomain
+        ledger:
+        - account_add: false
+          account_give_permission: true
+          account_remove: false
+          domain_add: false
+          domain_remove: false
+          ledger_name: Non dolores laboriosam et deserunt quia.
+          peer_read: false
+          peer_write: false
+        - account_add: false
+          account_give_permission: true
+          account_remove: false
+          domain_add: false
+          domain_remove: false
+          ledger_name: Non dolores laboriosam et deserunt quia.
+          peer_read: false
+          peer_write: false
+        root:
+          ledger_add: true
+          ledger_remove: false
+      pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      quorum: 1
+      signatories:
+      - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+    properties:
+      alias:
+        description: Account alias
+        example: sate
+        pattern: '[0-9a-zA-Z]+'
+        type: string
+      permissions:
+        $ref: '#/definitions/Permissions'
+      pubkey:
+        description: Account Public Key
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      quorum:
+        description: 最低限必要な数
+        example: 1
+        maximum: 65535
+        minimum: 1
+        type: integer
+      signatories:
+        description: Account Signatories
+        example:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          example: Culpa distinctio.
+          type: string
+        type: array
+    required:
+    - alias
+    - pubkey
+    - signatories
+    - quorum
+    - permissions
+    title: AccountFull
+    type: object
+  Accounts:
+    description: Accounts media type (default view)
+    example:
+      accounts:
+      - alias: sate
+        permissions:
+          asset:
+          - account_give_permission: false
+            add: false
+            asset_name: sampleassetname
+            domain_name: sampleledger
+            ledger_name: sampledomain
+            read: false
+            subtract: false
+            transfer: false
+          - account_give_permission: false
+            add: false
+            asset_name: sampleassetname
+            domain_name: sampleledger
+            ledger_name: sampledomain
+            read: false
+            subtract: false
+            transfer: false
+          domain:
+          - account_add: false
+            account_give_permission: false
+            account_remove: false
+            asset_create: true
+            asset_remove: false
+            asset_update: false
+            domain_name: sampleledger
+            ledger_name: sampledomain
+          - account_add: false
+            account_give_permission: false
+            account_remove: false
+            asset_create: true
+            asset_remove: false
+            asset_update: false
+            domain_name: sampleledger
+            ledger_name: sampledomain
+          ledger:
+          - account_add: false
+            account_give_permission: true
+            account_remove: false
+            domain_add: false
+            domain_remove: false
+            ledger_name: Non dolores laboriosam et deserunt quia.
+            peer_read: false
+            peer_write: false
+          - account_add: false
+            account_give_permission: true
+            account_remove: false
+            domain_add: false
+            domain_remove: false
+            ledger_name: Non dolores laboriosam et deserunt quia.
+            peer_read: false
+            peer_write: false
+          root:
+            ledger_add: true
+            ledger_remove: false
+        pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        quorum: 1
+        signatories:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      - alias: sate
+        permissions:
+          asset:
+          - account_give_permission: false
+            add: false
+            asset_name: sampleassetname
+            domain_name: sampleledger
+            ledger_name: sampledomain
+            read: false
+            subtract: false
+            transfer: false
+          - account_give_permission: false
+            add: false
+            asset_name: sampleassetname
+            domain_name: sampleledger
+            ledger_name: sampledomain
+            read: false
+            subtract: false
+            transfer: false
+          domain:
+          - account_add: false
+            account_give_permission: false
+            account_remove: false
+            asset_create: true
+            asset_remove: false
+            asset_update: false
+            domain_name: sampleledger
+            ledger_name: sampledomain
+          - account_add: false
+            account_give_permission: false
+            account_remove: false
+            asset_create: true
+            asset_remove: false
+            asset_update: false
+            domain_name: sampleledger
+            ledger_name: sampledomain
+          ledger:
+          - account_add: false
+            account_give_permission: true
+            account_remove: false
+            domain_add: false
+            domain_remove: false
+            ledger_name: Non dolores laboriosam et deserunt quia.
+            peer_read: false
+            peer_write: false
+          - account_add: false
+            account_give_permission: true
+            account_remove: false
+            domain_add: false
+            domain_remove: false
+            ledger_name: Non dolores laboriosam et deserunt quia.
+            peer_read: false
+            peer_write: false
+          root:
+            ledger_add: true
+            ledger_remove: false
+        pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        quorum: 1
+        signatories:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      - alias: sate
+        permissions:
+          asset:
+          - account_give_permission: false
+            add: false
+            asset_name: sampleassetname
+            domain_name: sampleledger
+            ledger_name: sampledomain
+            read: false
+            subtract: false
+            transfer: false
+          - account_give_permission: false
+            add: false
+            asset_name: sampleassetname
+            domain_name: sampleledger
+            ledger_name: sampledomain
+            read: false
+            subtract: false
+            transfer: false
+          domain:
+          - account_add: false
+            account_give_permission: false
+            account_remove: false
+            asset_create: true
+            asset_remove: false
+            asset_update: false
+            domain_name: sampleledger
+            ledger_name: sampledomain
+          - account_add: false
+            account_give_permission: false
+            account_remove: false
+            asset_create: true
+            asset_remove: false
+            asset_update: false
+            domain_name: sampleledger
+            ledger_name: sampledomain
+          ledger:
+          - account_add: false
+            account_give_permission: true
+            account_remove: false
+            domain_add: false
+            domain_remove: false
+            ledger_name: Non dolores laboriosam et deserunt quia.
+            peer_read: false
+            peer_write: false
+          - account_add: false
+            account_give_permission: true
+            account_remove: false
+            domain_add: false
+            domain_remove: false
+            ledger_name: Non dolores laboriosam et deserunt quia.
+            peer_read: false
+            peer_write: false
+          root:
+            ledger_add: true
+            ledger_remove: false
+        pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        quorum: 1
+        signatories:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      code: 0
+      message: message
+    properties:
+      accounts:
+        description: accounts
+        example:
+        - alias: sate
+          permissions:
+            asset:
+            - account_give_permission: false
+              add: false
+              asset_name: sampleassetname
+              domain_name: sampleledger
+              ledger_name: sampledomain
+              read: false
+              subtract: false
+              transfer: false
+            - account_give_permission: false
+              add: false
+              asset_name: sampleassetname
+              domain_name: sampleledger
+              ledger_name: sampledomain
+              read: false
+              subtract: false
+              transfer: false
+            domain:
+            - account_add: false
+              account_give_permission: false
+              account_remove: false
+              asset_create: true
+              asset_remove: false
+              asset_update: false
+              domain_name: sampleledger
+              ledger_name: sampledomain
+            - account_add: false
+              account_give_permission: false
+              account_remove: false
+              asset_create: true
+              asset_remove: false
+              asset_update: false
+              domain_name: sampleledger
+              ledger_name: sampledomain
+            ledger:
+            - account_add: false
+              account_give_permission: true
+              account_remove: false
+              domain_add: false
+              domain_remove: false
+              ledger_name: Non dolores laboriosam et deserunt quia.
+              peer_read: false
+              peer_write: false
+            - account_add: false
+              account_give_permission: true
+              account_remove: false
+              domain_add: false
+              domain_remove: false
+              ledger_name: Non dolores laboriosam et deserunt quia.
+              peer_read: false
+              peer_write: false
+            root:
+              ledger_add: true
+              ledger_remove: false
+          pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+          quorum: 1
+          signatories:
+          - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+          - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - alias: sate
+          permissions:
+            asset:
+            - account_give_permission: false
+              add: false
+              asset_name: sampleassetname
+              domain_name: sampleledger
+              ledger_name: sampledomain
+              read: false
+              subtract: false
+              transfer: false
+            - account_give_permission: false
+              add: false
+              asset_name: sampleassetname
+              domain_name: sampleledger
+              ledger_name: sampledomain
+              read: false
+              subtract: false
+              transfer: false
+            domain:
+            - account_add: false
+              account_give_permission: false
+              account_remove: false
+              asset_create: true
+              asset_remove: false
+              asset_update: false
+              domain_name: sampleledger
+              ledger_name: sampledomain
+            - account_add: false
+              account_give_permission: false
+              account_remove: false
+              asset_create: true
+              asset_remove: false
+              asset_update: false
+              domain_name: sampleledger
+              ledger_name: sampledomain
+            ledger:
+            - account_add: false
+              account_give_permission: true
+              account_remove: false
+              domain_add: false
+              domain_remove: false
+              ledger_name: Non dolores laboriosam et deserunt quia.
+              peer_read: false
+              peer_write: false
+            - account_add: false
+              account_give_permission: true
+              account_remove: false
+              domain_add: false
+              domain_remove: false
+              ledger_name: Non dolores laboriosam et deserunt quia.
+              peer_read: false
+              peer_write: false
+            root:
+              ledger_add: true
+              ledger_remove: false
+          pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+          quorum: 1
+          signatories:
+          - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+          - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - alias: sate
+          permissions:
+            asset:
+            - account_give_permission: false
+              add: false
+              asset_name: sampleassetname
+              domain_name: sampleledger
+              ledger_name: sampledomain
+              read: false
+              subtract: false
+              transfer: false
+            - account_give_permission: false
+              add: false
+              asset_name: sampleassetname
+              domain_name: sampleledger
+              ledger_name: sampledomain
+              read: false
+              subtract: false
+              transfer: false
+            domain:
+            - account_add: false
+              account_give_permission: false
+              account_remove: false
+              asset_create: true
+              asset_remove: false
+              asset_update: false
+              domain_name: sampleledger
+              ledger_name: sampledomain
+            - account_add: false
+              account_give_permission: false
+              account_remove: false
+              asset_create: true
+              asset_remove: false
+              asset_update: false
+              domain_name: sampleledger
+              ledger_name: sampledomain
+            ledger:
+            - account_add: false
+              account_give_permission: true
+              account_remove: false
+              domain_add: false
+              domain_remove: false
+              ledger_name: Non dolores laboriosam et deserunt quia.
+              peer_read: false
+              peer_write: false
+            - account_add: false
+              account_give_permission: true
+              account_remove: false
+              domain_add: false
+              domain_remove: false
+              ledger_name: Non dolores laboriosam et deserunt quia.
+              peer_read: false
+              peer_write: false
+            root:
+              ledger_add: true
+              ledger_remove: false
+          pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+          quorum: 1
+          signatories:
+          - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+          - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          $ref: '#/definitions/AccountFull'
+        type: array
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: message
+        type: string
+    required:
+    - message
+    - code
+    - accounts
+    title: 'Mediatype identifier: application/vnd.accounts+json; view=default'
+    type: object
+  AddAccountRequest:
+    example:
+      account:
+        alias: sate
+        pubkey: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        quorum: 1
+        signatories:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      account:
+        $ref: '#/definitions/Account'
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - creator_pubkey
+    - signature
+    - timestamp
+    - account
+    title: AddAccountRequest
+    type: object
+  CreateCurrencyRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      currency:
+        description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      currency:
+        $ref: '#/definitions/Currency'
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      target:
+        description: Public key of URL-encoded target's account
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+        pattern: '[0-9a-zA-Z-_.~]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - target
+    - creator_pubkey
+    - signature
+    - timestamp
+    - currency
+    title: CreateCurrencyRequest
+    type: object
+  Currency:
+    example:
+      description: This is sample currency description.
+      domain_name: sampleDomainName
+      ledger_name: sampleLedgerName
+      name: sampleCurrencyName
+      value: 10.1
+    properties:
+      description:
+        description: currency's description
+        example: This is sample currency description.
+        type: string
+      domain_name:
+        description: domain name to which currency belongs
+        example: sampleDomainName
+        type: string
+      ledger_name:
+        description: ledger name to which currency belongs
+        example: sampleLedgerName
+        type: string
+      name:
+        description: currency name
+        example: sampleCurrencyName
+        type: string
+      value:
+        description: currency's value
+        example: 10.1
+        format: double
+        type: number
+    required:
+    - name
+    - domain_name
+    - ledger_name
+    - value
+    title: Currency
+    type: object
+  CurrencyTransferRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      receiver: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      sender: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+      timestamp: "1494693347"
+      value: 10.1
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      receiver:
+        description: receiver's public key
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      sender:
+        description: sender's public key
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      target:
+        description: Public key of URL-encoded target's account
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+        pattern: '[0-9a-zA-Z-_.~]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+      value:
+        description: currency's value
+        example: 10.1
+        format: double
+        type: number
+    required:
+    - value
+    - sender
+    - receiver
+    - target
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: CurrencyTransferRequest
+    type: object
+  CurrencyValueRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+      timestamp: "1494693347"
+      value: 10.1
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      target:
+        description: Public key of URL-encoded target's account
+        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
+        pattern: '[0-9a-zA-Z-_.~]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+      value:
+        description: currency's value
+        example: 10.1
+        format: double
+        type: number
+    required:
+    - value
+    - target
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: CurrencyValueRequest
+    type: object
+  DeleteAccountRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: DeleteAccountRequest
+    type: object
+  DeleteCurrencyRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: DeleteCurrencyRequest
+    type: object
+  DeleteSignatoryRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: DeleteSignatoryRequest
+    type: object
+  Message:
+    description: Basic response (default view)
+    example:
+      code: 0
+      message: message
+    properties:
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: message
+        type: string
+    required:
+    - message
+    - code
+    title: 'Mediatype identifier: application/vnd.message+json; view=default'
+    type: object
+  PermissionAsset:
+    example:
+      account_give_permission: false
+      add: false
+      asset_name: sampleassetname
+      domain_name: sampleledger
+      ledger_name: sampledomain
+      read: false
+      subtract: false
+      transfer: false
+    properties:
+      account_give_permission:
+        description: ability to give permissions to account globally
+        example: false
+        type: boolean
+      add:
+        description: ability to add some amount to account
+        example: false
+        type: boolean
+      asset_name:
+        description: asset name
+        example: sampleassetname
+        type: string
+      domain_name:
+        description: domain name
+        example: sampleledger
+        type: string
+      ledger_name:
+        description: ledger name
+        example: sampledomain
+        type: string
+      read:
+        description: ability to access some amount from account
+        example: false
+        type: boolean
+      subtract:
+        description: ability to remove some amount from account
+        example: false
+        type: boolean
+      transfer:
+        description: ability to transfer an asset
+        example: false
+        type: boolean
+    required:
+    - asset_name
+    - domain_name
+    - ledger_name
+    title: PermissionAsset
+    type: object
+  PermissionDomain:
+    example:
+      account_add: false
+      account_give_permission: false
+      account_remove: false
+      asset_create: true
+      asset_remove: false
+      asset_update: false
+      domain_name: sampleledger
+      ledger_name: sampledomain
+    properties:
+      account_add:
+        description: ability to create new account
+        example: false
+        type: boolean
+      account_give_permission:
+        description: ability to give permissions to account globally
+        example: false
+        type: boolean
+      account_remove:
+        description: ability to remove account
+        example: false
+        type: boolean
+      asset_create:
+        description: ability to create asset
+        example: true
+        type: boolean
+      asset_remove:
+        description: ability to remove asset
+        example: false
+        type: boolean
+      asset_update:
+        description: ability to update asset
+        example: false
+        type: boolean
+      domain_name:
+        description: domain name
+        example: sampleledger
+        type: string
+      ledger_name:
+        description: ledger name
+        example: sampledomain
+        type: string
+    required:
+    - domain_name
+    - ledger_name
+    title: PermissionDomain
+    type: object
+  PermissionLedger:
+    example:
+      account_add: false
+      account_give_permission: true
+      account_remove: false
+      domain_add: false
+      domain_remove: false
+      ledger_name: Non dolores laboriosam et deserunt quia.
+      peer_read: false
+      peer_write: false
+    properties:
+      account_add:
+        description: ability to create new account
+        example: false
+        type: boolean
+      account_give_permission:
+        description: ability to give permissions to account globally
+        example: true
+        type: boolean
+      account_remove:
+        description: ability to remove account
+        example: false
+        type: boolean
+      domain_add:
+        description: ability to add new domain
+        example: false
+        type: boolean
+      domain_remove:
+        description: ability to remove existing domain
+        example: false
+        type: boolean
+      ledger_name:
+        description: ledger name
+        example: Non dolores laboriosam et deserunt quia.
+        type: string
+      peer_read:
+        description: ability to read peer information
+        example: false
+        type: boolean
+      peer_write:
+        description: ability to write(operate) peer
+        example: false
+        type: boolean
+    required:
+    - ledger_name
+    title: PermissionLedger
+    type: object
+  PermissionRoot:
+    example:
+      ledger_add: true
+      ledger_remove: false
+    properties:
+      ledger_add:
+        description: ability to create new ledgers
+        example: true
+        type: boolean
+      ledger_remove:
+        description: ability to remove ledgers
+        example: false
+        type: boolean
+    title: PermissionRoot
+    type: object
+  Permissions:
+    example:
+      asset:
+      - account_give_permission: false
+        add: false
+        asset_name: sampleassetname
+        domain_name: sampleledger
+        ledger_name: sampledomain
+        read: false
+        subtract: false
+        transfer: false
+      - account_give_permission: false
+        add: false
+        asset_name: sampleassetname
+        domain_name: sampleledger
+        ledger_name: sampledomain
+        read: false
+        subtract: false
+        transfer: false
+      domain:
+      - account_add: false
+        account_give_permission: false
+        account_remove: false
+        asset_create: true
+        asset_remove: false
+        asset_update: false
+        domain_name: sampleledger
+        ledger_name: sampledomain
+      - account_add: false
+        account_give_permission: false
+        account_remove: false
+        asset_create: true
+        asset_remove: false
+        asset_update: false
+        domain_name: sampleledger
+        ledger_name: sampledomain
+      ledger:
+      - account_add: false
+        account_give_permission: true
+        account_remove: false
+        domain_add: false
+        domain_remove: false
+        ledger_name: Non dolores laboriosam et deserunt quia.
+        peer_read: false
+        peer_write: false
+      - account_add: false
+        account_give_permission: true
+        account_remove: false
+        domain_add: false
+        domain_remove: false
+        ledger_name: Non dolores laboriosam et deserunt quia.
+        peer_read: false
+        peer_write: false
+      root:
+        ledger_add: true
+        ledger_remove: false
+    properties:
+      asset:
+        example:
+        - account_give_permission: false
+          add: false
+          asset_name: sampleassetname
+          domain_name: sampleledger
+          ledger_name: sampledomain
+          read: false
+          subtract: false
+          transfer: false
+        - account_give_permission: false
+          add: false
+          asset_name: sampleassetname
+          domain_name: sampleledger
+          ledger_name: sampledomain
+          read: false
+          subtract: false
+          transfer: false
+        items:
+          $ref: '#/definitions/PermissionAsset'
+        type: array
+      domain:
+        example:
+        - account_add: false
+          account_give_permission: false
+          account_remove: false
+          asset_create: true
+          asset_remove: false
+          asset_update: false
+          domain_name: sampleledger
+          ledger_name: sampledomain
+        - account_add: false
+          account_give_permission: false
+          account_remove: false
+          asset_create: true
+          asset_remove: false
+          asset_update: false
+          domain_name: sampleledger
+          ledger_name: sampledomain
+        items:
+          $ref: '#/definitions/PermissionDomain'
+        type: array
+      ledger:
+        example:
+        - account_add: false
+          account_give_permission: true
+          account_remove: false
+          domain_add: false
+          domain_remove: false
+          ledger_name: Non dolores laboriosam et deserunt quia.
+          peer_read: false
+          peer_write: false
+        - account_add: false
+          account_give_permission: true
+          account_remove: false
+          domain_add: false
+          domain_remove: false
+          ledger_name: Non dolores laboriosam et deserunt quia.
+          peer_read: false
+          peer_write: false
+        items:
+          $ref: '#/definitions/PermissionLedger'
+        type: array
+      root:
+        $ref: '#/definitions/PermissionRoot'
+    required:
+    - root
+    - ledger
+    - domain
+    - asset
+    title: Permissions
+    type: object
+  Signatories:
+    description: Signatories media type (default view)
+    example:
+      code: 0
+      message: message
+      signatories:
+      - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+    properties:
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: message
+        type: string
+      signatories:
+        example:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          example: Suscipit nihil occaecati sit facilis magnam.
+          type: string
+        type: array
+    required:
+    - message
+    - code
+    - signatories
+    title: 'Mediatype identifier: application/vnd.signatories+json; view=default'
+    type: object
+  SignatoryRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signatories:
+      - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+      - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      signatories:
+        description: Account Signatories
+        example:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        items:
+          example: In minima quod fugiat quasi.
+          type: string
+        type: array
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - signatories
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: SignatoryRequest
+    type: object
+  Signature:
+    example:
+      publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      publicKey:
+        description: transaction's public key
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: '[0-9a-zA-Z+/=]+'
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - publicKey
+    - signature
+    - timestamp
+    title: Signature
+    type: object
+  Transaction:
+    example:
+      command: PUT/accounts
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signatures:
+      - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        timestamp: "1494693347"
+      timestamp: "1494693347"
+    properties:
+      command:
+        description: transaction's command type
+        example: PUT/accounts
+        type: string
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signatures:
+        example:
+        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+          timestamp: "1494693347"
+        items:
+          $ref: '#/definitions/Signature'
+        type: array
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - command
+    - creator_pubkey
+    - signatures
+    - timestamp
+    title: Transaction
+    type: object
+  Transactions:
+    description: Transactions media type (default view)
+    example:
+      code: 0
+      message: message
+      transactions:
+      - command: PUT/accounts
+        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signatures:
+        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+          timestamp: "1494693347"
+        timestamp: "1494693347"
+      - command: PUT/accounts
+        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signatures:
+        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+          timestamp: "1494693347"
+        timestamp: "1494693347"
+    properties:
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: message
+        type: string
+      transactions:
+        example:
+        - command: PUT/accounts
+          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signatures:
+          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+            signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+            timestamp: "1494693347"
+          timestamp: "1494693347"
+        - command: PUT/accounts
+          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signatures:
+          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+            signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+            timestamp: "1494693347"
+          timestamp: "1494693347"
+        items:
+          $ref: '#/definitions/Transaction'
+        type: array
+    required:
+    - message
+    - code
+    - transactions
+    title: 'Mediatype identifier: application/vnd.transactions+json; view=default'
+    type: object
+  UpdateAccountRequest:
+    example:
+      alias: sate
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      alias:
+        description: Account alias
+        example: sate
+        pattern: '[0-9a-zA-Z]+'
+        type: string
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - alias
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: UpdateAccountRequest
+    type: object
+  UpdateCurrencyRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      description: This is sample currency description.
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      description:
+        description: currency's description
+        example: This is sample currency description.
+        type: string
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - description
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: UpdateCurrencyRequest
+    type: object
+  UpdateQuorumRequest:
+    example:
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      quorum: 1
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      timestamp: "1494693347"
+    properties:
+      creator_pubkey:
+        description: Public key of creator's account
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        type: string
+      quorum:
+        description: 最低限必要な数
+        example: 1
+        format: int64
+        type: integer
+      signature:
+        description: Transaction signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      timestamp:
+        description: Transaction timestamp
+        example: "1494693347"
+        pattern: '[0-9]{1,18}'
+        type: string
+    required:
+    - quorum
+    - creator_pubkey
+    - signature
+    - timestamp
+    title: UpdateQuorumRequest
+    type: object
+host: localhost:8080
+info:
+  title: The Iroha API
+  version: ""
+paths:
+  /accounts:
+    get:
+      description: get all accounts
+      operationId: accounts#getAll
+      produces:
+      - application/vnd.message+json
+      - application/vnd.accounts+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Accounts'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll accounts
+      tags:
+      - accounts
+    post:
+      description: add an account
+      operationId: accounts#add
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/AddAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: add accounts
+      tags:
+      - accounts
+  /accounts/{target}:
+    delete:
+      description: delete an account
+      operationId: accounts#delete
+      parameters:
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: delete accounts
+      tags:
+      - accounts
+    get:
+      description: get an account by public key
+      operationId: accounts#get
+      parameters:
+      - description: Public key of URL-encoded creator's account
+        in: query
+        name: creator_pubkey
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: false
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.account+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Account'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: get accounts
+      tags:
+      - accounts
+    put:
+      description: update an account
+      operationId: accounts#update
+      parameters:
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: update accounts
+      tags:
+      - accounts
+  /accounts/{target}/quorum:
+    put:
+      operationId: quorum#update
+      parameters:
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateQuorumRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: update quorum
+      tags:
+      - quorum
+  /accounts/{target}/signatories:
+    get:
+      operationId: signatories#getAll
+      parameters:
+      - description: Public key of URL-encoded creator's account
+        in: query
+        name: creator_pubkey
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: false
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.signatories+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Signatories'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll signatories
+      tags:
+      - signatories
+    post:
+      operationId: signatories#add
+      parameters:
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/SignatoryRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: add signatories
+      tags:
+      - signatories
+  /accounts/{target}/signatories/{sig}:
+    delete:
+      operationId: signatories#delete
+      parameters:
+      - description: URL encoded signatory
+        in: path
+        name: sig
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - description: Public key of URL-encoded target's account
+        in: path
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteSignatoryRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: delete signatories
+      tags:
+      - signatories
+  /currency:
+    post:
+      operationId: currency#add
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CreateCurrencyRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: add currency
+      tags:
+      - currency
+  /currency/{currency_uri}:
+    delete:
+      operationId: currency#delete
+      parameters:
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteCurrencyRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: delete currency
+      tags:
+      - currency
+    get:
+      operationId: currency#getAll
+      parameters:
+      - description: Public key of creator's account
+        in: query
+        name: creator_pubkey
+        required: true
+        type: string
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: query
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.currency+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Currency'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll currency
+      tags:
+      - currency
+    put:
+      operationId: currency#update
+      parameters:
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateCurrencyRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: update currency
+      tags:
+      - currency
+  /currency/{currency_uri}/add:
+    post:
+      operationId: currency#addValue
+      parameters:
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CurrencyValueRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: addValue currency
+      tags:
+      - currency
+  /currency/{currency_uri}/subtract:
+    post:
+      operationId: currency#subtractValue
+      parameters:
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CurrencyValueRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: subtractValue currency
+      tags:
+      - currency
+  /currency/{currency_uri}/transfer:
+    post:
+      operationId: currency#transfer
+      parameters:
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CurrencyTransferRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: transfer currency
+      tags:
+      - currency
+  /transactions/{currency_uri}:
+    get:
+      operationId: transactions#getAll
+      parameters:
+      - description: Public key of creator's account
+        in: query
+        name: creator_pubkey
+        required: true
+        type: string
+      - description: currency's uri
+        in: path
+        name: currency_uri
+        required: true
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: Public key of URL-encoded target's account
+        in: query
+        name: target
+        pattern: '[0-9a-zA-Z-_.~]+'
+        required: true
+        type: string
+      produces:
+      - application/vnd.transactions+json
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Transactions'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getAll transactions
+      tags:
+      - transactions
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+schemes:
+- http
+swagger: "2.0"

@@ -24,7 +24,7 @@ var _ = Resource("accounts", func() {
 				Example(exampleTargetEncoded)
 				Description("Public key of URL-encoded target's account")
 			})
-			Param("creator", String, func() {
+			Param("creator_pubkey", String, func() {
 				Pattern(`[0-9a-zA-Z-_.~]+`)
 				Example(exampleTargetEncoded)
 				Description("Public key of URL-encoded creator's account")
@@ -90,7 +90,7 @@ var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
 		Example(exampleAlias)
 		Pattern(`[0-9a-zA-Z]+`)
 	})
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -104,11 +104,11 @@ var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
 		Pattern(timestampPattern)
 	})
 
-	Required("alias", "creator", "signature", "timestamp")
+	Required("alias", "creator_pubkey", "signature", "timestamp")
 })
 
 var DeleteAccountRequest = Type("DeleteAccountRequest", func() {
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -122,12 +122,12 @@ var DeleteAccountRequest = Type("DeleteAccountRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("creator", "signature", "timestamp")
+	Required("creator_pubkey", "signature", "timestamp")
 
 })
 
 var AddAccountRequest = Type("AddAccountRequest", func() {
-	Attribute("creator", String, func() {
+	Attribute("creator_pubkey", String, func() {
 		Description(descriptionCreator)
 		Example(exampleCreator)
 	})
@@ -142,7 +142,7 @@ var AddAccountRequest = Type("AddAccountRequest", func() {
 	})
 	Attribute("account", Account)
 
-	Required("creator", "signature", "timestamp", "account")
+	Required("creator_pubkey", "signature", "timestamp", "account")
 })
 
 var Account = Type("Account", func() {
