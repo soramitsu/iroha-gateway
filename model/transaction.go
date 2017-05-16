@@ -1,7 +1,11 @@
 package model
 
+import (
+	"github.com/soramitsu/iroha-gateway/command"
+)
+
 type Transaction struct {
-	Command    interface{}
+	Command    command.Commander
 	Creator    string
 	Hash       string
 	Signatures []Signatures

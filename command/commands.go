@@ -6,7 +6,7 @@ import (
 )
 
 type Commander interface {
-	Serialize(builder *flatbuffers.Builder)
+	Serialize(builder *flatbuffers.Builder) flatbuffers.UOffsetT
 }
 
 type Currency struct {
@@ -20,7 +20,7 @@ type Currency struct {
 	Precision byte
 }
 
-func (c *Currency) Serialize(builder *flatbuffers.Builder) {
+func (c *Currency) Serialize(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
 	name := builder.CreateString(c.CurrencyName)
 	domainName := builder.CreateString(c.DomainName)
 	lederName := builder.CreateString(c.LedgerName)
@@ -35,5 +35,6 @@ func (c *Currency) Serialize(builder *flatbuffers.Builder) {
 	iroha.CurrencyAddDescription(builder, description)
 	iroha.CurrencyAddAmount(builder, amount)
 	iroha.CurrencyAddPrecision(builder, precision)
-	iroha.CurrencyEnd(builder)
+
+	return iroha.CurrencyEnd(builder)
 }
