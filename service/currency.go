@@ -10,14 +10,19 @@ import (
 	"google.golang.org/grpc"
 )
 
-func CreateCurrency(tx *model.Transaction) {
+func CreateCurrency(tx *model.Transaction) (*TransactionResponse, error) {
 	builder := flatbuffers.NewBuilder(0)
 
 	currency := tx.Command.Serialize(builder)
+	pubkey := builder.CreateString("rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=")
+	hash := builder.CreateString(tx.Hash)
 
 	iroha.TransactionStart(builder)
 	iroha.TransactionAddCommandType(builder, 4)
 	iroha.TransactionAddCommand(builder, currency)
+	iroha.TransactionAddCreatorPubKey(builder, pubkey)
+	iroha.TransactionAddSignatures(builder, 2)
+	iroha.TransactionAddHash(builder, hash)
 	// Add more some items ...
 
 	transaction := iroha.TransactionEnd(builder)
@@ -25,12 +30,17 @@ func CreateCurrency(tx *model.Transaction) {
 
 	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
-		panic(err)
+		return nil, fmt.Errorf("gRPC dial failed: %s", err)
 	}
 	client := iroha.NewSumeragiClient(cc)
 	ctx := context.Background()
-	resFbs, err := client.Torii(ctx, builder)
-	res := iroha.GetRootAsResponse(resFbs, 0)
-	fmt.Println(res.Code())
-	fmt.Println(res.Message())
+	res, err := client.Torii(ctx, builder)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect torii: %s", err)
+	}
+
+	return &TransactionResponse{
+		Code:    res.Code(),
+		Message: string(res.Message()),
+	}, nil
 }
