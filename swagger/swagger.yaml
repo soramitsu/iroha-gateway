@@ -547,13 +547,13 @@ definitions:
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
       account:
         $ref: '#/definitions/Account'
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -567,7 +567,7 @@ definitions:
         pattern: '[0-9]{1,18}'
         type: string
     required:
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     - account
@@ -575,7 +575,7 @@ definitions:
     type: object
   CreateCurrencyRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       currency:
         description: This is sample currency description.
         domain_name: sampleDomainName
@@ -586,7 +586,7 @@ definitions:
       target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -608,7 +608,7 @@ definitions:
         type: string
     required:
     - target
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     - currency
@@ -652,7 +652,7 @@ definitions:
     type: object
   CurrencyTransferRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       receiver: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       sender: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
@@ -660,7 +660,7 @@ definitions:
       timestamp: "1494693347"
       value: 10.1
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -698,20 +698,20 @@ definitions:
     - sender
     - receiver
     - target
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: CurrencyTransferRequest
     type: object
   CurrencyValueRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       target: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D
       timestamp: "1494693347"
       value: 10.1
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -737,18 +737,18 @@ definitions:
     required:
     - value
     - target
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: CurrencyValueRequest
     type: object
   DeleteAccountRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -762,18 +762,18 @@ definitions:
         pattern: '[0-9]{1,18}'
         type: string
     required:
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: DeleteAccountRequest
     type: object
   DeleteCurrencyRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -787,18 +787,18 @@ definitions:
         pattern: '[0-9]{1,18}'
         type: string
     required:
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: DeleteCurrencyRequest
     type: object
   DeleteSignatoryRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -812,7 +812,7 @@ definitions:
         pattern: '[0-9]{1,18}'
         type: string
     required:
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: DeleteSignatoryRequest
@@ -1159,14 +1159,14 @@ definitions:
     type: object
   SignatoryRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signatories:
       - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
       - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         pattern: '[0-9a-zA-Z+/=]+'
@@ -1192,7 +1192,7 @@ definitions:
         type: string
     required:
     - signatories
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: SignatoryRequest
@@ -1226,7 +1226,7 @@ definitions:
   Transaction:
     example:
       command: PUT/accounts
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signatures:
       - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
@@ -1237,7 +1237,7 @@ definitions:
         description: transaction's command type
         example: PUT/accounts
         type: string
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -1256,7 +1256,7 @@ definitions:
         type: string
     required:
     - command
-    - creator
+    - creator_pubkey
     - signatures
     - timestamp
     title: Transaction
@@ -1268,14 +1268,14 @@ definitions:
       message: message
       transactions:
       - command: PUT/accounts
-        creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signatures:
         - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
           timestamp: "1494693347"
         timestamp: "1494693347"
       - command: PUT/accounts
-        creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signatures:
         - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
@@ -1294,14 +1294,14 @@ definitions:
       transactions:
         example:
         - command: PUT/accounts
-          creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signatures:
           - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
             timestamp: "1494693347"
           timestamp: "1494693347"
         - command: PUT/accounts
-          creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signatures:
           - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
@@ -1319,7 +1319,7 @@ definitions:
   UpdateAccountRequest:
     example:
       alias: sate
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
@@ -1328,7 +1328,7 @@ definitions:
         example: sate
         pattern: '[0-9a-zA-Z]+'
         type: string
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -1343,19 +1343,19 @@ definitions:
         type: string
     required:
     - alias
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: UpdateAccountRequest
     type: object
   UpdateCurrencyRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       description: This is sample currency description.
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -1374,19 +1374,19 @@ definitions:
         type: string
     required:
     - description
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: UpdateCurrencyRequest
     type: object
   UpdateQuorumRequest:
     example:
-      creator: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       quorum: 1
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      creator:
+      creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
@@ -1406,7 +1406,7 @@ definitions:
         type: string
     required:
     - quorum
-    - creator
+    - creator_pubkey
     - signature
     - timestamp
     title: UpdateQuorumRequest
@@ -1512,7 +1512,7 @@ paths:
       parameters:
       - description: Public key of URL-encoded creator's account
         in: query
-        name: creator
+        name: creator_pubkey
         pattern: '[0-9a-zA-Z-_.~]+'
         required: false
         type: string
@@ -1529,8 +1529,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.account+json
       - application/vnd.message+json
+      - application/vnd.account+json
       responses:
         "200":
           description: OK
@@ -1625,7 +1625,7 @@ paths:
       parameters:
       - description: Public key of URL-encoded creator's account
         in: query
-        name: creator
+        name: creator_pubkey
         pattern: '[0-9a-zA-Z-_.~]+'
         required: false
         type: string
@@ -1642,8 +1642,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.signatories+json
       - application/vnd.message+json
+      - application/vnd.signatories+json
       responses:
         "200":
           description: OK
@@ -1805,7 +1805,7 @@ paths:
       parameters:
       - description: Public key of creator's account
         in: query
-        name: creator
+        name: creator_pubkey
         required: true
         type: string
       - description: currency's uri
@@ -1987,7 +1987,7 @@ paths:
       parameters:
       - description: Public key of creator's account
         in: query
-        name: creator
+        name: creator_pubkey
         required: true
         type: string
       - description: currency's uri
