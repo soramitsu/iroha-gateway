@@ -14,10 +14,13 @@ func CreateCurrency(tx *model.Transaction) {
 	builder := flatbuffers.NewBuilder(0)
 
 	currency := tx.Command.Serialize(builder)
+	pubkey := builder.CreateString("rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=")
 
 	iroha.TransactionStart(builder)
 	iroha.TransactionAddCommandType(builder, 4)
 	iroha.TransactionAddCommand(builder, currency)
+	iroha.TransactionAddCreatorPubKey(builder, pubkey)
+	iroha.TransactionAddSignatures(builder, 2)
 	// Add more some items ...
 
 	transaction := iroha.TransactionEnd(builder)
@@ -29,8 +32,7 @@ func CreateCurrency(tx *model.Transaction) {
 	}
 	client := iroha.NewSumeragiClient(cc)
 	ctx := context.Background()
-	resFbs, err := client.Torii(ctx, builder)
-	res := iroha.GetRootAsResponse(resFbs, 0)
+	res, err := client.Torii(ctx, builder)
 	fmt.Println(res.Code())
 	fmt.Println(res.Message())
 }
