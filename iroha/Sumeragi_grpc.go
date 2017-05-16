@@ -4,103 +4,112 @@
 
 package iroha
 
-import "github.com/google/flatbuffers/go"
-
 import (
-  context "golang.org/x/net/context"
-  grpc "google.golang.org/grpc"
+	"github.com/google/flatbuffers/go"
+
+	context "golang.org/x/net/context"
+
+	grpc "github.com/lycoris0731/grpc-go"
 )
 
 // Client API for Sumeragi service
-type SumeragiClient interface{
-  Torii(ctx context.Context, in *flatbuffers.Builder, 
-  	opts... grpc.CallOption) (* Response, error)  
-  Verify(ctx context.Context, in *flatbuffers.Builder, 
-  	opts... grpc.CallOption) (* Response, error)  
+type SumeragiClient interface {
+	Torii(ctx context.Context, in *flatbuffers.Builder,
+		opts ...grpc.CallOption) (*Response, error)
+	Verify(ctx context.Context, in *flatbuffers.Builder,
+		opts ...grpc.CallOption) (*Response, error)
 }
 
 type sumeragiClient struct {
-  cc *grpc.ClientConn
+	cc *grpc.ClientConn
 }
 
 func NewSumeragiClient(cc *grpc.ClientConn) SumeragiClient {
-  return &sumeragiClient{cc}
+	return &sumeragiClient{cc}
 }
 
-func (c *sumeragiClient) Torii(ctx context.Context, in *flatbuffers.Builder, 
-	opts... grpc.CallOption) (* Response, error) {
-  out := new(Response)
-  err := grpc.Invoke(ctx, "/iroha.Sumeragi/Torii", in, out, c.cc, opts...)
-  if err != nil { return nil, err }
-  return out, nil
+func (c *sumeragiClient) Torii(ctx context.Context, in *flatbuffers.Builder,
+	opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := grpc.Invoke(ctx, "/iroha.Sumeragi/Torii", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-func (c *sumeragiClient) Verify(ctx context.Context, in *flatbuffers.Builder, 
-	opts... grpc.CallOption) (* Response, error) {
-  out := new(Response)
-  err := grpc.Invoke(ctx, "/iroha.Sumeragi/Verify", in, out, c.cc, opts...)
-  if err != nil { return nil, err }
-  return out, nil
+func (c *sumeragiClient) Verify(ctx context.Context, in *flatbuffers.Builder,
+	opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := grpc.Invoke(ctx, "/iroha.Sumeragi/Verify", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 // Server API for Sumeragi service
 type SumeragiServer interface {
-  Torii(context.Context, *Transaction) (*flatbuffers.Builder, error)  
-  Verify(context.Context, *ConsensusEvent) (*flatbuffers.Builder, error)  
+	Torii(context.Context, *Transaction) (*flatbuffers.Builder, error)
+	Verify(context.Context, *ConsensusEvent) (*flatbuffers.Builder, error)
 }
 
 func RegisterSumeragiServer(s *grpc.Server, srv SumeragiServer) {
-  s.RegisterService(&_Sumeragi_serviceDesc, srv)
+	s.RegisterService(&_Sumeragi_serviceDesc, srv)
 }
 
 func _Sumeragi_Torii_Handler(srv interface{}, ctx context.Context,
 	dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-  in := new(Transaction)
-  if err := dec(in); err != nil { return nil, err }
-  if interceptor == nil { return srv.(SumeragiServer).Torii(ctx, in) }
-  info := &grpc.UnaryServerInfo{
-    Server: srv,
-    FullMethod: "/iroha.Sumeragi/Torii",
-  }
-  
-  handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-    return srv.(SumeragiServer).Torii(ctx, req.(* Transaction))
-  }
-  return interceptor(ctx, in, info, handler)
-}
+	in := new(Transaction)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SumeragiServer).Torii(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/iroha.Sumeragi/Torii",
+	}
 
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SumeragiServer).Torii(ctx, req.(*Transaction))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 func _Sumeragi_Verify_Handler(srv interface{}, ctx context.Context,
 	dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-  in := new(ConsensusEvent)
-  if err := dec(in); err != nil { return nil, err }
-  if interceptor == nil { return srv.(SumeragiServer).Verify(ctx, in) }
-  info := &grpc.UnaryServerInfo{
-    Server: srv,
-    FullMethod: "/iroha.Sumeragi/Verify",
-  }
-  
-  handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-    return srv.(SumeragiServer).Verify(ctx, req.(* ConsensusEvent))
-  }
-  return interceptor(ctx, in, info, handler)
-}
+	in := new(ConsensusEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SumeragiServer).Verify(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/iroha.Sumeragi/Verify",
+	}
 
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SumeragiServer).Verify(ctx, req.(*ConsensusEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 var _Sumeragi_serviceDesc = grpc.ServiceDesc{
-  ServiceName: "iroha.Sumeragi",
-  HandlerType: (*SumeragiServer)(nil),
-  Methods: []grpc.MethodDesc{
-    {
-      MethodName: "Torii",
-      Handler: _Sumeragi_Torii_Handler, 
-    },
-    {
-      MethodName: "Verify",
-      Handler: _Sumeragi_Verify_Handler, 
-    },
-  },
-  Streams: []grpc.StreamDesc{
-  },
+	ServiceName: "iroha.Sumeragi",
+	HandlerType: (*SumeragiServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Torii",
+			Handler:    _Sumeragi_Torii_Handler,
+		},
+		{
+			MethodName: "Verify",
+			Handler:    _Sumeragi_Verify_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{},
 }
-

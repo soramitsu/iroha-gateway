@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	flatbuffers "github.com/google/flatbuffers/go"
+	grpc "github.com/lycoris0731/grpc-go"
 	"github.com/soramitsu/iroha-gateway/iroha"
 	"github.com/soramitsu/iroha-gateway/model"
-	"google.golang.org/grpc"
 )
 
 func CreateCurrency(tx *model.Transaction) {
@@ -28,11 +28,15 @@ func CreateCurrency(tx *model.Transaction) {
 
 	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	client := iroha.NewSumeragiClient(cc)
 	ctx := context.Background()
 	res, err := client.Torii(ctx, builder)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	fmt.Println(res.Code())
 	fmt.Println(res.Message())
 }
