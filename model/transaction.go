@@ -1,7 +1,7 @@
 package model
 
 type Transaction struct {
-	Command    string
+	Command    interface{}
 	Creator    string
 	Hash       string
 	Signatures []Signatures
