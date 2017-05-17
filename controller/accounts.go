@@ -43,7 +43,7 @@ func (c *AccountsController) Get(ctx *app.GetAccountsContext) error {
 	// Put your logic here
 
 	// AccountsController_Get: end_implement
-	res := &app.Account{}
+	res := &app.AnAccount{}
 	return ctx.OK(res)
 }
 

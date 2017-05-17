@@ -1,0 +1,14 @@
+{
+  "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+  "currency": {
+    "description": "This is sample currency description.",
+    "domain_name": "sampleDomainName",
+    "ledger_name": "sampleLedgerName",
+    "name": "sampleCurrencyName",
+    "value": 10.1
+  },
+  "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+  "target": "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D",
+  "timestamp": "1494693347"
+}
+

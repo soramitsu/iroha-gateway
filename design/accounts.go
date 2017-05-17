@@ -145,7 +145,7 @@ var AddAccountRequest = Type("AddAccountRequest", func() {
 	Required("creator_pubkey", "signature", "timestamp", "account")
 })
 
-var Account = Type("Account", func() {
+var Account = Type("Account", func() { // TODO:
 	Attribute("alias", String, func() {
 		Description(descriptionAlias)
 		Example(exampleAlias)
@@ -198,7 +198,7 @@ var AccountFull = Type("AccountFull", func() {
 	Required("alias", "pubkey", "signatories", "quorum", "permissions")
 })
 
-var AccountResponse = MediaType("application/vnd.account+json", func() {
+var AccountResponse = MediaType("application/vnd.an.account+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

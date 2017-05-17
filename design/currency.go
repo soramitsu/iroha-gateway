@@ -254,7 +254,7 @@ var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
 
 })
 
-var CurrencyResponse = MediaType("application/vnd.currency+json", func() {
+var CurrencyResponse = MediaType("application/vnd.an.currency+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
