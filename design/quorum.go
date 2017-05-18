@@ -6,14 +6,14 @@ import (
 )
 
 var _ = Resource("quorum", func() {
-	BasePath("/accounts/:target/quorum")
+	BasePath("/accounts/:guid/quorum")
 	Params(func() {
-		Param("target", String, func() {
-			Pattern(`[0-9a-zA-Z-_.~]+`)
+		Param("guid", String, func() {
+			Pattern(base64Pattern)
 			Example(exampleTargetEncoded)
-			Description("Public key of URL-encoded target's account")
+			Description("GUID of URL-encoded account")
 		})
-		Required("target")
+		Required("guid")
 	})
 
 	Action("update", func() {

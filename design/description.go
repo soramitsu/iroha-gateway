@@ -42,4 +42,5 @@ const (
 	descriptionCurrencyReceiver                = "receiver's public key"
 	descriptionTransactionCommand              = "transaction's command type"
 	descriptionTransactionPublicKey            = "transaction's public key"
+	descriptionAccountGUID                     = "account's guid"
 )

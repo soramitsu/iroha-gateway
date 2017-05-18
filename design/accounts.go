@@ -16,13 +16,13 @@ var _ = Resource("accounts", func() {
 	})
 
 	Action("get", func() {
-		Routing(GET("/:target"))
+		Routing(GET("/:guid"))
 		Description("get an account by public key")
 		Params(func() {
-			Param("target", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
-				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded target's account")
+			Param("guid", String, func() {
+				Pattern(base64Pattern)
+				Example(exampleAccountGUIDEncoded)
+				Description("GUID of URL-encoded account")
 			})
 			Param("creator_pubkey", String, func() {
 				Pattern(`[0-9a-zA-Z-_.~]+`)
@@ -35,7 +35,7 @@ var _ = Resource("accounts", func() {
 				Example(false)
 			})
 
-			Required("target")
+			Required("guid")
 		})
 		Response(OK, AccountResponse)
 		Response(BadRequest, MessageResponse)
@@ -43,14 +43,15 @@ var _ = Resource("accounts", func() {
 	})
 
 	Action("update", func() {
-		Routing(PUT("/:target"))
+		Routing(PUT("/:guid"))
 		Description("update an account")
 		Params(func() {
-			Param("target", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
+			Param("guid", String, func() {
+				Pattern(base64Pattern)
 				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded target's account")
+				Description("GUID of URL-encoded account")
 			})
+			Required("guid")
 		})
 		Payload(UpdateAccountRequest)
 		Response(OK, MessageResponse)
@@ -59,13 +60,13 @@ var _ = Resource("accounts", func() {
 	})
 
 	Action("delete", func() {
-		Routing(DELETE("/:target"))
+		Routing(DELETE("/:guid"))
 		Description("delete an account")
 		Params(func() {
-			Param("target", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
-				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded target's account")
+			Param("guid", String, func() {
+				Pattern(base64Pattern)
+				Example(exampleAccountGUIDEncoded)
+				Description("GUID of URL-encoded account")
 			})
 		})
 		Payload(DeleteAccountRequest)
@@ -146,14 +147,9 @@ var AddAccountRequest = Type("AddAccountRequest", func() {
 })
 
 var Account = Type("Account", func() {
-	Attribute("alias", String, func() {
-		Description(descriptionAlias)
-		Example(exampleAlias)
-		Pattern(`[0-9a-zA-Z]+`)
-	})
-	Attribute("pubkey", String, func() {
-		Description(descriptionPubkey)
-		Example(examplePubkey)
+	Attribute("guid", String, func() {
+		Description(descriptionAccountGUID)
+		Example(exampleAccountGUID)
 		Pattern(base64Pattern)
 	})
 	Attribute("signatories", ArrayOf(String), func() {
@@ -167,35 +163,7 @@ var Account = Type("Account", func() {
 		Maximum(65535)
 	})
 
-	Required("alias", "pubkey", "signatories", "quorum")
-})
-
-var AccountFull = Type("AccountFull", func() {
-	Attribute("alias", String, func() {
-		Description(descriptionAlias)
-		Example(exampleAlias)
-		Pattern(`[0-9a-zA-Z]+`)
-	})
-	Attribute("pubkey", String, func() {
-		Description(descriptionPubkey)
-		Example(examplePubkey)
-		Pattern(base64Pattern)
-	})
-	Attribute("signatories", ArrayOf(String), func() {
-		Description(descriptionSignatories)
-		Example(exampleSignatories)
-	})
-	Attribute("quorum", Integer, func() {
-		Description(descriptionQuorum)
-		Example(exampleQuorum)
-		Minimum(1)
-		Maximum(65535)
-	})
-	Attribute("permissions", Permissions, func() {
-		Description("account permissions")
-	})
-
-	Required("alias", "pubkey", "signatories", "quorum", "permissions")
+	Required("guid", "signatories", "quorum")
 })
 
 var AccountResponse = MediaType("application/vnd.account+json", func() {
@@ -208,7 +176,7 @@ var AccountResponse = MediaType("application/vnd.account+json", func() {
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("account", AccountFull, func() {
+		Attribute("account", Account, func() {
 			Description(descriptionAccount)
 		})
 
@@ -232,7 +200,7 @@ var AccountsResponse = MediaType("application/vnd.accounts+json", func() {
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("accounts", ArrayOf(AccountFull), func() {
+		Attribute("accounts", ArrayOf(Account), func() {
 			Description(descriptionAccounts)
 		})
 
