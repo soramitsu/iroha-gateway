@@ -1,10 +1,17 @@
+SHELL=/bin/bash
 BASE_PACKAGE=github.com/soramitsu/doberman-server
+
+run-iroha:
+	docker-compose -f iroha-docker-compose.yaml up -d && docker-compose -f iroha-docker-compose.yaml logs -f
 
 install-glide:
 	sh util/glide.sh v0.12.3
 
 deps: install-glide
 	glide install
+
+test: 
+	go test -v -race ./service
 
 build:
 	go build -o bin/iroha-server main.go
