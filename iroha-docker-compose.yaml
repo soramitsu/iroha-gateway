@@ -1,0 +1,7 @@
+version: "2"
+services:
+  iroha:
+    image: hyperledger/iroha-docker
+    ports:
+      - "50051:50051"
+    command: sh -c /iroha/scripts/run.sh
