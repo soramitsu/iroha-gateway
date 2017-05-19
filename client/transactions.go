@@ -45,8 +45,8 @@ func (c *Client) NewGetAllTransactionsRequest(ctx context.Context, path string, 
 	values.Set("creator_pubkey", creatorPubkey)
 	values.Set("target", target)
 	if isCommitted != nil {
-		tmp31 := strconv.FormatBool(*isCommitted)
-		values.Set("is_committed", tmp31)
+		tmp35 := strconv.FormatBool(*isCommitted)
+		values.Set("is_committed", tmp35)
 	}
 	u.RawQuery = values.Encode()
 	req, err := http.NewRequest("GET", u.String(), nil)

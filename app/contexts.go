@@ -102,6 +102,109 @@ func (ctx *DeleteAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
+// DeleteByUsernameAccountContext provides the account deleteByUsername action context.
+type DeleteByUsernameAccountContext struct {
+	context.Context
+	*goa.ResponseData
+	*goa.RequestData
+	DomainURI string
+	Username  string
+	Payload   *DeleteAccountRequest
+}
+
+// NewDeleteByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
+// context used by the account controller deleteByUsername action.
+func NewDeleteByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUsernameAccountContext, error) {
+	var err error
+	resp := goa.ContextResponse(ctx)
+	resp.Service = service
+	req := goa.ContextRequest(ctx)
+	req.Request = r
+	rctx := DeleteByUsernameAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
+	paramDomainURI := req.Params["domain_uri"]
+	if len(paramDomainURI) > 0 {
+		rawDomainURI := paramDomainURI[0]
+		rctx.DomainURI = rawDomainURI
+		if ok := goa.ValidatePattern(`^$`, rctx.DomainURI); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^$`))
+		}
+	}
+	paramUsername := req.Params["username"]
+	if len(paramUsername) > 0 {
+		rawUsername := paramUsername[0]
+		rctx.Username = rawUsername
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, rctx.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`username`, rctx.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
+		}
+	}
+	return &rctx, err
+}
+
+// OK sends a HTTP response with status code 200.
+func (ctx *DeleteByUsernameAccountContext) OK(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
+}
+
+// BadRequest sends a HTTP response with status code 400.
+func (ctx *DeleteByUsernameAccountContext) BadRequest(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
+}
+
+// InternalServerError sends a HTTP response with status code 500.
+func (ctx *DeleteByUsernameAccountContext) InternalServerError(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
+}
+
+// DeleteByUsernameFromDefaultDomainAccountContext provides the account deleteByUsernameFromDefaultDomain action context.
+type DeleteByUsernameFromDefaultDomainAccountContext struct {
+	context.Context
+	*goa.ResponseData
+	*goa.RequestData
+	Username string
+	Payload  *DeleteAccountRequest
+}
+
+// NewDeleteByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
+// context used by the account controller deleteByUsernameFromDefaultDomain action.
+func NewDeleteByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUsernameFromDefaultDomainAccountContext, error) {
+	var err error
+	resp := goa.ContextResponse(ctx)
+	resp.Service = service
+	req := goa.ContextRequest(ctx)
+	req.Request = r
+	rctx := DeleteByUsernameFromDefaultDomainAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
+	paramUsername := req.Params["username"]
+	if len(paramUsername) > 0 {
+		rawUsername := paramUsername[0]
+		rctx.Username = rawUsername
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, rctx.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`username`, rctx.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
+		}
+	}
+	return &rctx, err
+}
+
+// OK sends a HTTP response with status code 200.
+func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) OK(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
+}
+
+// BadRequest sends a HTTP response with status code 400.
+func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) BadRequest(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
+}
+
+// InternalServerError sends a HTTP response with status code 500.
+func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
+}
+
 // GetAllAccountContext provides the account getAll action context.
 type GetAllAccountContext struct {
 	context.Context
@@ -362,6 +465,109 @@ func (ctx *UpdateAccountContext) BadRequest(r *Message) error {
 
 // InternalServerError sends a HTTP response with status code 500.
 func (ctx *UpdateAccountContext) InternalServerError(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
+}
+
+// UpdateByUsernameAccountContext provides the account updateByUsername action context.
+type UpdateByUsernameAccountContext struct {
+	context.Context
+	*goa.ResponseData
+	*goa.RequestData
+	DomainURI string
+	Username  string
+	Payload   *UpdateAccountRequest
+}
+
+// NewUpdateByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
+// context used by the account controller updateByUsername action.
+func NewUpdateByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUsernameAccountContext, error) {
+	var err error
+	resp := goa.ContextResponse(ctx)
+	resp.Service = service
+	req := goa.ContextRequest(ctx)
+	req.Request = r
+	rctx := UpdateByUsernameAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
+	paramDomainURI := req.Params["domain_uri"]
+	if len(paramDomainURI) > 0 {
+		rawDomainURI := paramDomainURI[0]
+		rctx.DomainURI = rawDomainURI
+		if ok := goa.ValidatePattern(`^$`, rctx.DomainURI); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^$`))
+		}
+	}
+	paramUsername := req.Params["username"]
+	if len(paramUsername) > 0 {
+		rawUsername := paramUsername[0]
+		rctx.Username = rawUsername
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, rctx.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`username`, rctx.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
+		}
+	}
+	return &rctx, err
+}
+
+// OK sends a HTTP response with status code 200.
+func (ctx *UpdateByUsernameAccountContext) OK(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
+}
+
+// BadRequest sends a HTTP response with status code 400.
+func (ctx *UpdateByUsernameAccountContext) BadRequest(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
+}
+
+// InternalServerError sends a HTTP response with status code 500.
+func (ctx *UpdateByUsernameAccountContext) InternalServerError(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
+}
+
+// UpdateByUsernameFromDefaultDomainAccountContext provides the account updateByUsernameFromDefaultDomain action context.
+type UpdateByUsernameFromDefaultDomainAccountContext struct {
+	context.Context
+	*goa.ResponseData
+	*goa.RequestData
+	Username string
+	Payload  *UpdateAccountRequest
+}
+
+// NewUpdateByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
+// context used by the account controller updateByUsernameFromDefaultDomain action.
+func NewUpdateByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUsernameFromDefaultDomainAccountContext, error) {
+	var err error
+	resp := goa.ContextResponse(ctx)
+	resp.Service = service
+	req := goa.ContextRequest(ctx)
+	req.Request = r
+	rctx := UpdateByUsernameFromDefaultDomainAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
+	paramUsername := req.Params["username"]
+	if len(paramUsername) > 0 {
+		rawUsername := paramUsername[0]
+		rctx.Username = rawUsername
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, rctx.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`username`, rctx.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
+		}
+	}
+	return &rctx, err
+}
+
+// OK sends a HTTP response with status code 200.
+func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) OK(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
+}
+
+// BadRequest sends a HTTP response with status code 400.
+func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) BadRequest(r *Message) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
+}
+
+// InternalServerError sends a HTTP response with status code 500.
+func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }

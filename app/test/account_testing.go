@@ -507,6 +507,495 @@ func DeleteAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Ser
 	return rw, mt
 }
 
+// DeleteByUsernameAccountBadRequest runs the method DeleteByUsername of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func DeleteByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/%v/accounts/%v", domainURI, username),
+	}
+	req, _err := http.NewRequest("DELETE", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["domain_uri"] = []string{fmt.Sprintf("%v", domainURI)}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	deleteByUsernameCtx, __err := app.NewDeleteByUsernameAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	deleteByUsernameCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.DeleteByUsername(deleteByUsernameCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 400 {
+		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// DeleteByUsernameAccountInternalServerError runs the method DeleteByUsername of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func DeleteByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/%v/accounts/%v", domainURI, username),
+	}
+	req, _err := http.NewRequest("DELETE", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["domain_uri"] = []string{fmt.Sprintf("%v", domainURI)}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	deleteByUsernameCtx, __err := app.NewDeleteByUsernameAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	deleteByUsernameCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.DeleteByUsername(deleteByUsernameCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 500 {
+		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// DeleteByUsernameAccountOK runs the method DeleteByUsername of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func DeleteByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/%v/accounts/%v", domainURI, username),
+	}
+	req, _err := http.NewRequest("DELETE", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["domain_uri"] = []string{fmt.Sprintf("%v", domainURI)}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	deleteByUsernameCtx, __err := app.NewDeleteByUsernameAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	deleteByUsernameCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.DeleteByUsername(deleteByUsernameCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 200 {
+		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// DeleteByUsernameFromDefaultDomainAccountBadRequest runs the method DeleteByUsernameFromDefaultDomain of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func DeleteByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/default/accounts/%v", username),
+	}
+	req, _err := http.NewRequest("DELETE", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	deleteByUsernameFromDefaultDomainCtx, __err := app.NewDeleteByUsernameFromDefaultDomainAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	deleteByUsernameFromDefaultDomainCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.DeleteByUsernameFromDefaultDomain(deleteByUsernameFromDefaultDomainCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 400 {
+		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// DeleteByUsernameFromDefaultDomainAccountInternalServerError runs the method DeleteByUsernameFromDefaultDomain of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func DeleteByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/default/accounts/%v", username),
+	}
+	req, _err := http.NewRequest("DELETE", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	deleteByUsernameFromDefaultDomainCtx, __err := app.NewDeleteByUsernameFromDefaultDomainAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	deleteByUsernameFromDefaultDomainCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.DeleteByUsernameFromDefaultDomain(deleteByUsernameFromDefaultDomainCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 500 {
+		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// DeleteByUsernameFromDefaultDomainAccountOK runs the method DeleteByUsernameFromDefaultDomain of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func DeleteByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/default/accounts/%v", username),
+	}
+	req, _err := http.NewRequest("DELETE", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	deleteByUsernameFromDefaultDomainCtx, __err := app.NewDeleteByUsernameFromDefaultDomainAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	deleteByUsernameFromDefaultDomainCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.DeleteByUsernameFromDefaultDomain(deleteByUsernameFromDefaultDomainCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 200 {
+		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
 // GetAllAccountBadRequest runs the method GetAll of the given controller with the given parameters.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
@@ -1643,6 +2132,495 @@ func UpdateAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Ser
 
 	// Perform action
 	__err = ctrl.Update(updateCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 200 {
+		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// UpdateByUsernameAccountBadRequest runs the method UpdateByUsername of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func UpdateByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/%v/accounts/%v", domainURI, username),
+	}
+	req, _err := http.NewRequest("PUT", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["domain_uri"] = []string{fmt.Sprintf("%v", domainURI)}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	updateByUsernameCtx, __err := app.NewUpdateByUsernameAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	updateByUsernameCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.UpdateByUsername(updateByUsernameCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 400 {
+		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// UpdateByUsernameAccountInternalServerError runs the method UpdateByUsername of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func UpdateByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/%v/accounts/%v", domainURI, username),
+	}
+	req, _err := http.NewRequest("PUT", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["domain_uri"] = []string{fmt.Sprintf("%v", domainURI)}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	updateByUsernameCtx, __err := app.NewUpdateByUsernameAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	updateByUsernameCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.UpdateByUsername(updateByUsernameCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 500 {
+		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// UpdateByUsernameAccountOK runs the method UpdateByUsername of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func UpdateByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/%v/accounts/%v", domainURI, username),
+	}
+	req, _err := http.NewRequest("PUT", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["domain_uri"] = []string{fmt.Sprintf("%v", domainURI)}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	updateByUsernameCtx, __err := app.NewUpdateByUsernameAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	updateByUsernameCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.UpdateByUsername(updateByUsernameCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 200 {
+		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// UpdateByUsernameFromDefaultDomainAccountBadRequest runs the method UpdateByUsernameFromDefaultDomain of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func UpdateByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/default/accounts/%v", username),
+	}
+	req, _err := http.NewRequest("PUT", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	updateByUsernameFromDefaultDomainCtx, __err := app.NewUpdateByUsernameFromDefaultDomainAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	updateByUsernameFromDefaultDomainCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.UpdateByUsernameFromDefaultDomain(updateByUsernameFromDefaultDomainCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 400 {
+		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// UpdateByUsernameFromDefaultDomainAccountInternalServerError runs the method UpdateByUsernameFromDefaultDomain of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func UpdateByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/default/accounts/%v", username),
+	}
+	req, _err := http.NewRequest("PUT", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	updateByUsernameFromDefaultDomainCtx, __err := app.NewUpdateByUsernameFromDefaultDomainAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	updateByUsernameFromDefaultDomainCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.UpdateByUsernameFromDefaultDomain(updateByUsernameFromDefaultDomainCtx)
+
+	// Validate response
+	if __err != nil {
+		t.Fatalf("controller returned %+v, logs:\n%s", __err, logBuf.String())
+	}
+	if rw.Code != 500 {
+		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
+	}
+	var mt *app.Message
+	if resp != nil {
+		var _ok bool
+		mt, _ok = resp.(*app.Message)
+		if !_ok {
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+		}
+		__err = mt.Validate()
+		if __err != nil {
+			t.Errorf("invalid response media type: %s", __err)
+		}
+	}
+
+	// Return results
+	return rw, mt
+}
+
+// UpdateByUsernameFromDefaultDomainAccountOK runs the method UpdateByUsernameFromDefaultDomain of the given controller with the given parameters and payload.
+// It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
+// If ctx is nil then context.Background() is used.
+// If service is nil then a default service is created.
+func UpdateByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+	// Setup service
+	var (
+		logBuf bytes.Buffer
+		resp   interface{}
+
+		respSetter goatest.ResponseSetterFunc = func(r interface{}) { resp = r }
+	)
+	if service == nil {
+		service = goatest.Service(&logBuf, respSetter)
+	} else {
+		logger := log.New(&logBuf, "", log.Ltime)
+		service.WithLogger(goa.NewLogger(logger))
+		newEncoder := func(io.Writer) goa.Encoder { return respSetter }
+		service.Encoder = goa.NewHTTPEncoder() // Make sure the code ends up using this decoder
+		service.Encoder.Register(newEncoder, "*/*")
+	}
+
+	// Validate payload
+	err := payload.Validate()
+	if err != nil {
+		e, ok := err.(goa.ServiceError)
+		if !ok {
+			panic(err) // bug
+		}
+		t.Errorf("unexpected payload validation error: %+v", e)
+		return nil, nil
+	}
+
+	// Setup request context
+	rw := httptest.NewRecorder()
+	u := &url.URL{
+		Path: fmt.Sprintf("/domains/default/accounts/%v", username),
+	}
+	req, _err := http.NewRequest("PUT", u.String(), nil)
+	if _err != nil {
+		panic("invalid test " + _err.Error()) // bug
+	}
+	prms := url.Values{}
+	prms["username"] = []string{fmt.Sprintf("%v", username)}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
+	updateByUsernameFromDefaultDomainCtx, __err := app.NewUpdateByUsernameFromDefaultDomainAccountContext(goaCtx, req, service)
+	if __err != nil {
+		panic("invalid test data " + __err.Error()) // bug
+	}
+	updateByUsernameFromDefaultDomainCtx.Payload = payload
+
+	// Perform action
+	__err = ctrl.UpdateByUsernameFromDefaultDomain(updateByUsernameFromDefaultDomainCtx)
 
 	// Validate response
 	if __err != nil {

@@ -44,6 +44,26 @@ type (
 		PrettyPrint bool
 	}
 
+	// DeleteByUsernameAccountCommand is the command line data structure for the deleteByUsername action of account
+	DeleteByUsernameAccountCommand struct {
+		Payload     string
+		ContentType string
+		// domain's uri
+		DomainURI string
+		// account's username
+		Username    string
+		PrettyPrint bool
+	}
+
+	// DeleteByUsernameFromDefaultDomainAccountCommand is the command line data structure for the deleteByUsernameFromDefaultDomain action of account
+	DeleteByUsernameFromDefaultDomainAccountCommand struct {
+		Payload     string
+		ContentType string
+		// account's username
+		Username    string
+		PrettyPrint bool
+	}
+
 	// GetAllAccountCommand is the command line data structure for the getAll action of account
 	GetAllAccountCommand struct {
 		PrettyPrint bool
@@ -84,6 +104,26 @@ type (
 		ContentType string
 		// account's guid
 		UUID        string
+		PrettyPrint bool
+	}
+
+	// UpdateByUsernameAccountCommand is the command line data structure for the updateByUsername action of account
+	UpdateByUsernameAccountCommand struct {
+		Payload     string
+		ContentType string
+		// domain's uri
+		DomainURI string
+		// account's username
+		Username    string
+		PrettyPrint bool
+	}
+
+	// UpdateByUsernameFromDefaultDomainAccountCommand is the command line data structure for the updateByUsernameFromDefaultDomain action of account
+	UpdateByUsernameFromDefaultDomainAccountCommand struct {
+		Payload     string
+		ContentType string
+		// account's username
+		Username    string
 		PrettyPrint bool
 	}
 
@@ -230,9 +270,11 @@ Payload example:
       ],
       "uuid": "2aaf2527-8021-4afd-829b-89e8de608b36"
    },
-   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-   "timestamp": "1494693347"
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   }
 }`,
 		RunE: func(cmd *cobra.Command, args []string) error { return tmp1.Run(c, args) },
 	}
@@ -326,9 +368,11 @@ Payload example:
 Payload example:
 
 {
-   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-   "timestamp": "1494693347"
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   }
 }`,
 		RunE: func(cmd *cobra.Command, args []string) error { return tmp5.Run(c, args) },
 	}
@@ -373,67 +417,89 @@ Payload example:
 	command.AddCommand(sub)
 	app.AddCommand(command)
 	command = &cobra.Command{
-		Use:   "get-all",
-		Short: `getAll action`,
+		Use:   "delete-by-username",
+		Short: `delete an account by account's domain and username`,
 	}
-	tmp8 := new(GetAllAccountCommand)
+	tmp8 := new(DeleteByUsernameAccountCommand)
 	sub = &cobra.Command{
-		Use:   `account ["/accounts"]`,
+		Use:   `account ["/domains/DOMAIN_URI/accounts/USERNAME"]`,
 		Short: ``,
-		RunE:  func(cmd *cobra.Command, args []string) error { return tmp8.Run(c, args) },
+		Long: `
+
+Payload example:
+
+{
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   }
+}`,
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp8.Run(c, args) },
 	}
 	tmp8.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp8.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp9 := new(GetAllCurrencyCommand)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "delete-by-username-from-default-domain",
+		Short: `delete an account by account's username from default domain`,
+	}
+	tmp9 := new(DeleteByUsernameFromDefaultDomainAccountCommand)
 	sub = &cobra.Command{
-		Use:   `currency ["/currency/CURRENCY_URI"]`,
+		Use:   `account ["/domains/default/accounts/USERNAME"]`,
 		Short: ``,
-		RunE:  func(cmd *cobra.Command, args []string) error { return tmp9.Run(c, args) },
+		Long: `
+
+Payload example:
+
+{
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   }
+}`,
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp9.Run(c, args) },
 	}
 	tmp9.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp9.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp10 := new(GetAllSignatoriesCommand)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "get-all",
+		Short: `getAll action`,
+	}
+	tmp10 := new(GetAllAccountCommand)
 	sub = &cobra.Command{
-		Use:   `signatories ["/accounts/UUID/signatories"]`,
+		Use:   `account ["/accounts"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp10.Run(c, args) },
 	}
 	tmp10.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp10.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp11 := new(GetAllTransactionsCommand)
+	tmp11 := new(GetAllCurrencyCommand)
 	sub = &cobra.Command{
-		Use:   `transactions ["/transactions/CURRENCY_URI"]`,
+		Use:   `currency ["/currency/CURRENCY_URI"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp11.Run(c, args) },
 	}
 	tmp11.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp11.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	app.AddCommand(command)
-	command = &cobra.Command{
-		Use:   "get-byuuid",
-		Short: `get an account by account's UUID`,
-	}
-	tmp12 := new(GetByUUIDAccountCommand)
+	tmp12 := new(GetAllSignatoriesCommand)
 	sub = &cobra.Command{
-		Use:   `account ["/accounts/UUID"]`,
+		Use:   `signatories ["/accounts/UUID/signatories"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp12.Run(c, args) },
 	}
 	tmp12.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp12.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	app.AddCommand(command)
-	command = &cobra.Command{
-		Use:   "get-by-username",
-		Short: `get an account by account's domain and username`,
-	}
-	tmp13 := new(GetByUsernameAccountCommand)
+	tmp13 := new(GetAllTransactionsCommand)
 	sub = &cobra.Command{
-		Use:   `account ["/domains/DOMAIN_URI/accounts/USERNAME"]`,
+		Use:   `transactions ["/transactions/CURRENCY_URI"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp13.Run(c, args) },
 	}
@@ -442,12 +508,12 @@ Payload example:
 	command.AddCommand(sub)
 	app.AddCommand(command)
 	command = &cobra.Command{
-		Use:   "get-by-username-from-default-domain",
-		Short: `get an account by account's username from default domain`,
+		Use:   "get-byuuid",
+		Short: `get an account by account's UUID`,
 	}
-	tmp14 := new(GetByUsernameFromDefaultDomainAccountCommand)
+	tmp14 := new(GetByUUIDAccountCommand)
 	sub = &cobra.Command{
-		Use:   `account ["/domains/default/accounts/USERNAME"]`,
+		Use:   `account ["/accounts/UUID"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp14.Run(c, args) },
 	}
@@ -456,10 +522,38 @@ Payload example:
 	command.AddCommand(sub)
 	app.AddCommand(command)
 	command = &cobra.Command{
+		Use:   "get-by-username",
+		Short: `get an account by account's domain and username`,
+	}
+	tmp15 := new(GetByUsernameAccountCommand)
+	sub = &cobra.Command{
+		Use:   `account ["/domains/DOMAIN_URI/accounts/USERNAME"]`,
+		Short: ``,
+		RunE:  func(cmd *cobra.Command, args []string) error { return tmp15.Run(c, args) },
+	}
+	tmp15.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp15.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "get-by-username-from-default-domain",
+		Short: `get an account by account's username from default domain`,
+	}
+	tmp16 := new(GetByUsernameFromDefaultDomainAccountCommand)
+	sub = &cobra.Command{
+		Use:   `account ["/domains/default/accounts/USERNAME"]`,
+		Short: ``,
+		RunE:  func(cmd *cobra.Command, args []string) error { return tmp16.Run(c, args) },
+	}
+	tmp16.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp16.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
 		Use:   "subtract-value",
 		Short: ``,
 	}
-	tmp15 := new(SubtractValueCurrencyCommand)
+	tmp17 := new(SubtractValueCurrencyCommand)
 	sub = &cobra.Command{
 		Use:   `currency ["/currency/CURRENCY_URI/subtract"]`,
 		Short: ``,
@@ -474,17 +568,17 @@ Payload example:
    "timestamp": "1494693347",
    "value": 10.1
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp15.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp17.Run(c, args) },
 	}
-	tmp15.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp15.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp17.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp17.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
 	app.AddCommand(command)
 	command = &cobra.Command{
 		Use:   "transfer",
 		Short: ``,
 	}
-	tmp16 := new(TransferCurrencyCommand)
+	tmp18 := new(TransferCurrencyCommand)
 	sub = &cobra.Command{
 		Use:   `currency ["/currency/CURRENCY_URI/transfer"]`,
 		Short: ``,
@@ -501,17 +595,17 @@ Payload example:
    "timestamp": "1494693347",
    "value": 10.1
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp16.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp18.Run(c, args) },
 	}
-	tmp16.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp16.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp18.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp18.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
 	app.AddCommand(command)
 	command = &cobra.Command{
 		Use:   "update",
 		Short: `update action`,
 	}
-	tmp17 := new(UpdateAccountCommand)
+	tmp19 := new(UpdateAccountCommand)
 	sub = &cobra.Command{
 		Use:   `account ["/accounts/UUID"]`,
 		Short: ``,
@@ -520,17 +614,19 @@ Payload example:
 Payload example:
 
 {
-   "alias": "sate",
-   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-   "timestamp": "1494693347"
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   },
+   "username": "serizawa"
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp17.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp19.Run(c, args) },
 	}
-	tmp17.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp17.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp19.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp19.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp18 := new(UpdateCurrencyCommand)
+	tmp20 := new(UpdateCurrencyCommand)
 	sub = &cobra.Command{
 		Use:   `currency ["/currency/CURRENCY_URI"]`,
 		Short: ``,
@@ -544,12 +640,12 @@ Payload example:
    "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
    "timestamp": "1494693347"
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp18.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp20.Run(c, args) },
 	}
-	tmp18.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp18.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp20.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp20.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp19 := new(UpdateQuorumCommand)
+	tmp21 := new(UpdateQuorumCommand)
 	sub = &cobra.Command{
 		Use:   `quorum ["/accounts/UUID/quorum"]`,
 		Short: ``,
@@ -563,10 +659,62 @@ Payload example:
    "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
    "timestamp": "1494693347"
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp19.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp21.Run(c, args) },
 	}
-	tmp19.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp19.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp21.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp21.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "update-by-username",
+		Short: `update an account by account's domain and username`,
+	}
+	tmp22 := new(UpdateByUsernameAccountCommand)
+	sub = &cobra.Command{
+		Use:   `account ["/domains/DOMAIN_URI/accounts/USERNAME"]`,
+		Short: ``,
+		Long: `
+
+Payload example:
+
+{
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   },
+   "username": "serizawa"
+}`,
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp22.Run(c, args) },
+	}
+	tmp22.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp22.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "update-by-username-from-default-domain",
+		Short: `update an account by account's username from default domain`,
+	}
+	tmp23 := new(UpdateByUsernameFromDefaultDomainAccountCommand)
+	sub = &cobra.Command{
+		Use:   `account ["/domains/default/accounts/USERNAME"]`,
+		Short: ``,
+		Long: `
+
+Payload example:
+
+{
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   },
+   "username": "serizawa"
+}`,
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp23.Run(c, args) },
+	}
+	tmp23.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp23.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
 	app.AddCommand(command)
 }
@@ -792,6 +940,78 @@ func (cmd *DeleteAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Clie
 	cc.Flags().StringVar(&cmd.UUID, "uuid", uuid, `account's guid`)
 }
 
+// Run makes the HTTP request corresponding to the DeleteByUsernameAccountCommand command.
+func (cmd *DeleteByUsernameAccountCommand) Run(c *client.Client, args []string) error {
+	var path string
+	if len(args) > 0 {
+		path = args[0]
+	} else {
+		path = fmt.Sprintf("/domains/%v/accounts/%v", url.QueryEscape(cmd.DomainURI), url.QueryEscape(cmd.Username))
+	}
+	var payload client.DeleteAccountRequest
+	if cmd.Payload != "" {
+		err := json.Unmarshal([]byte(cmd.Payload), &payload)
+		if err != nil {
+			return fmt.Errorf("failed to deserialize payload: %s", err)
+		}
+	}
+	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
+	ctx := goa.WithLogger(context.Background(), logger)
+	resp, err := c.DeleteByUsernameAccount(ctx, path, &payload, cmd.ContentType)
+	if err != nil {
+		goa.LogError(ctx, "failed", "err", err)
+		return err
+	}
+
+	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
+	return nil
+}
+
+// RegisterFlags registers the command flags with the command line.
+func (cmd *DeleteByUsernameAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+	cc.Flags().StringVar(&cmd.Payload, "payload", "", "Request body encoded in JSON")
+	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
+	var domainURI string
+	cc.Flags().StringVar(&cmd.DomainURI, "domain_uri", domainURI, `domain's uri`)
+	var username string
+	cc.Flags().StringVar(&cmd.Username, "username", username, `account's username`)
+}
+
+// Run makes the HTTP request corresponding to the DeleteByUsernameFromDefaultDomainAccountCommand command.
+func (cmd *DeleteByUsernameFromDefaultDomainAccountCommand) Run(c *client.Client, args []string) error {
+	var path string
+	if len(args) > 0 {
+		path = args[0]
+	} else {
+		path = fmt.Sprintf("/domains/default/accounts/%v", url.QueryEscape(cmd.Username))
+	}
+	var payload client.DeleteAccountRequest
+	if cmd.Payload != "" {
+		err := json.Unmarshal([]byte(cmd.Payload), &payload)
+		if err != nil {
+			return fmt.Errorf("failed to deserialize payload: %s", err)
+		}
+	}
+	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
+	ctx := goa.WithLogger(context.Background(), logger)
+	resp, err := c.DeleteByUsernameFromDefaultDomainAccount(ctx, path, &payload, cmd.ContentType)
+	if err != nil {
+		goa.LogError(ctx, "failed", "err", err)
+		return err
+	}
+
+	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
+	return nil
+}
+
+// RegisterFlags registers the command flags with the command line.
+func (cmd *DeleteByUsernameFromDefaultDomainAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+	cc.Flags().StringVar(&cmd.Payload, "payload", "", "Request body encoded in JSON")
+	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
+	var username string
+	cc.Flags().StringVar(&cmd.Username, "username", username, `account's username`)
+}
+
 // Run makes the HTTP request corresponding to the GetAllAccountCommand command.
 func (cmd *GetAllAccountCommand) Run(c *client.Client, args []string) error {
 	var path string
@@ -826,16 +1046,16 @@ func (cmd *GetByUUIDAccountCommand) Run(c *client.Client, args []string) error {
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	var tmp20 *bool
+	var tmp24 *bool
 	if cmd.IsCommitted != "" {
 		var err error
-		tmp20, err = boolVal(cmd.IsCommitted)
+		tmp24, err = boolVal(cmd.IsCommitted)
 		if err != nil {
 			goa.LogError(ctx, "failed to parse flag into *bool value", "flag", "--is_committed", "err", err)
 			return err
 		}
 	}
-	resp, err := c.GetByUUIDAccount(ctx, path, tmp20)
+	resp, err := c.GetByUUIDAccount(ctx, path, tmp24)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -863,16 +1083,16 @@ func (cmd *GetByUsernameAccountCommand) Run(c *client.Client, args []string) err
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	var tmp21 *bool
+	var tmp25 *bool
 	if cmd.IsCommitted != "" {
 		var err error
-		tmp21, err = boolVal(cmd.IsCommitted)
+		tmp25, err = boolVal(cmd.IsCommitted)
 		if err != nil {
 			goa.LogError(ctx, "failed to parse flag into *bool value", "flag", "--is_committed", "err", err)
 			return err
 		}
 	}
-	resp, err := c.GetByUsernameAccount(ctx, path, tmp21)
+	resp, err := c.GetByUsernameAccount(ctx, path, tmp25)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -902,16 +1122,16 @@ func (cmd *GetByUsernameFromDefaultDomainAccountCommand) Run(c *client.Client, a
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	var tmp22 *bool
+	var tmp26 *bool
 	if cmd.IsCommitted != "" {
 		var err error
-		tmp22, err = boolVal(cmd.IsCommitted)
+		tmp26, err = boolVal(cmd.IsCommitted)
 		if err != nil {
 			goa.LogError(ctx, "failed to parse flag into *bool value", "flag", "--is_committed", "err", err)
 			return err
 		}
 	}
-	resp, err := c.GetByUsernameFromDefaultDomainAccount(ctx, path, tmp22)
+	resp, err := c.GetByUsernameFromDefaultDomainAccount(ctx, path, tmp26)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -962,6 +1182,78 @@ func (cmd *UpdateAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Clie
 	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
 	var uuid string
 	cc.Flags().StringVar(&cmd.UUID, "uuid", uuid, `account's guid`)
+}
+
+// Run makes the HTTP request corresponding to the UpdateByUsernameAccountCommand command.
+func (cmd *UpdateByUsernameAccountCommand) Run(c *client.Client, args []string) error {
+	var path string
+	if len(args) > 0 {
+		path = args[0]
+	} else {
+		path = fmt.Sprintf("/domains/%v/accounts/%v", url.QueryEscape(cmd.DomainURI), url.QueryEscape(cmd.Username))
+	}
+	var payload client.UpdateAccountRequest
+	if cmd.Payload != "" {
+		err := json.Unmarshal([]byte(cmd.Payload), &payload)
+		if err != nil {
+			return fmt.Errorf("failed to deserialize payload: %s", err)
+		}
+	}
+	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
+	ctx := goa.WithLogger(context.Background(), logger)
+	resp, err := c.UpdateByUsernameAccount(ctx, path, &payload, cmd.ContentType)
+	if err != nil {
+		goa.LogError(ctx, "failed", "err", err)
+		return err
+	}
+
+	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
+	return nil
+}
+
+// RegisterFlags registers the command flags with the command line.
+func (cmd *UpdateByUsernameAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+	cc.Flags().StringVar(&cmd.Payload, "payload", "", "Request body encoded in JSON")
+	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
+	var domainURI string
+	cc.Flags().StringVar(&cmd.DomainURI, "domain_uri", domainURI, `domain's uri`)
+	var username string
+	cc.Flags().StringVar(&cmd.Username, "username", username, `account's username`)
+}
+
+// Run makes the HTTP request corresponding to the UpdateByUsernameFromDefaultDomainAccountCommand command.
+func (cmd *UpdateByUsernameFromDefaultDomainAccountCommand) Run(c *client.Client, args []string) error {
+	var path string
+	if len(args) > 0 {
+		path = args[0]
+	} else {
+		path = fmt.Sprintf("/domains/default/accounts/%v", url.QueryEscape(cmd.Username))
+	}
+	var payload client.UpdateAccountRequest
+	if cmd.Payload != "" {
+		err := json.Unmarshal([]byte(cmd.Payload), &payload)
+		if err != nil {
+			return fmt.Errorf("failed to deserialize payload: %s", err)
+		}
+	}
+	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
+	ctx := goa.WithLogger(context.Background(), logger)
+	resp, err := c.UpdateByUsernameFromDefaultDomainAccount(ctx, path, &payload, cmd.ContentType)
+	if err != nil {
+		goa.LogError(ctx, "failed", "err", err)
+		return err
+	}
+
+	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
+	return nil
+}
+
+// RegisterFlags registers the command flags with the command line.
+func (cmd *UpdateByUsernameFromDefaultDomainAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+	cc.Flags().StringVar(&cmd.Payload, "payload", "", "Request body encoded in JSON")
+	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
+	var username string
+	cc.Flags().StringVar(&cmd.Username, "username", username, `account's username`)
 }
 
 // Run makes the HTTP request corresponding to the AddCurrencyCommand command.
@@ -1077,16 +1369,16 @@ func (cmd *GetAllCurrencyCommand) Run(c *client.Client, args []string) error {
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	var tmp23 *bool
+	var tmp27 *bool
 	if cmd.IsCommitted != "" {
 		var err error
-		tmp23, err = boolVal(cmd.IsCommitted)
+		tmp27, err = boolVal(cmd.IsCommitted)
 		if err != nil {
 			goa.LogError(ctx, "failed to parse flag into *bool value", "flag", "--is_committed", "err", err)
 			return err
 		}
 	}
-	resp, err := c.GetAllCurrency(ctx, path, cmd.CreatorPubkey, cmd.Target, tmp23)
+	resp, err := c.GetAllCurrency(ctx, path, cmd.CreatorPubkey, cmd.Target, tmp27)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -1330,16 +1622,16 @@ func (cmd *GetAllSignatoriesCommand) Run(c *client.Client, args []string) error 
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	var tmp24 *bool
+	var tmp28 *bool
 	if cmd.IsCommitted != "" {
 		var err error
-		tmp24, err = boolVal(cmd.IsCommitted)
+		tmp28, err = boolVal(cmd.IsCommitted)
 		if err != nil {
 			goa.LogError(ctx, "failed to parse flag into *bool value", "flag", "--is_committed", "err", err)
 			return err
 		}
 	}
-	resp, err := c.GetAllSignatories(ctx, path, stringFlagVal("creator_pubkey", cmd.CreatorPubkey), tmp24)
+	resp, err := c.GetAllSignatories(ctx, path, stringFlagVal("creator_pubkey", cmd.CreatorPubkey), tmp28)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -1369,16 +1661,16 @@ func (cmd *GetAllTransactionsCommand) Run(c *client.Client, args []string) error
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	var tmp25 *bool
+	var tmp29 *bool
 	if cmd.IsCommitted != "" {
 		var err error
-		tmp25, err = boolVal(cmd.IsCommitted)
+		tmp29, err = boolVal(cmd.IsCommitted)
 		if err != nil {
 			goa.LogError(ctx, "failed to parse flag into *bool value", "flag", "--is_committed", "err", err)
 			return err
 		}
 	}
-	resp, err := c.GetAllTransactions(ctx, path, cmd.CreatorPubkey, cmd.Target, tmp25)
+	resp, err := c.GetAllTransactions(ctx, path, cmd.CreatorPubkey, cmd.Target, tmp29)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err

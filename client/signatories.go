@@ -136,8 +136,8 @@ func (c *Client) NewGetAllSignatoriesRequest(ctx context.Context, path string, c
 		values.Set("creator_pubkey", *creatorPubkey)
 	}
 	if isCommitted != nil {
-		tmp30 := strconv.FormatBool(*isCommitted)
-		values.Set("is_committed", tmp30)
+		tmp34 := strconv.FormatBool(*isCommitted)
+		values.Set("is_committed", tmp34)
 	}
 	u.RawQuery = values.Encode()
 	req, err := http.NewRequest("GET", u.String(), nil)

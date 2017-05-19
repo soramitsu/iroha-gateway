@@ -101,25 +101,14 @@ func (ut *Account) Validate() (err error) {
 
 // addAccountRequest user type.
 type addAccountRequest struct {
-	Account *account `form:"account,omitempty" json:"account,omitempty" xml:"account,omitempty"`
-	// Public key of creator's account
-	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Transaction signature
-	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
-	// Transaction timestamp
-	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
+	Account         *account            `form:"account,omitempty" json:"account,omitempty" xml:"account,omitempty"`
+	MetaTransaction *transactionRequest `form:"meta_transaction,omitempty" json:"meta_transaction,omitempty" xml:"meta_transaction,omitempty"`
 }
 
 // Validate validates the addAccountRequest type instance.
 func (ut *addAccountRequest) Validate() (err error) {
-	if ut.CreatorPubkey == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
-	}
-	if ut.Signature == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
-	}
-	if ut.Timestamp == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
+	if ut.MetaTransaction == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "meta_transaction"))
 	}
 	if ut.Account == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "account"))
@@ -129,9 +118,9 @@ func (ut *addAccountRequest) Validate() (err error) {
 			err = goa.MergeErrors(err, err2)
 		}
 	}
-	if ut.Timestamp != nil {
-		if ok := goa.ValidatePattern(`[0-9]{1,18}`, *ut.Timestamp); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, *ut.Timestamp, `[0-9]{1,18}`))
+	if ut.MetaTransaction != nil {
+		if err2 := ut.MetaTransaction.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
 		}
 	}
 	return
@@ -143,39 +132,22 @@ func (ut *addAccountRequest) Publicize() *AddAccountRequest {
 	if ut.Account != nil {
 		pub.Account = ut.Account.Publicize()
 	}
-	if ut.CreatorPubkey != nil {
-		pub.CreatorPubkey = *ut.CreatorPubkey
-	}
-	if ut.Signature != nil {
-		pub.Signature = *ut.Signature
-	}
-	if ut.Timestamp != nil {
-		pub.Timestamp = *ut.Timestamp
+	if ut.MetaTransaction != nil {
+		pub.MetaTransaction = ut.MetaTransaction.Publicize()
 	}
 	return &pub
 }
 
 // AddAccountRequest user type.
 type AddAccountRequest struct {
-	Account *Account `form:"account" json:"account" xml:"account"`
-	// Public key of creator's account
-	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Transaction signature
-	Signature string `form:"signature" json:"signature" xml:"signature"`
-	// Transaction timestamp
-	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
+	Account         *Account            `form:"account" json:"account" xml:"account"`
+	MetaTransaction *TransactionRequest `form:"meta_transaction" json:"meta_transaction" xml:"meta_transaction"`
 }
 
 // Validate validates the AddAccountRequest type instance.
 func (ut *AddAccountRequest) Validate() (err error) {
-	if ut.CreatorPubkey == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
-	}
-	if ut.Signature == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
-	}
-	if ut.Timestamp == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
+	if ut.MetaTransaction == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "meta_transaction"))
 	}
 	if ut.Account == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "account"))
@@ -185,8 +157,10 @@ func (ut *AddAccountRequest) Validate() (err error) {
 			err = goa.MergeErrors(err, err2)
 		}
 	}
-	if ok := goa.ValidatePattern(`[0-9]{1,18}`, ut.Timestamp); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, ut.Timestamp, `[0-9]{1,18}`))
+	if ut.MetaTransaction != nil {
+		if err2 := ut.MetaTransaction.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
+		}
 	}
 	return
 }
@@ -196,7 +170,7 @@ type createCurrencyRequest struct {
 	// Public key of creator's account
 	CreatorPubkey *string   `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
 	Currency      *currency `form:"currency,omitempty" json:"currency,omitempty" xml:"currency,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Public key of URL-encoded target's account
 	Target *string `form:"target,omitempty" json:"target,omitempty" xml:"target,omitempty"`
@@ -265,7 +239,7 @@ type CreateCurrencyRequest struct {
 	// Public key of creator's account
 	CreatorPubkey string    `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
 	Currency      *Currency `form:"currency" json:"currency" xml:"currency"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Public key of URL-encoded target's account
 	Target string `form:"target" json:"target" xml:"target"`
@@ -393,7 +367,7 @@ type currencyTransferRequest struct {
 	Receiver *string `form:"receiver,omitempty" json:"receiver,omitempty" xml:"receiver,omitempty"`
 	// sender's public key
 	Sender *string `form:"sender,omitempty" json:"sender,omitempty" xml:"sender,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Public key of URL-encoded target's account
 	Target *string `form:"target,omitempty" json:"target,omitempty" xml:"target,omitempty"`
@@ -484,7 +458,7 @@ type CurrencyTransferRequest struct {
 	Receiver string `form:"receiver" json:"receiver" xml:"receiver"`
 	// sender's public key
 	Sender string `form:"sender" json:"sender" xml:"sender"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Public key of URL-encoded target's account
 	Target string `form:"target" json:"target" xml:"target"`
@@ -534,7 +508,7 @@ func (ut *CurrencyTransferRequest) Validate() (err error) {
 type currencyValueRequest struct {
 	// Public key of creator's account
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Public key of URL-encoded target's account
 	Target *string `form:"target,omitempty" json:"target,omitempty" xml:"target,omitempty"`
@@ -599,7 +573,7 @@ func (ut *currencyValueRequest) Publicize() *CurrencyValueRequest {
 type CurrencyValueRequest struct {
 	// Public key of creator's account
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Public key of URL-encoded target's account
 	Target string `form:"target" json:"target" xml:"target"`
@@ -635,28 +609,17 @@ func (ut *CurrencyValueRequest) Validate() (err error) {
 
 // deleteAccountRequest user type.
 type deleteAccountRequest struct {
-	// Public key of creator's account
-	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Transaction signature
-	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
-	// Transaction timestamp
-	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
+	MetaTransaction *transactionRequest `form:"meta_transaction,omitempty" json:"meta_transaction,omitempty" xml:"meta_transaction,omitempty"`
 }
 
 // Validate validates the deleteAccountRequest type instance.
 func (ut *deleteAccountRequest) Validate() (err error) {
-	if ut.CreatorPubkey == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
+	if ut.MetaTransaction == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "meta_transaction"))
 	}
-	if ut.Signature == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
-	}
-	if ut.Timestamp == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
-	}
-	if ut.Timestamp != nil {
-		if ok := goa.ValidatePattern(`[0-9]{1,18}`, *ut.Timestamp); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, *ut.Timestamp, `[0-9]{1,18}`))
+	if ut.MetaTransaction != nil {
+		if err2 := ut.MetaTransaction.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
 		}
 	}
 	return
@@ -665,41 +628,26 @@ func (ut *deleteAccountRequest) Validate() (err error) {
 // Publicize creates DeleteAccountRequest from deleteAccountRequest
 func (ut *deleteAccountRequest) Publicize() *DeleteAccountRequest {
 	var pub DeleteAccountRequest
-	if ut.CreatorPubkey != nil {
-		pub.CreatorPubkey = *ut.CreatorPubkey
-	}
-	if ut.Signature != nil {
-		pub.Signature = *ut.Signature
-	}
-	if ut.Timestamp != nil {
-		pub.Timestamp = *ut.Timestamp
+	if ut.MetaTransaction != nil {
+		pub.MetaTransaction = ut.MetaTransaction.Publicize()
 	}
 	return &pub
 }
 
 // DeleteAccountRequest user type.
 type DeleteAccountRequest struct {
-	// Public key of creator's account
-	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Transaction signature
-	Signature string `form:"signature" json:"signature" xml:"signature"`
-	// Transaction timestamp
-	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
+	MetaTransaction *TransactionRequest `form:"meta_transaction" json:"meta_transaction" xml:"meta_transaction"`
 }
 
 // Validate validates the DeleteAccountRequest type instance.
 func (ut *DeleteAccountRequest) Validate() (err error) {
-	if ut.CreatorPubkey == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
+	if ut.MetaTransaction == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "meta_transaction"))
 	}
-	if ut.Signature == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
-	}
-	if ut.Timestamp == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
-	}
-	if ok := goa.ValidatePattern(`[0-9]{1,18}`, ut.Timestamp); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, ut.Timestamp, `[0-9]{1,18}`))
+	if ut.MetaTransaction != nil {
+		if err2 := ut.MetaTransaction.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
+		}
 	}
 	return
 }
@@ -708,7 +656,7 @@ func (ut *DeleteAccountRequest) Validate() (err error) {
 type deleteCurrencyRequest struct {
 	// Public key of creator's account
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
 	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
@@ -752,7 +700,7 @@ func (ut *deleteCurrencyRequest) Publicize() *DeleteCurrencyRequest {
 type DeleteCurrencyRequest struct {
 	// Public key of creator's account
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
 	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
@@ -779,7 +727,7 @@ func (ut *DeleteCurrencyRequest) Validate() (err error) {
 type deleteSignatoryRequest struct {
 	// Public key of creator's account
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
 	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
@@ -823,7 +771,7 @@ func (ut *deleteSignatoryRequest) Publicize() *DeleteSignatoryRequest {
 type DeleteSignatoryRequest struct {
 	// Public key of creator's account
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
 	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
@@ -1275,7 +1223,7 @@ type signatoryRequest struct {
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
 	// Account Signatories
 	Signatories []string `form:"signatories,omitempty" json:"signatories,omitempty" xml:"signatories,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
 	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
@@ -1337,7 +1285,7 @@ type SignatoryRequest struct {
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
 	// Account Signatories
 	Signatories []string `form:"signatories" json:"signatories" xml:"signatories"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
 	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
@@ -1371,16 +1319,171 @@ func (ut *SignatoryRequest) Validate() (err error) {
 
 // signature user type.
 type signature struct {
-	// transaction's public key
+	// ed25519 public key, which should be used to validate the signature
+	Pubkey *string `form:"pubkey,omitempty" json:"pubkey,omitempty" xml:"pubkey,omitempty"`
+	// The signature, which can be verified with pubkey
+	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
+}
+
+// Validate validates the signature type instance.
+func (ut *signature) Validate() (err error) {
+	if ut.Pubkey == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "pubkey"))
+	}
+	if ut.Signature == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
+	}
+	if ut.Pubkey != nil {
+		if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, *ut.Pubkey); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.pubkey`, *ut.Pubkey, `^[0-9a-zA-Z+/=]+$`))
+		}
+	}
+	return
+}
+
+// Publicize creates Signature from signature
+func (ut *signature) Publicize() *Signature {
+	var pub Signature
+	if ut.Pubkey != nil {
+		pub.Pubkey = *ut.Pubkey
+	}
+	if ut.Signature != nil {
+		pub.Signature = *ut.Signature
+	}
+	return &pub
+}
+
+// Signature user type.
+type Signature struct {
+	// ed25519 public key, which should be used to validate the signature
+	Pubkey string `form:"pubkey" json:"pubkey" xml:"pubkey"`
+	// The signature, which can be verified with pubkey
+	Signature string `form:"signature" json:"signature" xml:"signature"`
+}
+
+// Validate validates the Signature type instance.
+func (ut *Signature) Validate() (err error) {
+	if ut.Pubkey == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "pubkey"))
+	}
+	if ut.Signature == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
+	}
+	if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, ut.Pubkey); !ok {
+		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.pubkey`, ut.Pubkey, `^[0-9a-zA-Z+/=]+$`))
+	}
+	return
+}
+
+// transaction user type.
+type transaction struct {
+	// transaction creation time
+	CreatedAt *string `form:"created_at,omitempty" json:"created_at,omitempty" xml:"created_at,omitempty"`
+	// creator's signature
+	CreatorSignature *string `form:"creator_signature,omitempty" json:"creator_signature,omitempty" xml:"creator_signature,omitempty"`
+	// random 4 bytes
+	Nonce      *int         `form:"nonce,omitempty" json:"nonce,omitempty" xml:"nonce,omitempty"`
+	Signatures []*signature `form:"signatures,omitempty" json:"signatures,omitempty" xml:"signatures,omitempty"`
+}
+
+// Validate validates the transaction type instance.
+func (ut *transaction) Validate() (err error) {
+	if ut.CreatorSignature == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_signature"))
+	}
+	if ut.Signatures == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signatures"))
+	}
+	if ut.CreatedAt == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "created_at"))
+	}
+	if ut.Nonce == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "nonce"))
+	}
+	if ut.CreatedAt != nil {
+		if ok := goa.ValidatePattern(`^[0-9]{1,18}$`, *ut.CreatedAt); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.created_at`, *ut.CreatedAt, `^[0-9]{1,18}$`))
+		}
+	}
+	for _, e := range ut.Signatures {
+		if e != nil {
+			if err2 := e.Validate(); err2 != nil {
+				err = goa.MergeErrors(err, err2)
+			}
+		}
+	}
+	return
+}
+
+// Publicize creates Transaction from transaction
+func (ut *transaction) Publicize() *Transaction {
+	var pub Transaction
+	if ut.CreatedAt != nil {
+		pub.CreatedAt = *ut.CreatedAt
+	}
+	if ut.CreatorSignature != nil {
+		pub.CreatorSignature = *ut.CreatorSignature
+	}
+	if ut.Nonce != nil {
+		pub.Nonce = *ut.Nonce
+	}
+	if ut.Signatures != nil {
+		pub.Signatures = make([]*Signature, len(ut.Signatures))
+		for i2, elem2 := range ut.Signatures {
+			pub.Signatures[i2] = elem2.Publicize()
+		}
+	}
+	return &pub
+}
+
+// Transaction user type.
+type Transaction struct {
+	// transaction creation time
+	CreatedAt string `form:"created_at" json:"created_at" xml:"created_at"`
+	// creator's signature
+	CreatorSignature string `form:"creator_signature" json:"creator_signature" xml:"creator_signature"`
+	// random 4 bytes
+	Nonce      int          `form:"nonce" json:"nonce" xml:"nonce"`
+	Signatures []*Signature `form:"signatures" json:"signatures" xml:"signatures"`
+}
+
+// Validate validates the Transaction type instance.
+func (ut *Transaction) Validate() (err error) {
+	if ut.CreatorSignature == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_signature"))
+	}
+	if ut.Signatures == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signatures"))
+	}
+	if ut.CreatedAt == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "created_at"))
+	}
+
+	if ok := goa.ValidatePattern(`^[0-9]{1,18}$`, ut.CreatedAt); !ok {
+		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.created_at`, ut.CreatedAt, `^[0-9]{1,18}$`))
+	}
+	for _, e := range ut.Signatures {
+		if e != nil {
+			if err2 := e.Validate(); err2 != nil {
+				err = goa.MergeErrors(err, err2)
+			}
+		}
+	}
+	return
+}
+
+// transactionRequest user type.
+type transactionRequest struct {
+	// ed25519 public key, which should be used to validate the signature
 	PublicKey *string `form:"publicKey,omitempty" json:"publicKey,omitempty" xml:"publicKey,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
 	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
 }
 
-// Validate validates the signature type instance.
-func (ut *signature) Validate() (err error) {
+// Validate validates the transactionRequest type instance.
+func (ut *transactionRequest) Validate() (err error) {
 	if ut.PublicKey == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "publicKey"))
 	}
@@ -1403,9 +1506,9 @@ func (ut *signature) Validate() (err error) {
 	return
 }
 
-// Publicize creates Signature from signature
-func (ut *signature) Publicize() *Signature {
-	var pub Signature
+// Publicize creates TransactionRequest from transactionRequest
+func (ut *transactionRequest) Publicize() *TransactionRequest {
+	var pub TransactionRequest
 	if ut.PublicKey != nil {
 		pub.PublicKey = *ut.PublicKey
 	}
@@ -1418,18 +1521,18 @@ func (ut *signature) Publicize() *Signature {
 	return &pub
 }
 
-// Signature user type.
-type Signature struct {
-	// transaction's public key
+// TransactionRequest user type.
+type TransactionRequest struct {
+	// ed25519 public key, which should be used to validate the signature
 	PublicKey string `form:"publicKey" json:"publicKey" xml:"publicKey"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
 	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
 }
 
-// Validate validates the Signature type instance.
-func (ut *Signature) Validate() (err error) {
+// Validate validates the TransactionRequest type instance.
+func (ut *TransactionRequest) Validate() (err error) {
 	if ut.PublicKey == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "publicKey"))
 	}
@@ -1448,139 +1551,29 @@ func (ut *Signature) Validate() (err error) {
 	return
 }
 
-// transaction user type.
-type transaction struct {
-	// transaction's command type
-	Command *string `form:"command,omitempty" json:"command,omitempty" xml:"command,omitempty"`
-	// Public key of creator's account
-	CreatorPubkey *string      `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	Signatures    []*signature `form:"signatures,omitempty" json:"signatures,omitempty" xml:"signatures,omitempty"`
-	// Transaction timestamp
-	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
-}
-
-// Validate validates the transaction type instance.
-func (ut *transaction) Validate() (err error) {
-	if ut.Command == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "command"))
-	}
-	if ut.CreatorPubkey == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
-	}
-	if ut.Signatures == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signatures"))
-	}
-	if ut.Timestamp == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
-	}
-	for _, e := range ut.Signatures {
-		if e != nil {
-			if err2 := e.Validate(); err2 != nil {
-				err = goa.MergeErrors(err, err2)
-			}
-		}
-	}
-	if ut.Timestamp != nil {
-		if ok := goa.ValidatePattern(`[0-9]{1,18}`, *ut.Timestamp); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, *ut.Timestamp, `[0-9]{1,18}`))
-		}
-	}
-	return
-}
-
-// Publicize creates Transaction from transaction
-func (ut *transaction) Publicize() *Transaction {
-	var pub Transaction
-	if ut.Command != nil {
-		pub.Command = *ut.Command
-	}
-	if ut.CreatorPubkey != nil {
-		pub.CreatorPubkey = *ut.CreatorPubkey
-	}
-	if ut.Signatures != nil {
-		pub.Signatures = make([]*Signature, len(ut.Signatures))
-		for i2, elem2 := range ut.Signatures {
-			pub.Signatures[i2] = elem2.Publicize()
-		}
-	}
-	if ut.Timestamp != nil {
-		pub.Timestamp = *ut.Timestamp
-	}
-	return &pub
-}
-
-// Transaction user type.
-type Transaction struct {
-	// transaction's command type
-	Command string `form:"command" json:"command" xml:"command"`
-	// Public key of creator's account
-	CreatorPubkey string       `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	Signatures    []*Signature `form:"signatures" json:"signatures" xml:"signatures"`
-	// Transaction timestamp
-	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
-}
-
-// Validate validates the Transaction type instance.
-func (ut *Transaction) Validate() (err error) {
-	if ut.Command == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "command"))
-	}
-	if ut.CreatorPubkey == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
-	}
-	if ut.Signatures == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signatures"))
-	}
-	if ut.Timestamp == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
-	}
-	for _, e := range ut.Signatures {
-		if e != nil {
-			if err2 := e.Validate(); err2 != nil {
-				err = goa.MergeErrors(err, err2)
-			}
-		}
-	}
-	if ok := goa.ValidatePattern(`[0-9]{1,18}`, ut.Timestamp); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, ut.Timestamp, `[0-9]{1,18}`))
-	}
-	return
-}
-
 // updateAccountRequest user type.
 type updateAccountRequest struct {
-	// Account alias
-	Alias *string `form:"alias,omitempty" json:"alias,omitempty" xml:"alias,omitempty"`
-	// Public key of creator's account
-	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Transaction signature
-	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
-	// Transaction timestamp
-	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
+	MetaTransaction *transactionRequest `form:"meta_transaction,omitempty" json:"meta_transaction,omitempty" xml:"meta_transaction,omitempty"`
+	// account's username
+	Username *string `form:"username,omitempty" json:"username,omitempty" xml:"username,omitempty"`
 }
 
 // Validate validates the updateAccountRequest type instance.
 func (ut *updateAccountRequest) Validate() (err error) {
-	if ut.Alias == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "alias"))
+	if ut.Username == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "username"))
 	}
-	if ut.CreatorPubkey == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
+	if ut.MetaTransaction == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "meta_transaction"))
 	}
-	if ut.Signature == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
-	}
-	if ut.Timestamp == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
-	}
-	if ut.Alias != nil {
-		if ok := goa.ValidatePattern(`[0-9a-zA-Z]+`, *ut.Alias); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.alias`, *ut.Alias, `[0-9a-zA-Z]+`))
+	if ut.MetaTransaction != nil {
+		if err2 := ut.MetaTransaction.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
 		}
 	}
-	if ut.Timestamp != nil {
-		if ok := goa.ValidatePattern(`^[0-9]{1,18}$`, *ut.Timestamp); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, *ut.Timestamp, `^[0-9]{1,18}$`))
+	if ut.Username != nil {
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, *ut.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.username`, *ut.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
 		}
 	}
 	return
@@ -1589,52 +1582,37 @@ func (ut *updateAccountRequest) Validate() (err error) {
 // Publicize creates UpdateAccountRequest from updateAccountRequest
 func (ut *updateAccountRequest) Publicize() *UpdateAccountRequest {
 	var pub UpdateAccountRequest
-	if ut.Alias != nil {
-		pub.Alias = *ut.Alias
+	if ut.MetaTransaction != nil {
+		pub.MetaTransaction = ut.MetaTransaction.Publicize()
 	}
-	if ut.CreatorPubkey != nil {
-		pub.CreatorPubkey = *ut.CreatorPubkey
-	}
-	if ut.Signature != nil {
-		pub.Signature = *ut.Signature
-	}
-	if ut.Timestamp != nil {
-		pub.Timestamp = *ut.Timestamp
+	if ut.Username != nil {
+		pub.Username = *ut.Username
 	}
 	return &pub
 }
 
 // UpdateAccountRequest user type.
 type UpdateAccountRequest struct {
-	// Account alias
-	Alias string `form:"alias" json:"alias" xml:"alias"`
-	// Public key of creator's account
-	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Transaction signature
-	Signature string `form:"signature" json:"signature" xml:"signature"`
-	// Transaction timestamp
-	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
+	MetaTransaction *TransactionRequest `form:"meta_transaction" json:"meta_transaction" xml:"meta_transaction"`
+	// account's username
+	Username string `form:"username" json:"username" xml:"username"`
 }
 
 // Validate validates the UpdateAccountRequest type instance.
 func (ut *UpdateAccountRequest) Validate() (err error) {
-	if ut.Alias == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "alias"))
+	if ut.Username == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "username"))
 	}
-	if ut.CreatorPubkey == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "creator_pubkey"))
+	if ut.MetaTransaction == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "meta_transaction"))
 	}
-	if ut.Signature == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
+	if ut.MetaTransaction != nil {
+		if err2 := ut.MetaTransaction.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
+		}
 	}
-	if ut.Timestamp == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
-	}
-	if ok := goa.ValidatePattern(`[0-9a-zA-Z]+`, ut.Alias); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.alias`, ut.Alias, `[0-9a-zA-Z]+`))
-	}
-	if ok := goa.ValidatePattern(`^[0-9]{1,18}$`, ut.Timestamp); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, ut.Timestamp, `^[0-9]{1,18}$`))
+	if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, ut.Username); !ok {
+		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.username`, ut.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
 	}
 	return
 }
@@ -1645,7 +1623,7 @@ type updateCurrencyRequest struct {
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
 	// currency's description
 	Description *string `form:"description,omitempty" json:"description,omitempty" xml:"description,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
 	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
@@ -1697,7 +1675,7 @@ type UpdateCurrencyRequest struct {
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
 	// currency's description
 	Description string `form:"description" json:"description" xml:"description"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
 	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`
@@ -1729,7 +1707,7 @@ type updateQuorumRequest struct {
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
 	// 最低限必要な数
 	Quorum *int `form:"quorum,omitempty" json:"quorum,omitempty" xml:"quorum,omitempty"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
 	Timestamp *string `form:"timestamp,omitempty" json:"timestamp,omitempty" xml:"timestamp,omitempty"`
@@ -1781,7 +1759,7 @@ type UpdateQuorumRequest struct {
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
 	// 最低限必要な数
 	Quorum int `form:"quorum" json:"quorum" xml:"quorum"`
-	// Transaction signature
+	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
 	Timestamp string `form:"timestamp" json:"timestamp" xml:"timestamp"`

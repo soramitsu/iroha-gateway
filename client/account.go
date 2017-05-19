@@ -106,6 +106,95 @@ func (c *Client) NewDeleteAccountRequest(ctx context.Context, path string, paylo
 	return req, nil
 }
 
+// DeleteByUsernameAccountPath computes a request path to the deleteByUsername action of account.
+func DeleteByUsernameAccountPath(domainURI string, username string) string {
+	param0 := domainURI
+	param1 := username
+
+	return fmt.Sprintf("/domains/%s/accounts/%s", param0, param1)
+}
+
+// delete an account by account's domain and username
+func (c *Client) DeleteByUsernameAccount(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Response, error) {
+	req, err := c.NewDeleteByUsernameAccountRequest(ctx, path, payload, contentType)
+	if err != nil {
+		return nil, err
+	}
+	return c.Client.Do(ctx, req)
+}
+
+// NewDeleteByUsernameAccountRequest create the request corresponding to the deleteByUsername action endpoint of the account resource.
+func (c *Client) NewDeleteByUsernameAccountRequest(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Request, error) {
+	var body bytes.Buffer
+	if contentType == "" {
+		contentType = "*/*" // Use default encoder
+	}
+	err := c.Encoder.Encode(payload, &body, contentType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to encode body: %s", err)
+	}
+	scheme := c.Scheme
+	if scheme == "" {
+		scheme = "http"
+	}
+	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
+	req, err := http.NewRequest("DELETE", u.String(), &body)
+	if err != nil {
+		return nil, err
+	}
+	header := req.Header
+	if contentType == "*/*" {
+		header.Set("Content-Type", "application/json")
+	} else {
+		header.Set("Content-Type", contentType)
+	}
+	return req, nil
+}
+
+// DeleteByUsernameFromDefaultDomainAccountPath computes a request path to the deleteByUsernameFromDefaultDomain action of account.
+func DeleteByUsernameFromDefaultDomainAccountPath(username string) string {
+	param0 := username
+
+	return fmt.Sprintf("/domains/default/accounts/%s", param0)
+}
+
+// delete an account by account's username from default domain
+func (c *Client) DeleteByUsernameFromDefaultDomainAccount(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Response, error) {
+	req, err := c.NewDeleteByUsernameFromDefaultDomainAccountRequest(ctx, path, payload, contentType)
+	if err != nil {
+		return nil, err
+	}
+	return c.Client.Do(ctx, req)
+}
+
+// NewDeleteByUsernameFromDefaultDomainAccountRequest create the request corresponding to the deleteByUsernameFromDefaultDomain action endpoint of the account resource.
+func (c *Client) NewDeleteByUsernameFromDefaultDomainAccountRequest(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Request, error) {
+	var body bytes.Buffer
+	if contentType == "" {
+		contentType = "*/*" // Use default encoder
+	}
+	err := c.Encoder.Encode(payload, &body, contentType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to encode body: %s", err)
+	}
+	scheme := c.Scheme
+	if scheme == "" {
+		scheme = "http"
+	}
+	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
+	req, err := http.NewRequest("DELETE", u.String(), &body)
+	if err != nil {
+		return nil, err
+	}
+	header := req.Header
+	if contentType == "*/*" {
+		header.Set("Content-Type", "application/json")
+	} else {
+		header.Set("Content-Type", contentType)
+	}
+	return req, nil
+}
+
 // GetAllAccountPath computes a request path to the getAll action of account.
 func GetAllAccountPath() string {
 
@@ -160,8 +249,8 @@ func (c *Client) NewGetByUUIDAccountRequest(ctx context.Context, path string, is
 	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
 	values := u.Query()
 	if isCommitted != nil {
-		tmp26 := strconv.FormatBool(*isCommitted)
-		values.Set("is_committed", tmp26)
+		tmp30 := strconv.FormatBool(*isCommitted)
+		values.Set("is_committed", tmp30)
 	}
 	u.RawQuery = values.Encode()
 	req, err := http.NewRequest("GET", u.String(), nil)
@@ -197,8 +286,8 @@ func (c *Client) NewGetByUsernameAccountRequest(ctx context.Context, path string
 	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
 	values := u.Query()
 	if isCommitted != nil {
-		tmp27 := strconv.FormatBool(*isCommitted)
-		values.Set("is_committed", tmp27)
+		tmp31 := strconv.FormatBool(*isCommitted)
+		values.Set("is_committed", tmp31)
 	}
 	u.RawQuery = values.Encode()
 	req, err := http.NewRequest("GET", u.String(), nil)
@@ -233,8 +322,8 @@ func (c *Client) NewGetByUsernameFromDefaultDomainAccountRequest(ctx context.Con
 	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
 	values := u.Query()
 	if isCommitted != nil {
-		tmp28 := strconv.FormatBool(*isCommitted)
-		values.Set("is_committed", tmp28)
+		tmp32 := strconv.FormatBool(*isCommitted)
+		values.Set("is_committed", tmp32)
 	}
 	u.RawQuery = values.Encode()
 	req, err := http.NewRequest("GET", u.String(), nil)
@@ -251,7 +340,7 @@ func UpdateAccountPath(uuid string) string {
 	return fmt.Sprintf("/accounts/%s", param0)
 }
 
-// update an account
+// update an account by account's uuid
 func (c *Client) UpdateAccount(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Response, error) {
 	req, err := c.NewUpdateAccountRequest(ctx, path, payload, contentType)
 	if err != nil {
@@ -262,6 +351,95 @@ func (c *Client) UpdateAccount(ctx context.Context, path string, payload *Update
 
 // NewUpdateAccountRequest create the request corresponding to the update action endpoint of the account resource.
 func (c *Client) NewUpdateAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
+	var body bytes.Buffer
+	if contentType == "" {
+		contentType = "*/*" // Use default encoder
+	}
+	err := c.Encoder.Encode(payload, &body, contentType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to encode body: %s", err)
+	}
+	scheme := c.Scheme
+	if scheme == "" {
+		scheme = "http"
+	}
+	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
+	req, err := http.NewRequest("PUT", u.String(), &body)
+	if err != nil {
+		return nil, err
+	}
+	header := req.Header
+	if contentType == "*/*" {
+		header.Set("Content-Type", "application/json")
+	} else {
+		header.Set("Content-Type", contentType)
+	}
+	return req, nil
+}
+
+// UpdateByUsernameAccountPath computes a request path to the updateByUsername action of account.
+func UpdateByUsernameAccountPath(domainURI string, username string) string {
+	param0 := domainURI
+	param1 := username
+
+	return fmt.Sprintf("/domains/%s/accounts/%s", param0, param1)
+}
+
+// update an account by account's domain and username
+func (c *Client) UpdateByUsernameAccount(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Response, error) {
+	req, err := c.NewUpdateByUsernameAccountRequest(ctx, path, payload, contentType)
+	if err != nil {
+		return nil, err
+	}
+	return c.Client.Do(ctx, req)
+}
+
+// NewUpdateByUsernameAccountRequest create the request corresponding to the updateByUsername action endpoint of the account resource.
+func (c *Client) NewUpdateByUsernameAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
+	var body bytes.Buffer
+	if contentType == "" {
+		contentType = "*/*" // Use default encoder
+	}
+	err := c.Encoder.Encode(payload, &body, contentType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to encode body: %s", err)
+	}
+	scheme := c.Scheme
+	if scheme == "" {
+		scheme = "http"
+	}
+	u := url.URL{Host: c.Host, Scheme: scheme, Path: path}
+	req, err := http.NewRequest("PUT", u.String(), &body)
+	if err != nil {
+		return nil, err
+	}
+	header := req.Header
+	if contentType == "*/*" {
+		header.Set("Content-Type", "application/json")
+	} else {
+		header.Set("Content-Type", contentType)
+	}
+	return req, nil
+}
+
+// UpdateByUsernameFromDefaultDomainAccountPath computes a request path to the updateByUsernameFromDefaultDomain action of account.
+func UpdateByUsernameFromDefaultDomainAccountPath(username string) string {
+	param0 := username
+
+	return fmt.Sprintf("/domains/default/accounts/%s", param0)
+}
+
+// update an account by account's username from default domain
+func (c *Client) UpdateByUsernameFromDefaultDomainAccount(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Response, error) {
+	req, err := c.NewUpdateByUsernameFromDefaultDomainAccountRequest(ctx, path, payload, contentType)
+	if err != nil {
+		return nil, err
+	}
+	return c.Client.Do(ctx, req)
+}
+
+// NewUpdateByUsernameFromDefaultDomainAccountRequest create the request corresponding to the updateByUsernameFromDefaultDomain action endpoint of the account resource.
+func (c *Client) NewUpdateByUsernameFromDefaultDomainAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {
 		contentType = "*/*" // Use default encoder

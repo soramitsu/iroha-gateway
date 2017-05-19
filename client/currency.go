@@ -177,8 +177,8 @@ func (c *Client) NewGetAllCurrencyRequest(ctx context.Context, path string, crea
 	values.Set("creator_pubkey", creatorPubkey)
 	values.Set("target", target)
 	if isCommitted != nil {
-		tmp29 := strconv.FormatBool(*isCommitted)
-		values.Set("is_committed", tmp29)
+		tmp33 := strconv.FormatBool(*isCommitted)
+		values.Set("is_committed", tmp33)
 	}
 	u.RawQuery = values.Encode()
 	req, err := http.NewRequest("GET", u.String(), nil)

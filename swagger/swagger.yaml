@@ -94,29 +94,17 @@ definitions:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
-      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-      timestamp: "1494693347"
+      meta_transaction:
+        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        timestamp: "1494693347"
     properties:
       account:
         $ref: '#/definitions/Account'
-      creator_pubkey:
-        description: Public key of creator's account
-        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        type: string
-      signature:
-        description: Transaction signature
-        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        type: string
-      timestamp:
-        description: Transaction timestamp
-        example: "1494693347"
-        pattern: '[0-9]{1,18}'
-        type: string
+      meta_transaction:
+        $ref: '#/definitions/TransactionRequest'
     required:
-    - creator_pubkey
-    - signature
-    - timestamp
+    - meta_transaction
     - account
     title: AddAccountRequest
     type: object
@@ -140,7 +128,7 @@ definitions:
       currency:
         $ref: '#/definitions/Currency'
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       target:
@@ -222,7 +210,7 @@ definitions:
         pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       target:
@@ -263,7 +251,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       target:
@@ -291,27 +279,15 @@ definitions:
     type: object
   DeleteAccountRequest:
     example:
-      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-      timestamp: "1494693347"
+      meta_transaction:
+        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        timestamp: "1494693347"
     properties:
-      creator_pubkey:
-        description: Public key of creator's account
-        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        type: string
-      signature:
-        description: Transaction signature
-        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        type: string
-      timestamp:
-        description: Transaction timestamp
-        example: "1494693347"
-        pattern: '[0-9]{1,18}'
-        type: string
+      meta_transaction:
+        $ref: '#/definitions/TransactionRequest'
     required:
-    - creator_pubkey
-    - signature
-    - timestamp
+    - meta_transaction
     title: DeleteAccountRequest
     type: object
   DeleteCurrencyRequest:
@@ -325,7 +301,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       timestamp:
@@ -350,7 +326,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       timestamp:
@@ -440,7 +416,7 @@ definitions:
           type: string
         type: array
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         pattern: ^[0-9a-zA-Z+/=]+$
         type: string
@@ -458,17 +434,81 @@ definitions:
     type: object
   Signature:
     example:
+      pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+    properties:
+      pubkey:
+        description: ed25519 public key, which should be used to validate the signature
+        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pattern: ^[0-9a-zA-Z+/=]+$
+        type: string
+      signature:
+        description: The signature, which can be verified with pubkey
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+    required:
+    - pubkey
+    - signature
+    title: Signature
+    type: object
+  Transaction:
+    example:
+      created_at: "1494693347"
+      creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      nonce: 1234
+      signatures:
+      - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+      - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+    properties:
+      created_at:
+        description: transaction creation time
+        example: "1494693347"
+        pattern: ^[0-9]{1,18}$
+        type: string
+      creator_signature:
+        description: creator's signature
+        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        type: string
+      nonce:
+        description: random 4 bytes
+        example: 1234
+        format: int64
+        type: integer
+      signatures:
+        example:
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        items:
+          $ref: '#/definitions/Signature'
+        type: array
+    required:
+    - creator_signature
+    - signatures
+    - created_at
+    - nonce
+    title: Transaction
+    type: object
+  TransactionRequest:
+    example:
       publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
       publicKey:
-        description: transaction's public key
+        description: ed25519 public key, which should be used to validate the signature
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       timestamp:
@@ -480,57 +520,7 @@ definitions:
     - publicKey
     - signature
     - timestamp
-    title: Signature
-    type: object
-  Transaction:
-    example:
-      command: PUT/accounts
-      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      signatures:
-      - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        timestamp: "1494693347"
-      - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        timestamp: "1494693347"
-      - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        timestamp: "1494693347"
-      timestamp: "1494693347"
-    properties:
-      command:
-        description: transaction's command type
-        example: PUT/accounts
-        type: string
-      creator_pubkey:
-        description: Public key of creator's account
-        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        type: string
-      signatures:
-        example:
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-          signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        items:
-          $ref: '#/definitions/Signature'
-        type: array
-      timestamp:
-        description: Transaction timestamp
-        example: "1494693347"
-        pattern: '[0-9]{1,18}'
-        type: string
-    required:
-    - command
-    - creator_pubkey
-    - signatures
-    - timestamp
-    title: Transaction
+    title: TransactionRequest
     type: object
   Transactions:
     description: Transactions media type (default view)
@@ -538,45 +528,36 @@ definitions:
       code: 0
       message: message
       transactions:
-      - command: PUT/accounts
-        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      - created_at: "1494693347"
+        creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        nonce: 1234
         signatures:
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        timestamp: "1494693347"
-      - command: PUT/accounts
-        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      - created_at: "1494693347"
+        creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        nonce: 1234
         signatures:
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        timestamp: "1494693347"
-      - command: PUT/accounts
-        creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      - created_at: "1494693347"
+        creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        nonce: 1234
         signatures:
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
           signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-          timestamp: "1494693347"
-        timestamp: "1494693347"
     properties:
       code:
         description: response code
@@ -589,45 +570,36 @@ definitions:
         type: string
       transactions:
         example:
-        - command: PUT/accounts
-          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - created_at: "1494693347"
+          creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+          nonce: 1234
           signatures:
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          timestamp: "1494693347"
-        - command: PUT/accounts
-          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - created_at: "1494693347"
+          creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+          nonce: 1234
           signatures:
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          timestamp: "1494693347"
-        - command: PUT/accounts
-          creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        - created_at: "1494693347"
+          creator_signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+          nonce: 1234
           signatures:
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          - publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          - pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
             signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-            timestamp: "1494693347"
-          timestamp: "1494693347"
         items:
           $ref: '#/definitions/Transaction'
         type: array
@@ -639,34 +611,22 @@ definitions:
     type: object
   UpdateAccountRequest:
     example:
-      alias: sate
-      creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-      timestamp: "1494693347"
+      meta_transaction:
+        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
+        timestamp: "1494693347"
+      username: serizawa
     properties:
-      alias:
-        description: Account alias
-        example: sate
-        pattern: '[0-9a-zA-Z]+'
-        type: string
-      creator_pubkey:
-        description: Public key of creator's account
-        example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        type: string
-      signature:
-        description: Transaction signature
-        example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        type: string
-      timestamp:
-        description: Transaction timestamp
-        example: "1494693347"
-        pattern: ^[0-9]{1,18}$
+      meta_transaction:
+        $ref: '#/definitions/TransactionRequest'
+      username:
+        description: account's username
+        example: serizawa
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
         type: string
     required:
-    - alias
-    - creator_pubkey
-    - signature
-    - timestamp
+    - username
+    - meta_transaction
     title: UpdateAccountRequest
     type: object
   UpdateCurrencyRequest:
@@ -685,7 +645,7 @@ definitions:
         example: This is sample currency description.
         type: string
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       timestamp:
@@ -717,7 +677,7 @@ definitions:
         format: int64
         type: integer
       signature:
-        description: Transaction signature
+        description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         type: string
       timestamp:
@@ -865,7 +825,7 @@ paths:
       tags:
       - account
     put:
-      description: update an account
+      description: update an account by account's uuid
       operationId: account#update
       parameters:
       - description: account's guid
@@ -1297,6 +1257,47 @@ paths:
       tags:
       - currency
   /domains/{domain_uri}/accounts/{username}:
+    delete:
+      description: delete an account by account's domain and username
+      operationId: account#deleteByUsername
+      parameters:
+      - description: domain's uri
+        in: path
+        name: domain_uri
+        pattern: ^$
+        required: true
+        type: string
+      - description: account's username
+        in: path
+        name: username
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: deleteByUsername account
+      tags:
+      - account
     get:
       description: get an account by account's domain and username
       operationId: account#getByUsername
@@ -1340,7 +1341,83 @@ paths:
       summary: getByUsername account
       tags:
       - account
+    put:
+      description: update an account by account's domain and username
+      operationId: account#updateByUsername
+      parameters:
+      - description: domain's uri
+        in: path
+        name: domain_uri
+        pattern: ^$
+        required: true
+        type: string
+      - description: account's username
+        in: path
+        name: username
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: updateByUsername account
+      tags:
+      - account
   /domains/default/accounts/{username}:
+    delete:
+      description: delete an account by account's username from default domain
+      operationId: account#deleteByUsernameFromDefaultDomain
+      parameters:
+      - description: account's username
+        in: path
+        name: username
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: deleteByUsernameFromDefaultDomain account
+      tags:
+      - account
     get:
       description: get an account by account's username from default domain
       operationId: account#getByUsernameFromDefaultDomain
@@ -1358,8 +1435,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.account+json
       - application/vnd.message+json
+      - application/vnd.account+json
       responses:
         "200":
           description: OK
@@ -1376,6 +1453,41 @@ paths:
       schemes:
       - http
       summary: getByUsernameFromDefaultDomain account
+      tags:
+      - account
+    put:
+      description: update an account by account's username from default domain
+      operationId: account#updateByUsernameFromDefaultDomain
+      parameters:
+      - description: account's username
+        in: path
+        name: username
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateAccountRequest'
+      produces:
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Message'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: updateByUsernameFromDefaultDomain account
       tags:
       - account
   /transactions/{currency_uri}:
@@ -1405,8 +1517,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.message+json
       - application/vnd.transactions+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK

@@ -3,7 +3,7 @@ package design
 const (
 	descriptionAlias                           = "Account alias"
 	descriptionCreator                         = "Public key of creator's account"
-	descriptionSignature                       = "Transaction signature"
+	descriptionSignature                       = "The signature, which can be verified with pubkey"
 	descriptionTimestamp                       = "Transaction timestamp"
 	descriptionPubkey                          = "Account Public Key"
 	descriptionSignatories                     = "Account Signatories"
@@ -40,9 +40,16 @@ const (
 	descriptionCurrencyValue                   = "currency's value"
 	descriptionCurrencySender                  = "sender's public key"
 	descriptionCurrencyReceiver                = "receiver's public key"
-	descriptionTransactionCommand              = "transaction's command type"
-	descriptionTransactionPublicKey            = "transaction's public key"
 	descriptionDomainURI                       = "domain's uri"
+
+	descriptionTransactionSignature = "creator's signature"
+	descriptionTransactionCommand   = "transaction's command type"
+	descriptionTransactionPublicKey = "ed25519 public key, which should be used to validate the signature"
+	descriptionTransactionTimestamp = "transaction creation time"
+	descriptionTransactionNonce     = "random 4 bytes"
+	descriptionTransactionAction    = "transactions' action"
+
+	descriptionMetaTransaction = ""
 
 	descriptionAccountUUID     = "account's guid"
 	descriptionAccountUsername = "account's username"

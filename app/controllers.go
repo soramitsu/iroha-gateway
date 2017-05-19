@@ -36,11 +36,15 @@ type AccountController interface {
 	goa.Muxer
 	Add(*AddAccountContext) error
 	Delete(*DeleteAccountContext) error
+	DeleteByUsername(*DeleteByUsernameAccountContext) error
+	DeleteByUsernameFromDefaultDomain(*DeleteByUsernameFromDefaultDomainAccountContext) error
 	GetAll(*GetAllAccountContext) error
 	GetByUUID(*GetByUUIDAccountContext) error
 	GetByUsername(*GetByUsernameAccountContext) error
 	GetByUsernameFromDefaultDomain(*GetByUsernameFromDefaultDomainAccountContext) error
 	Update(*UpdateAccountContext) error
+	UpdateByUsername(*UpdateByUsernameAccountContext) error
+	UpdateByUsernameFromDefaultDomain(*UpdateByUsernameFromDefaultDomainAccountContext) error
 }
 
 // MountAccountController "mounts" a Account resource controller on the given service.
@@ -89,6 +93,48 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 	}
 	service.Mux.Handle("DELETE", "/accounts/:uuid", ctrl.MuxHandler("Delete", h, unmarshalDeleteAccountPayload))
 	service.LogInfo("mount", "ctrl", "Account", "action", "Delete", "route", "DELETE /accounts/:uuid")
+
+	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
+		// Check if there was an error loading the request
+		if err := goa.ContextError(ctx); err != nil {
+			return err
+		}
+		// Build the context
+		rctx, err := NewDeleteByUsernameAccountContext(ctx, req, service)
+		if err != nil {
+			return err
+		}
+		// Build the payload
+		if rawPayload := goa.ContextRequest(ctx).Payload; rawPayload != nil {
+			rctx.Payload = rawPayload.(*DeleteAccountRequest)
+		} else {
+			return goa.MissingPayloadError()
+		}
+		return ctrl.DeleteByUsername(rctx)
+	}
+	service.Mux.Handle("DELETE", "/domains/:domain_uri/accounts/:username", ctrl.MuxHandler("DeleteByUsername", h, unmarshalDeleteByUsernameAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "DeleteByUsername", "route", "DELETE /domains/:domain_uri/accounts/:username")
+
+	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
+		// Check if there was an error loading the request
+		if err := goa.ContextError(ctx); err != nil {
+			return err
+		}
+		// Build the context
+		rctx, err := NewDeleteByUsernameFromDefaultDomainAccountContext(ctx, req, service)
+		if err != nil {
+			return err
+		}
+		// Build the payload
+		if rawPayload := goa.ContextRequest(ctx).Payload; rawPayload != nil {
+			rctx.Payload = rawPayload.(*DeleteAccountRequest)
+		} else {
+			return goa.MissingPayloadError()
+		}
+		return ctrl.DeleteByUsernameFromDefaultDomain(rctx)
+	}
+	service.Mux.Handle("DELETE", "/domains/default/accounts/:username", ctrl.MuxHandler("DeleteByUsernameFromDefaultDomain", h, unmarshalDeleteByUsernameFromDefaultDomainAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "DeleteByUsernameFromDefaultDomain", "route", "DELETE /domains/default/accounts/:username")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -170,6 +216,48 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 	}
 	service.Mux.Handle("PUT", "/accounts/:uuid", ctrl.MuxHandler("Update", h, unmarshalUpdateAccountPayload))
 	service.LogInfo("mount", "ctrl", "Account", "action", "Update", "route", "PUT /accounts/:uuid")
+
+	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
+		// Check if there was an error loading the request
+		if err := goa.ContextError(ctx); err != nil {
+			return err
+		}
+		// Build the context
+		rctx, err := NewUpdateByUsernameAccountContext(ctx, req, service)
+		if err != nil {
+			return err
+		}
+		// Build the payload
+		if rawPayload := goa.ContextRequest(ctx).Payload; rawPayload != nil {
+			rctx.Payload = rawPayload.(*UpdateAccountRequest)
+		} else {
+			return goa.MissingPayloadError()
+		}
+		return ctrl.UpdateByUsername(rctx)
+	}
+	service.Mux.Handle("PUT", "/domains/:domain_uri/accounts/:username", ctrl.MuxHandler("UpdateByUsername", h, unmarshalUpdateByUsernameAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "UpdateByUsername", "route", "PUT /domains/:domain_uri/accounts/:username")
+
+	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
+		// Check if there was an error loading the request
+		if err := goa.ContextError(ctx); err != nil {
+			return err
+		}
+		// Build the context
+		rctx, err := NewUpdateByUsernameFromDefaultDomainAccountContext(ctx, req, service)
+		if err != nil {
+			return err
+		}
+		// Build the payload
+		if rawPayload := goa.ContextRequest(ctx).Payload; rawPayload != nil {
+			rctx.Payload = rawPayload.(*UpdateAccountRequest)
+		} else {
+			return goa.MissingPayloadError()
+		}
+		return ctrl.UpdateByUsernameFromDefaultDomain(rctx)
+	}
+	service.Mux.Handle("PUT", "/domains/default/accounts/:username", ctrl.MuxHandler("UpdateByUsernameFromDefaultDomain", h, unmarshalUpdateByUsernameFromDefaultDomainAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "UpdateByUsernameFromDefaultDomain", "route", "PUT /domains/default/accounts/:username")
 }
 
 // unmarshalAddAccountPayload unmarshals the request body into the context request data Payload field.
@@ -202,8 +290,68 @@ func unmarshalDeleteAccountPayload(ctx context.Context, service *goa.Service, re
 	return nil
 }
 
+// unmarshalDeleteByUsernameAccountPayload unmarshals the request body into the context request data Payload field.
+func unmarshalDeleteByUsernameAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
+	payload := &deleteAccountRequest{}
+	if err := service.DecodeRequest(req, payload); err != nil {
+		return err
+	}
+	if err := payload.Validate(); err != nil {
+		// Initialize payload with private data structure so it can be logged
+		goa.ContextRequest(ctx).Payload = payload
+		return err
+	}
+	goa.ContextRequest(ctx).Payload = payload.Publicize()
+	return nil
+}
+
+// unmarshalDeleteByUsernameFromDefaultDomainAccountPayload unmarshals the request body into the context request data Payload field.
+func unmarshalDeleteByUsernameFromDefaultDomainAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
+	payload := &deleteAccountRequest{}
+	if err := service.DecodeRequest(req, payload); err != nil {
+		return err
+	}
+	if err := payload.Validate(); err != nil {
+		// Initialize payload with private data structure so it can be logged
+		goa.ContextRequest(ctx).Payload = payload
+		return err
+	}
+	goa.ContextRequest(ctx).Payload = payload.Publicize()
+	return nil
+}
+
 // unmarshalUpdateAccountPayload unmarshals the request body into the context request data Payload field.
 func unmarshalUpdateAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
+	payload := &updateAccountRequest{}
+	if err := service.DecodeRequest(req, payload); err != nil {
+		return err
+	}
+	if err := payload.Validate(); err != nil {
+		// Initialize payload with private data structure so it can be logged
+		goa.ContextRequest(ctx).Payload = payload
+		return err
+	}
+	goa.ContextRequest(ctx).Payload = payload.Publicize()
+	return nil
+}
+
+// unmarshalUpdateByUsernameAccountPayload unmarshals the request body into the context request data Payload field.
+func unmarshalUpdateByUsernameAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
+	payload := &updateAccountRequest{}
+	if err := service.DecodeRequest(req, payload); err != nil {
+		return err
+	}
+	if err := payload.Validate(); err != nil {
+		// Initialize payload with private data structure so it can be logged
+		goa.ContextRequest(ctx).Payload = payload
+		return err
+	}
+	goa.ContextRequest(ctx).Payload = payload.Publicize()
+	return nil
+}
+
+// unmarshalUpdateByUsernameFromDefaultDomainAccountPayload unmarshals the request body into the context request data Payload field.
+func unmarshalUpdateByUsernameFromDefaultDomainAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
 	payload := &updateAccountRequest{}
 	if err := service.DecodeRequest(req, payload); err != nil {
 		return err

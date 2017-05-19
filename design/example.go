@@ -30,6 +30,7 @@ const (
 	exampleAccountUUID          = "2aaf2527-8021-4afd-829b-89e8de608b36" // TODO
 	exampleDomainURI            = "dummy.domain.com"                     // TODO
 	exampleAccountUsername      = "serizawa"
+	exampleTransactionNonce     = 1234
 )
 
 var (
