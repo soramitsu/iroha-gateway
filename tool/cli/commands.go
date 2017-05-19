@@ -35,8 +35,8 @@ type (
 		PrettyPrint bool
 	}
 
-	// DeleteAccountCommand is the command line data structure for the delete action of account
-	DeleteAccountCommand struct {
+	// DeleteByUUIDAccountCommand is the command line data structure for the delete by UUID action of account
+	DeleteByUUIDAccountCommand struct {
 		Payload     string
 		ContentType string
 		// account's guid
@@ -44,7 +44,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// DeleteByUsernameAccountCommand is the command line data structure for the deleteByUsername action of account
+	// DeleteByUsernameAccountCommand is the command line data structure for the delete by username action of account
 	DeleteByUsernameAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -55,7 +55,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// DeleteByUsernameFromDefaultDomainAccountCommand is the command line data structure for the deleteByUsernameFromDefaultDomain action of account
+	// DeleteByUsernameFromDefaultDomainAccountCommand is the command line data structure for the delete by username from default domain action of account
 	DeleteByUsernameFromDefaultDomainAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -64,12 +64,12 @@ type (
 		PrettyPrint bool
 	}
 
-	// GetAllAccountCommand is the command line data structure for the getAll action of account
+	// GetAllAccountCommand is the command line data structure for the get all action of account
 	GetAllAccountCommand struct {
 		PrettyPrint bool
 	}
 
-	// GetByUUIDAccountCommand is the command line data structure for the getByUUID action of account
+	// GetByUUIDAccountCommand is the command line data structure for the get by UUID action of account
 	GetByUUIDAccountCommand struct {
 		// account's UUID
 		UUID string
@@ -78,7 +78,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// GetByUsernameAccountCommand is the command line data structure for the getByUsername action of account
+	// GetByUsernameAccountCommand is the command line data structure for the get by username action of account
 	GetByUsernameAccountCommand struct {
 		// domain's uri
 		DomainURI string
@@ -89,7 +89,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// GetByUsernameFromDefaultDomainAccountCommand is the command line data structure for the getByUsernameFromDefaultDomain action of account
+	// GetByUsernameFromDefaultDomainAccountCommand is the command line data structure for the get by username from default domain action of account
 	GetByUsernameFromDefaultDomainAccountCommand struct {
 		// account's username
 		Username string
@@ -98,8 +98,8 @@ type (
 		PrettyPrint bool
 	}
 
-	// UpdateAccountCommand is the command line data structure for the update action of account
-	UpdateAccountCommand struct {
+	// UpdateByUUIDAccountCommand is the command line data structure for the update by UUID action of account
+	UpdateByUUIDAccountCommand struct {
 		Payload     string
 		ContentType string
 		// account's guid
@@ -107,7 +107,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// UpdateByUsernameAccountCommand is the command line data structure for the updateByUsername action of account
+	// UpdateByUsernameAccountCommand is the command line data structure for the update by username action of account
 	UpdateByUsernameAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -118,7 +118,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// UpdateByUsernameFromDefaultDomainAccountCommand is the command line data structure for the updateByUsernameFromDefaultDomain action of account
+	// UpdateByUsernameFromDefaultDomainAccountCommand is the command line data structure for the update by username from default domain action of account
 	UpdateByUsernameFromDefaultDomainAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -359,29 +359,27 @@ Payload example:
 		Use:   "delete",
 		Short: `delete action`,
 	}
-	tmp5 := new(DeleteAccountCommand)
+	tmp5 := new(DeleteCurrencyCommand)
 	sub = &cobra.Command{
-		Use:   `account ["/accounts/UUID"]`,
+		Use:   `currency ["/currency/CURRENCY_URI"]`,
 		Short: ``,
 		Long: `
 
 Payload example:
 
 {
-   "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-      "timestamp": "1494693347"
-   }
+   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+   "timestamp": "1494693347"
 }`,
 		RunE: func(cmd *cobra.Command, args []string) error { return tmp5.Run(c, args) },
 	}
 	tmp5.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp5.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp6 := new(DeleteCurrencyCommand)
+	tmp6 := new(DeleteSignatoriesCommand)
 	sub = &cobra.Command{
-		Use:   `currency ["/currency/CURRENCY_URI"]`,
+		Use:   `signatories ["/accounts/UUID/signatories/SIG"]`,
 		Short: ``,
 		Long: `
 
@@ -397,18 +395,25 @@ Payload example:
 	tmp6.RegisterFlags(sub, c)
 	sub.PersistentFlags().BoolVar(&tmp6.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp7 := new(DeleteSignatoriesCommand)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "delete-byuuid",
+		Short: `delete an account`,
+	}
+	tmp7 := new(DeleteByUUIDAccountCommand)
 	sub = &cobra.Command{
-		Use:   `signatories ["/accounts/UUID/signatories/SIG"]`,
+		Use:   `account ["/accounts/UUID"]`,
 		Short: ``,
 		Long: `
 
 Payload example:
 
 {
-   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-   "timestamp": "1494693347"
+   "meta_transaction": {
+      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+      "timestamp": "1494693347"
+   }
 }`,
 		RunE: func(cmd *cobra.Command, args []string) error { return tmp7.Run(c, args) },
 	}
@@ -605,7 +610,50 @@ Payload example:
 		Use:   "update",
 		Short: `update action`,
 	}
-	tmp19 := new(UpdateAccountCommand)
+	tmp19 := new(UpdateCurrencyCommand)
+	sub = &cobra.Command{
+		Use:   `currency ["/currency/CURRENCY_URI"]`,
+		Short: ``,
+		Long: `
+
+Payload example:
+
+{
+   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+   "description": "This is sample currency description.",
+   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+   "timestamp": "1494693347"
+}`,
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp19.Run(c, args) },
+	}
+	tmp19.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp19.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	tmp20 := new(UpdateQuorumCommand)
+	sub = &cobra.Command{
+		Use:   `quorum ["/accounts/UUID/quorum"]`,
+		Short: ``,
+		Long: `
+
+Payload example:
+
+{
+   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+   "quorum": 1,
+   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
+   "timestamp": "1494693347"
+}`,
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp20.Run(c, args) },
+	}
+	tmp20.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp20.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "update-byuuid",
+		Short: `update an account by account's uuid`,
+	}
+	tmp21 := new(UpdateByUUIDAccountCommand)
 	sub = &cobra.Command{
 		Use:   `account ["/accounts/UUID"]`,
 		Short: ``,
@@ -620,44 +668,6 @@ Payload example:
       "timestamp": "1494693347"
    },
    "username": "serizawa"
-}`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp19.Run(c, args) },
-	}
-	tmp19.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp19.PrettyPrint, "pp", false, "Pretty print response body")
-	command.AddCommand(sub)
-	tmp20 := new(UpdateCurrencyCommand)
-	sub = &cobra.Command{
-		Use:   `currency ["/currency/CURRENCY_URI"]`,
-		Short: ``,
-		Long: `
-
-Payload example:
-
-{
-   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-   "description": "This is sample currency description.",
-   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-   "timestamp": "1494693347"
-}`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp20.Run(c, args) },
-	}
-	tmp20.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp20.PrettyPrint, "pp", false, "Pretty print response body")
-	command.AddCommand(sub)
-	tmp21 := new(UpdateQuorumCommand)
-	sub = &cobra.Command{
-		Use:   `quorum ["/accounts/UUID/quorum"]`,
-		Short: ``,
-		Long: `
-
-Payload example:
-
-{
-   "creator_pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
-   "quorum": 1,
-   "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
-   "timestamp": "1494693347"
 }`,
 		RunE: func(cmd *cobra.Command, args []string) error { return tmp21.Run(c, args) },
 	}
@@ -905,8 +915,8 @@ func (cmd *AddAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client)
 	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
 }
 
-// Run makes the HTTP request corresponding to the DeleteAccountCommand command.
-func (cmd *DeleteAccountCommand) Run(c *client.Client, args []string) error {
+// Run makes the HTTP request corresponding to the DeleteByUUIDAccountCommand command.
+func (cmd *DeleteByUUIDAccountCommand) Run(c *client.Client, args []string) error {
 	var path string
 	if len(args) > 0 {
 		path = args[0]
@@ -922,7 +932,7 @@ func (cmd *DeleteAccountCommand) Run(c *client.Client, args []string) error {
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	resp, err := c.DeleteAccount(ctx, path, &payload, cmd.ContentType)
+	resp, err := c.DeleteByUUIDAccount(ctx, path, &payload, cmd.ContentType)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -933,7 +943,7 @@ func (cmd *DeleteAccountCommand) Run(c *client.Client, args []string) error {
 }
 
 // RegisterFlags registers the command flags with the command line.
-func (cmd *DeleteAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+func (cmd *DeleteByUUIDAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
 	cc.Flags().StringVar(&cmd.Payload, "payload", "", "Request body encoded in JSON")
 	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
 	var uuid string
@@ -1149,8 +1159,8 @@ func (cmd *GetByUsernameFromDefaultDomainAccountCommand) RegisterFlags(cc *cobra
 	cc.Flags().StringVar(&cmd.IsCommitted, "is_committed", isCommitted, `If this value is true, you can only get transactions committed to ametsuchi`)
 }
 
-// Run makes the HTTP request corresponding to the UpdateAccountCommand command.
-func (cmd *UpdateAccountCommand) Run(c *client.Client, args []string) error {
+// Run makes the HTTP request corresponding to the UpdateByUUIDAccountCommand command.
+func (cmd *UpdateByUUIDAccountCommand) Run(c *client.Client, args []string) error {
 	var path string
 	if len(args) > 0 {
 		path = args[0]
@@ -1166,7 +1176,7 @@ func (cmd *UpdateAccountCommand) Run(c *client.Client, args []string) error {
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	resp, err := c.UpdateAccount(ctx, path, &payload, cmd.ContentType)
+	resp, err := c.UpdateByUUIDAccount(ctx, path, &payload, cmd.ContentType)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -1177,7 +1187,7 @@ func (cmd *UpdateAccountCommand) Run(c *client.Client, args []string) error {
 }
 
 // RegisterFlags registers the command flags with the command line.
-func (cmd *UpdateAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+func (cmd *UpdateByUUIDAccountCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
 	cc.Flags().StringVar(&cmd.Payload, "payload", "", "Request body encoded in JSON")
 	cc.Flags().StringVar(&cmd.ContentType, "content", "", "Request content type override, e.g. 'application/x-www-form-urlencoded'")
 	var uuid string

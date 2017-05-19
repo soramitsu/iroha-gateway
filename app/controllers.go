@@ -35,14 +35,14 @@ func initService(service *goa.Service) {
 type AccountController interface {
 	goa.Muxer
 	Add(*AddAccountContext) error
-	Delete(*DeleteAccountContext) error
+	DeleteByUUID(*DeleteByUUIDAccountContext) error
 	DeleteByUsername(*DeleteByUsernameAccountContext) error
 	DeleteByUsernameFromDefaultDomain(*DeleteByUsernameFromDefaultDomainAccountContext) error
 	GetAll(*GetAllAccountContext) error
 	GetByUUID(*GetByUUIDAccountContext) error
 	GetByUsername(*GetByUsernameAccountContext) error
 	GetByUsernameFromDefaultDomain(*GetByUsernameFromDefaultDomainAccountContext) error
-	Update(*UpdateAccountContext) error
+	UpdateByUUID(*UpdateByUUIDAccountContext) error
 	UpdateByUsername(*UpdateByUsernameAccountContext) error
 	UpdateByUsernameFromDefaultDomain(*UpdateByUsernameFromDefaultDomainAccountContext) error
 }
@@ -79,7 +79,7 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 			return err
 		}
 		// Build the context
-		rctx, err := NewDeleteAccountContext(ctx, req, service)
+		rctx, err := NewDeleteByUUIDAccountContext(ctx, req, service)
 		if err != nil {
 			return err
 		}
@@ -89,10 +89,10 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 		} else {
 			return goa.MissingPayloadError()
 		}
-		return ctrl.Delete(rctx)
+		return ctrl.DeleteByUUID(rctx)
 	}
-	service.Mux.Handle("DELETE", "/accounts/:uuid", ctrl.MuxHandler("Delete", h, unmarshalDeleteAccountPayload))
-	service.LogInfo("mount", "ctrl", "Account", "action", "Delete", "route", "DELETE /accounts/:uuid")
+	service.Mux.Handle("DELETE", "/accounts/:uuid", ctrl.MuxHandler("DeleteByUUID", h, unmarshalDeleteByUUIDAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "DeleteByUUID", "route", "DELETE /accounts/:uuid")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -202,7 +202,7 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 			return err
 		}
 		// Build the context
-		rctx, err := NewUpdateAccountContext(ctx, req, service)
+		rctx, err := NewUpdateByUUIDAccountContext(ctx, req, service)
 		if err != nil {
 			return err
 		}
@@ -212,10 +212,10 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 		} else {
 			return goa.MissingPayloadError()
 		}
-		return ctrl.Update(rctx)
+		return ctrl.UpdateByUUID(rctx)
 	}
-	service.Mux.Handle("PUT", "/accounts/:uuid", ctrl.MuxHandler("Update", h, unmarshalUpdateAccountPayload))
-	service.LogInfo("mount", "ctrl", "Account", "action", "Update", "route", "PUT /accounts/:uuid")
+	service.Mux.Handle("PUT", "/accounts/:uuid", ctrl.MuxHandler("UpdateByUUID", h, unmarshalUpdateByUUIDAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "UpdateByUUID", "route", "PUT /accounts/:uuid")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -275,8 +275,8 @@ func unmarshalAddAccountPayload(ctx context.Context, service *goa.Service, req *
 	return nil
 }
 
-// unmarshalDeleteAccountPayload unmarshals the request body into the context request data Payload field.
-func unmarshalDeleteAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
+// unmarshalDeleteByUUIDAccountPayload unmarshals the request body into the context request data Payload field.
+func unmarshalDeleteByUUIDAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
 	payload := &deleteAccountRequest{}
 	if err := service.DecodeRequest(req, payload); err != nil {
 		return err
@@ -320,8 +320,8 @@ func unmarshalDeleteByUsernameFromDefaultDomainAccountPayload(ctx context.Contex
 	return nil
 }
 
-// unmarshalUpdateAccountPayload unmarshals the request body into the context request data Payload field.
-func unmarshalUpdateAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
+// unmarshalUpdateByUUIDAccountPayload unmarshals the request body into the context request data Payload field.
+func unmarshalUpdateByUUIDAccountPayload(ctx context.Context, service *goa.Service, req *http.Request) error {
 	payload := &updateAccountRequest{}
 	if err := service.DecodeRequest(req, payload); err != nil {
 		return err

@@ -700,7 +700,7 @@ paths:
   /accounts:
     get:
       description: get all accounts
-      operationId: account#getAll
+      operationId: account#get all
       produces:
       - application/vnd.message+json
       - application/vnd.accounts+json
@@ -719,7 +719,7 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: getAll account
+      summary: get all account
       tags:
       - account
     post:
@@ -754,7 +754,7 @@ paths:
   /accounts/{uuid}:
     delete:
       description: delete an account
-      operationId: account#delete
+      operationId: account#delete by UUID
       parameters:
       - description: account's guid
         in: path
@@ -784,12 +784,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: delete account
+      summary: delete by UUID account
       tags:
       - account
     get:
       description: get an account by account's UUID
-      operationId: account#getByUUID
+      operationId: account#get by UUID
       parameters:
       - description: If this value is true, you can only get transactions committed
           to ametsuchi
@@ -821,12 +821,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: getByUUID account
+      summary: get by UUID account
       tags:
       - account
     put:
       description: update an account by account's uuid
-      operationId: account#update
+      operationId: account#update by UUID
       parameters:
       - description: account's guid
         in: path
@@ -856,7 +856,7 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: update account
+      summary: update by UUID account
       tags:
       - account
   /accounts/{uuid}/quorum:
@@ -917,8 +917,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.signatories+json
       - application/vnd.message+json
+      - application/vnd.signatories+json
       responses:
         "200":
           description: OK
@@ -1259,7 +1259,7 @@ paths:
   /domains/{domain_uri}/accounts/{username}:
     delete:
       description: delete an account by account's domain and username
-      operationId: account#deleteByUsername
+      operationId: account#delete by username
       parameters:
       - description: domain's uri
         in: path
@@ -1295,12 +1295,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: deleteByUsername account
+      summary: delete by username account
       tags:
       - account
     get:
       description: get an account by account's domain and username
-      operationId: account#getByUsername
+      operationId: account#get by username
       parameters:
       - description: domain's uri
         in: path
@@ -1338,12 +1338,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: getByUsername account
+      summary: get by username account
       tags:
       - account
     put:
       description: update an account by account's domain and username
-      operationId: account#updateByUsername
+      operationId: account#update by username
       parameters:
       - description: domain's uri
         in: path
@@ -1379,13 +1379,13 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: updateByUsername account
+      summary: update by username account
       tags:
       - account
   /domains/default/accounts/{username}:
     delete:
       description: delete an account by account's username from default domain
-      operationId: account#deleteByUsernameFromDefaultDomain
+      operationId: account#delete by username from default domain
       parameters:
       - description: account's username
         in: path
@@ -1415,12 +1415,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: deleteByUsernameFromDefaultDomain account
+      summary: delete by username from default domain account
       tags:
       - account
     get:
       description: get an account by account's username from default domain
-      operationId: account#getByUsernameFromDefaultDomain
+      operationId: account#get by username from default domain
       parameters:
       - description: If this value is true, you can only get transactions committed
           to ametsuchi
@@ -1452,12 +1452,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: getByUsernameFromDefaultDomain account
+      summary: get by username from default domain account
       tags:
       - account
     put:
       description: update an account by account's username from default domain
-      operationId: account#updateByUsernameFromDefaultDomain
+      operationId: account#update by username from default domain
       parameters:
       - description: account's username
         in: path
@@ -1487,7 +1487,7 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: updateByUsernameFromDefaultDomain account
+      summary: update by username from default domain account
       tags:
       - account
   /transactions/{currency_uri}:
@@ -1517,8 +1517,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.transactions+json
       - application/vnd.message+json
+      - application/vnd.transactions+json
       responses:
         "200":
           description: OK

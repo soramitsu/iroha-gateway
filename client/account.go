@@ -62,24 +62,24 @@ func (c *Client) NewAddAccountRequest(ctx context.Context, path string, payload 
 	return req, nil
 }
 
-// DeleteAccountPath computes a request path to the delete action of account.
-func DeleteAccountPath(uuid string) string {
+// DeleteByUUIDAccountPath computes a request path to the delete by UUID action of account.
+func DeleteByUUIDAccountPath(uuid string) string {
 	param0 := uuid
 
 	return fmt.Sprintf("/accounts/%s", param0)
 }
 
 // delete an account
-func (c *Client) DeleteAccount(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Response, error) {
-	req, err := c.NewDeleteAccountRequest(ctx, path, payload, contentType)
+func (c *Client) DeleteByUUIDAccount(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Response, error) {
+	req, err := c.NewDeleteByUUIDAccountRequest(ctx, path, payload, contentType)
 	if err != nil {
 		return nil, err
 	}
 	return c.Client.Do(ctx, req)
 }
 
-// NewDeleteAccountRequest create the request corresponding to the delete action endpoint of the account resource.
-func (c *Client) NewDeleteAccountRequest(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Request, error) {
+// NewDeleteByUUIDAccountRequest create the request corresponding to the delete by UUID action endpoint of the account resource.
+func (c *Client) NewDeleteByUUIDAccountRequest(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {
 		contentType = "*/*" // Use default encoder
@@ -106,7 +106,7 @@ func (c *Client) NewDeleteAccountRequest(ctx context.Context, path string, paylo
 	return req, nil
 }
 
-// DeleteByUsernameAccountPath computes a request path to the deleteByUsername action of account.
+// DeleteByUsernameAccountPath computes a request path to the delete by username action of account.
 func DeleteByUsernameAccountPath(domainURI string, username string) string {
 	param0 := domainURI
 	param1 := username
@@ -123,7 +123,7 @@ func (c *Client) DeleteByUsernameAccount(ctx context.Context, path string, paylo
 	return c.Client.Do(ctx, req)
 }
 
-// NewDeleteByUsernameAccountRequest create the request corresponding to the deleteByUsername action endpoint of the account resource.
+// NewDeleteByUsernameAccountRequest create the request corresponding to the delete by username action endpoint of the account resource.
 func (c *Client) NewDeleteByUsernameAccountRequest(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {
@@ -151,7 +151,7 @@ func (c *Client) NewDeleteByUsernameAccountRequest(ctx context.Context, path str
 	return req, nil
 }
 
-// DeleteByUsernameFromDefaultDomainAccountPath computes a request path to the deleteByUsernameFromDefaultDomain action of account.
+// DeleteByUsernameFromDefaultDomainAccountPath computes a request path to the delete by username from default domain action of account.
 func DeleteByUsernameFromDefaultDomainAccountPath(username string) string {
 	param0 := username
 
@@ -167,7 +167,7 @@ func (c *Client) DeleteByUsernameFromDefaultDomainAccount(ctx context.Context, p
 	return c.Client.Do(ctx, req)
 }
 
-// NewDeleteByUsernameFromDefaultDomainAccountRequest create the request corresponding to the deleteByUsernameFromDefaultDomain action endpoint of the account resource.
+// NewDeleteByUsernameFromDefaultDomainAccountRequest create the request corresponding to the delete by username from default domain action endpoint of the account resource.
 func (c *Client) NewDeleteByUsernameFromDefaultDomainAccountRequest(ctx context.Context, path string, payload *DeleteAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {
@@ -195,7 +195,7 @@ func (c *Client) NewDeleteByUsernameFromDefaultDomainAccountRequest(ctx context.
 	return req, nil
 }
 
-// GetAllAccountPath computes a request path to the getAll action of account.
+// GetAllAccountPath computes a request path to the get all action of account.
 func GetAllAccountPath() string {
 
 	return fmt.Sprintf("/accounts")
@@ -210,7 +210,7 @@ func (c *Client) GetAllAccount(ctx context.Context, path string) (*http.Response
 	return c.Client.Do(ctx, req)
 }
 
-// NewGetAllAccountRequest create the request corresponding to the getAll action endpoint of the account resource.
+// NewGetAllAccountRequest create the request corresponding to the get all action endpoint of the account resource.
 func (c *Client) NewGetAllAccountRequest(ctx context.Context, path string) (*http.Request, error) {
 	scheme := c.Scheme
 	if scheme == "" {
@@ -224,7 +224,7 @@ func (c *Client) NewGetAllAccountRequest(ctx context.Context, path string) (*htt
 	return req, nil
 }
 
-// GetByUUIDAccountPath computes a request path to the getByUUID action of account.
+// GetByUUIDAccountPath computes a request path to the get by UUID action of account.
 func GetByUUIDAccountPath(uuid string) string {
 	param0 := uuid
 
@@ -240,7 +240,7 @@ func (c *Client) GetByUUIDAccount(ctx context.Context, path string, isCommitted 
 	return c.Client.Do(ctx, req)
 }
 
-// NewGetByUUIDAccountRequest create the request corresponding to the getByUUID action endpoint of the account resource.
+// NewGetByUUIDAccountRequest create the request corresponding to the get by UUID action endpoint of the account resource.
 func (c *Client) NewGetByUUIDAccountRequest(ctx context.Context, path string, isCommitted *bool) (*http.Request, error) {
 	scheme := c.Scheme
 	if scheme == "" {
@@ -260,7 +260,7 @@ func (c *Client) NewGetByUUIDAccountRequest(ctx context.Context, path string, is
 	return req, nil
 }
 
-// GetByUsernameAccountPath computes a request path to the getByUsername action of account.
+// GetByUsernameAccountPath computes a request path to the get by username action of account.
 func GetByUsernameAccountPath(domainURI string, username string) string {
 	param0 := domainURI
 	param1 := username
@@ -277,7 +277,7 @@ func (c *Client) GetByUsernameAccount(ctx context.Context, path string, isCommit
 	return c.Client.Do(ctx, req)
 }
 
-// NewGetByUsernameAccountRequest create the request corresponding to the getByUsername action endpoint of the account resource.
+// NewGetByUsernameAccountRequest create the request corresponding to the get by username action endpoint of the account resource.
 func (c *Client) NewGetByUsernameAccountRequest(ctx context.Context, path string, isCommitted *bool) (*http.Request, error) {
 	scheme := c.Scheme
 	if scheme == "" {
@@ -297,7 +297,7 @@ func (c *Client) NewGetByUsernameAccountRequest(ctx context.Context, path string
 	return req, nil
 }
 
-// GetByUsernameFromDefaultDomainAccountPath computes a request path to the getByUsernameFromDefaultDomain action of account.
+// GetByUsernameFromDefaultDomainAccountPath computes a request path to the get by username from default domain action of account.
 func GetByUsernameFromDefaultDomainAccountPath(username string) string {
 	param0 := username
 
@@ -313,7 +313,7 @@ func (c *Client) GetByUsernameFromDefaultDomainAccount(ctx context.Context, path
 	return c.Client.Do(ctx, req)
 }
 
-// NewGetByUsernameFromDefaultDomainAccountRequest create the request corresponding to the getByUsernameFromDefaultDomain action endpoint of the account resource.
+// NewGetByUsernameFromDefaultDomainAccountRequest create the request corresponding to the get by username from default domain action endpoint of the account resource.
 func (c *Client) NewGetByUsernameFromDefaultDomainAccountRequest(ctx context.Context, path string, isCommitted *bool) (*http.Request, error) {
 	scheme := c.Scheme
 	if scheme == "" {
@@ -333,24 +333,24 @@ func (c *Client) NewGetByUsernameFromDefaultDomainAccountRequest(ctx context.Con
 	return req, nil
 }
 
-// UpdateAccountPath computes a request path to the update action of account.
-func UpdateAccountPath(uuid string) string {
+// UpdateByUUIDAccountPath computes a request path to the update by UUID action of account.
+func UpdateByUUIDAccountPath(uuid string) string {
 	param0 := uuid
 
 	return fmt.Sprintf("/accounts/%s", param0)
 }
 
 // update an account by account's uuid
-func (c *Client) UpdateAccount(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Response, error) {
-	req, err := c.NewUpdateAccountRequest(ctx, path, payload, contentType)
+func (c *Client) UpdateByUUIDAccount(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Response, error) {
+	req, err := c.NewUpdateByUUIDAccountRequest(ctx, path, payload, contentType)
 	if err != nil {
 		return nil, err
 	}
 	return c.Client.Do(ctx, req)
 }
 
-// NewUpdateAccountRequest create the request corresponding to the update action endpoint of the account resource.
-func (c *Client) NewUpdateAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
+// NewUpdateByUUIDAccountRequest create the request corresponding to the update by UUID action endpoint of the account resource.
+func (c *Client) NewUpdateByUUIDAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {
 		contentType = "*/*" // Use default encoder
@@ -377,7 +377,7 @@ func (c *Client) NewUpdateAccountRequest(ctx context.Context, path string, paylo
 	return req, nil
 }
 
-// UpdateByUsernameAccountPath computes a request path to the updateByUsername action of account.
+// UpdateByUsernameAccountPath computes a request path to the update by username action of account.
 func UpdateByUsernameAccountPath(domainURI string, username string) string {
 	param0 := domainURI
 	param1 := username
@@ -394,7 +394,7 @@ func (c *Client) UpdateByUsernameAccount(ctx context.Context, path string, paylo
 	return c.Client.Do(ctx, req)
 }
 
-// NewUpdateByUsernameAccountRequest create the request corresponding to the updateByUsername action endpoint of the account resource.
+// NewUpdateByUsernameAccountRequest create the request corresponding to the update by username action endpoint of the account resource.
 func (c *Client) NewUpdateByUsernameAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {
@@ -422,7 +422,7 @@ func (c *Client) NewUpdateByUsernameAccountRequest(ctx context.Context, path str
 	return req, nil
 }
 
-// UpdateByUsernameFromDefaultDomainAccountPath computes a request path to the updateByUsernameFromDefaultDomain action of account.
+// UpdateByUsernameFromDefaultDomainAccountPath computes a request path to the update by username from default domain action of account.
 func UpdateByUsernameFromDefaultDomainAccountPath(username string) string {
 	param0 := username
 
@@ -438,7 +438,7 @@ func (c *Client) UpdateByUsernameFromDefaultDomainAccount(ctx context.Context, p
 	return c.Client.Do(ctx, req)
 }
 
-// NewUpdateByUsernameFromDefaultDomainAccountRequest create the request corresponding to the updateByUsernameFromDefaultDomain action endpoint of the account resource.
+// NewUpdateByUsernameFromDefaultDomainAccountRequest create the request corresponding to the update by username from default domain action endpoint of the account resource.
 func (c *Client) NewUpdateByUsernameFromDefaultDomainAccountRequest(ctx context.Context, path string, payload *UpdateAccountRequest, contentType string) (*http.Request, error) {
 	var body bytes.Buffer
 	if contentType == "" {

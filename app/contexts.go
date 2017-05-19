@@ -55,8 +55,8 @@ func (ctx *AddAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// DeleteAccountContext provides the account delete action context.
-type DeleteAccountContext struct {
+// DeleteByUUIDAccountContext provides the account delete by UUID action context.
+type DeleteByUUIDAccountContext struct {
 	context.Context
 	*goa.ResponseData
 	*goa.RequestData
@@ -64,15 +64,15 @@ type DeleteAccountContext struct {
 	Payload *DeleteAccountRequest
 }
 
-// NewDeleteAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller delete action.
-func NewDeleteAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteAccountContext, error) {
+// NewDeleteByUUIDAccountContext parses the incoming request URL and body, performs validations and creates the
+// context used by the account controller delete by UUID action.
+func NewDeleteByUUIDAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUUIDAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
 	resp.Service = service
 	req := goa.ContextRequest(ctx)
 	req.Request = r
-	rctx := DeleteAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
+	rctx := DeleteByUUIDAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
 	paramUUID := req.Params["uuid"]
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
@@ -85,24 +85,24 @@ func NewDeleteAccountContext(ctx context.Context, r *http.Request, service *goa.
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *DeleteAccountContext) OK(r *Message) error {
+func (ctx *DeleteByUUIDAccountContext) OK(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *DeleteAccountContext) BadRequest(r *Message) error {
+func (ctx *DeleteByUUIDAccountContext) BadRequest(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *DeleteAccountContext) InternalServerError(r *Message) error {
+func (ctx *DeleteByUUIDAccountContext) InternalServerError(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// DeleteByUsernameAccountContext provides the account deleteByUsername action context.
+// DeleteByUsernameAccountContext provides the account delete by username action context.
 type DeleteByUsernameAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -113,7 +113,7 @@ type DeleteByUsernameAccountContext struct {
 }
 
 // NewDeleteByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller deleteByUsername action.
+// context used by the account controller delete by username action.
 func NewDeleteByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUsernameAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -158,7 +158,7 @@ func (ctx *DeleteByUsernameAccountContext) InternalServerError(r *Message) error
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// DeleteByUsernameFromDefaultDomainAccountContext provides the account deleteByUsernameFromDefaultDomain action context.
+// DeleteByUsernameFromDefaultDomainAccountContext provides the account delete by username from default domain action context.
 type DeleteByUsernameFromDefaultDomainAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -168,7 +168,7 @@ type DeleteByUsernameFromDefaultDomainAccountContext struct {
 }
 
 // NewDeleteByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller deleteByUsernameFromDefaultDomain action.
+// context used by the account controller delete by username from default domain action.
 func NewDeleteByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUsernameFromDefaultDomainAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -205,7 +205,7 @@ func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) InternalServerError(
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetAllAccountContext provides the account getAll action context.
+// GetAllAccountContext provides the account get all action context.
 type GetAllAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -213,7 +213,7 @@ type GetAllAccountContext struct {
 }
 
 // NewGetAllAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller getAll action.
+// context used by the account controller get all action.
 func NewGetAllAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetAllAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -242,7 +242,7 @@ func (ctx *GetAllAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetByUUIDAccountContext provides the account getByUUID action context.
+// GetByUUIDAccountContext provides the account get by UUID action context.
 type GetByUUIDAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -252,7 +252,7 @@ type GetByUUIDAccountContext struct {
 }
 
 // NewGetByUUIDAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller getByUUID action.
+// context used by the account controller get by UUID action.
 func NewGetByUUIDAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetByUUIDAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -299,7 +299,7 @@ func (ctx *GetByUUIDAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetByUsernameAccountContext provides the account getByUsername action context.
+// GetByUsernameAccountContext provides the account get by username action context.
 type GetByUsernameAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -310,7 +310,7 @@ type GetByUsernameAccountContext struct {
 }
 
 // NewGetByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller getByUsername action.
+// context used by the account controller get by username action.
 func NewGetByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetByUsernameAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -365,7 +365,7 @@ func (ctx *GetByUsernameAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetByUsernameFromDefaultDomainAccountContext provides the account getByUsernameFromDefaultDomain action context.
+// GetByUsernameFromDefaultDomainAccountContext provides the account get by username from default domain action context.
 type GetByUsernameFromDefaultDomainAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -375,7 +375,7 @@ type GetByUsernameFromDefaultDomainAccountContext struct {
 }
 
 // NewGetByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller getByUsernameFromDefaultDomain action.
+// context used by the account controller get by username from default domain action.
 func NewGetByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetByUsernameFromDefaultDomainAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -422,8 +422,8 @@ func (ctx *GetByUsernameFromDefaultDomainAccountContext) InternalServerError(r *
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// UpdateAccountContext provides the account update action context.
-type UpdateAccountContext struct {
+// UpdateByUUIDAccountContext provides the account update by UUID action context.
+type UpdateByUUIDAccountContext struct {
 	context.Context
 	*goa.ResponseData
 	*goa.RequestData
@@ -431,15 +431,15 @@ type UpdateAccountContext struct {
 	Payload *UpdateAccountRequest
 }
 
-// NewUpdateAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller update action.
-func NewUpdateAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateAccountContext, error) {
+// NewUpdateByUUIDAccountContext parses the incoming request URL and body, performs validations and creates the
+// context used by the account controller update by UUID action.
+func NewUpdateByUUIDAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUUIDAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
 	resp.Service = service
 	req := goa.ContextRequest(ctx)
 	req.Request = r
-	rctx := UpdateAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
+	rctx := UpdateByUUIDAccountContext{Context: ctx, ResponseData: resp, RequestData: req}
 	paramUUID := req.Params["uuid"]
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
@@ -452,24 +452,24 @@ func NewUpdateAccountContext(ctx context.Context, r *http.Request, service *goa.
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *UpdateAccountContext) OK(r *Message) error {
+func (ctx *UpdateByUUIDAccountContext) OK(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *UpdateAccountContext) BadRequest(r *Message) error {
+func (ctx *UpdateByUUIDAccountContext) BadRequest(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *UpdateAccountContext) InternalServerError(r *Message) error {
+func (ctx *UpdateByUUIDAccountContext) InternalServerError(r *Message) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// UpdateByUsernameAccountContext provides the account updateByUsername action context.
+// UpdateByUsernameAccountContext provides the account update by username action context.
 type UpdateByUsernameAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -480,7 +480,7 @@ type UpdateByUsernameAccountContext struct {
 }
 
 // NewUpdateByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller updateByUsername action.
+// context used by the account controller update by username action.
 func NewUpdateByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUsernameAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -525,7 +525,7 @@ func (ctx *UpdateByUsernameAccountContext) InternalServerError(r *Message) error
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// UpdateByUsernameFromDefaultDomainAccountContext provides the account updateByUsernameFromDefaultDomain action context.
+// UpdateByUsernameFromDefaultDomainAccountContext provides the account update by username from default domain action context.
 type UpdateByUsernameFromDefaultDomainAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -535,7 +535,7 @@ type UpdateByUsernameFromDefaultDomainAccountContext struct {
 }
 
 // NewUpdateByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller updateByUsernameFromDefaultDomain action.
+// context used by the account controller update by username from default domain action.
 func NewUpdateByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUsernameFromDefaultDomainAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)

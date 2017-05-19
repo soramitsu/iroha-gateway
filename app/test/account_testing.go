@@ -264,11 +264,11 @@ func AddAccountInternalServerError(t goatest.TInterface, ctx context.Context, se
 	return rw, mt
 }
 
-// DeleteAccountBadRequest runs the method Delete of the given controller with the given parameters and payload.
+// DeleteByUUIDAccountBadRequest runs the method DeleteByUUID of the given controller with the given parameters and payload.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+func DeleteByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -312,14 +312,14 @@ func DeleteAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 		ctx = context.Background()
 	}
 	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
-	deleteCtx, __err := app.NewDeleteAccountContext(goaCtx, req, service)
+	deleteByUUIDCtx, __err := app.NewDeleteByUUIDAccountContext(goaCtx, req, service)
 	if __err != nil {
 		panic("invalid test data " + __err.Error()) // bug
 	}
-	deleteCtx.Payload = payload
+	deleteByUUIDCtx.Payload = payload
 
 	// Perform action
-	__err = ctrl.Delete(deleteCtx)
+	__err = ctrl.DeleteByUUID(deleteByUUIDCtx)
 
 	// Validate response
 	if __err != nil {
@@ -345,11 +345,11 @@ func DeleteAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 	return rw, mt
 }
 
-// DeleteAccountInternalServerError runs the method Delete of the given controller with the given parameters and payload.
+// DeleteByUUIDAccountInternalServerError runs the method DeleteByUUID of the given controller with the given parameters and payload.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+func DeleteByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -393,14 +393,14 @@ func DeleteAccountInternalServerError(t goatest.TInterface, ctx context.Context,
 		ctx = context.Background()
 	}
 	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
-	deleteCtx, __err := app.NewDeleteAccountContext(goaCtx, req, service)
+	deleteByUUIDCtx, __err := app.NewDeleteByUUIDAccountContext(goaCtx, req, service)
 	if __err != nil {
 		panic("invalid test data " + __err.Error()) // bug
 	}
-	deleteCtx.Payload = payload
+	deleteByUUIDCtx.Payload = payload
 
 	// Perform action
-	__err = ctrl.Delete(deleteCtx)
+	__err = ctrl.DeleteByUUID(deleteByUUIDCtx)
 
 	// Validate response
 	if __err != nil {
@@ -426,11 +426,11 @@ func DeleteAccountInternalServerError(t goatest.TInterface, ctx context.Context,
 	return rw, mt
 }
 
-// DeleteAccountOK runs the method Delete of the given controller with the given parameters and payload.
+// DeleteByUUIDAccountOK runs the method DeleteByUUID of the given controller with the given parameters and payload.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
+func DeleteByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -474,14 +474,14 @@ func DeleteAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Ser
 		ctx = context.Background()
 	}
 	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
-	deleteCtx, __err := app.NewDeleteAccountContext(goaCtx, req, service)
+	deleteByUUIDCtx, __err := app.NewDeleteByUUIDAccountContext(goaCtx, req, service)
 	if __err != nil {
 		panic("invalid test data " + __err.Error()) // bug
 	}
-	deleteCtx.Payload = payload
+	deleteByUUIDCtx.Payload = payload
 
 	// Perform action
-	__err = ctrl.Delete(deleteCtx)
+	__err = ctrl.DeleteByUUID(deleteByUUIDCtx)
 
 	// Validate response
 	if __err != nil {
@@ -1914,11 +1914,11 @@ func GetByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.C
 	return rw, mt
 }
 
-// UpdateAccountBadRequest runs the method Update of the given controller with the given parameters and payload.
+// UpdateByUUIDAccountBadRequest runs the method UpdateByUUID of the given controller with the given parameters and payload.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+func UpdateByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1962,14 +1962,14 @@ func UpdateAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 		ctx = context.Background()
 	}
 	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
-	updateCtx, __err := app.NewUpdateAccountContext(goaCtx, req, service)
+	updateByUUIDCtx, __err := app.NewUpdateByUUIDAccountContext(goaCtx, req, service)
 	if __err != nil {
 		panic("invalid test data " + __err.Error()) // bug
 	}
-	updateCtx.Payload = payload
+	updateByUUIDCtx.Payload = payload
 
 	// Perform action
-	__err = ctrl.Update(updateCtx)
+	__err = ctrl.UpdateByUUID(updateByUUIDCtx)
 
 	// Validate response
 	if __err != nil {
@@ -1995,11 +1995,11 @@ func UpdateAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 	return rw, mt
 }
 
-// UpdateAccountInternalServerError runs the method Update of the given controller with the given parameters and payload.
+// UpdateByUUIDAccountInternalServerError runs the method UpdateByUUID of the given controller with the given parameters and payload.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+func UpdateByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2043,14 +2043,14 @@ func UpdateAccountInternalServerError(t goatest.TInterface, ctx context.Context,
 		ctx = context.Background()
 	}
 	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
-	updateCtx, __err := app.NewUpdateAccountContext(goaCtx, req, service)
+	updateByUUIDCtx, __err := app.NewUpdateByUUIDAccountContext(goaCtx, req, service)
 	if __err != nil {
 		panic("invalid test data " + __err.Error()) // bug
 	}
-	updateCtx.Payload = payload
+	updateByUUIDCtx.Payload = payload
 
 	// Perform action
-	__err = ctrl.Update(updateCtx)
+	__err = ctrl.UpdateByUUID(updateByUUIDCtx)
 
 	// Validate response
 	if __err != nil {
@@ -2076,11 +2076,11 @@ func UpdateAccountInternalServerError(t goatest.TInterface, ctx context.Context,
 	return rw, mt
 }
 
-// UpdateAccountOK runs the method Update of the given controller with the given parameters and payload.
+// UpdateByUUIDAccountOK runs the method UpdateByUUID of the given controller with the given parameters and payload.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
+func UpdateByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2124,14 +2124,14 @@ func UpdateAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Ser
 		ctx = context.Background()
 	}
 	goaCtx := goa.NewContext(goa.WithAction(ctx, "AccountTest"), rw, req, prms)
-	updateCtx, __err := app.NewUpdateAccountContext(goaCtx, req, service)
+	updateByUUIDCtx, __err := app.NewUpdateByUUIDAccountContext(goaCtx, req, service)
 	if __err != nil {
 		panic("invalid test data " + __err.Error()) // bug
 	}
-	updateCtx.Payload = payload
+	updateByUUIDCtx.Payload = payload
 
 	// Perform action
-	__err = ctrl.Update(updateCtx)
+	__err = ctrl.UpdateByUUID(updateByUUIDCtx)
 
 	// Validate response
 	if __err != nil {

@@ -8,13 +8,13 @@ import (
 var _ = Resource("account", func() {
 
 	// GET
-	Action("getAll", func() {
+	Action("get all", func() {
 		Routing(GET("/accounts/"))
 		Description("get all accounts")
 		Response(OK, AccountsResponse)
 	})
 
-	Action("getByUUID", func() {
+	Action("get by UUID", func() {
 		Routing(GET("/accounts/:uuid"))
 		Description("get an account by account's UUID")
 		Params(func() {
@@ -32,7 +32,7 @@ var _ = Resource("account", func() {
 		Response(OK, AccountResponse)
 	})
 
-	Action("getByUsername", func() {
+	Action("get by username", func() {
 		Routing(GET("/domains/:domain_uri/accounts/:username"))
 		Description("get an account by account's domain and username")
 		Params(func() {
@@ -56,7 +56,7 @@ var _ = Resource("account", func() {
 	})
 
 	// TODO: Consider a good URL path when get an account with only a user name from the default domain
-	Action("getByUsernameFromDefaultDomain", func() {
+	Action("get by username from default domain", func() {
 		Routing(GET("/domains/default/accounts/:username"))
 		Description("get an account by account's username from default domain")
 		Params(func() {
@@ -75,7 +75,7 @@ var _ = Resource("account", func() {
 	})
 
 	// UPDATE
-	Action("update", func() {
+	Action("update by UUID", func() {
 		Routing(PUT("/accounts/:uuid"))
 		Description("update an account by account's uuid")
 		Params(func() {
@@ -90,7 +90,7 @@ var _ = Resource("account", func() {
 		Response(OK, MessageResponse)
 	})
 
-	Action("updateByUsername", func() {
+	Action("update by username", func() {
 		Routing(PUT("/domains/:domain_uri/accounts/:username"))
 		Description("update an account by account's domain and username")
 		Params(func() {
@@ -111,7 +111,7 @@ var _ = Resource("account", func() {
 	})
 
 	// TODO: Consider a good URL path when update an account with only a user name from the default domain
-	Action("updateByUsernameFromDefaultDomain", func() {
+	Action("update by username from default domain", func() {
 		Routing(PUT("/domains/default/accounts/:username"))
 		Description("update an account by account's username from default domain")
 		Params(func() {
@@ -127,7 +127,7 @@ var _ = Resource("account", func() {
 	})
 
 	// DELETE
-	Action("delete", func() {
+	Action("delete by UUID", func() {
 		Routing(DELETE("/accounts/:uuid"))
 		Description("delete an account")
 		Params(func() {
@@ -141,7 +141,7 @@ var _ = Resource("account", func() {
 		Response(OK, MessageResponse)
 	})
 
-	Action("deleteByUsername", func() {
+	Action("delete by username", func() {
 		Routing(DELETE("/domains/:domain_uri/accounts/:username"))
 		Description("delete an account by account's domain and username")
 		Params(func() {
@@ -162,7 +162,7 @@ var _ = Resource("account", func() {
 	})
 
 	// TODO: Consider a good URL path when delete an account with only a user name from the default domain
-	Action("deleteByUsernameFromDefaultDomain", func() {
+	Action("delete by username from default domain", func() {
 		Routing(DELETE("/domains/default/accounts/:username"))
 		Description("delete an account by account's username from default domain")
 		Params(func() {
