@@ -6,14 +6,14 @@ import (
 )
 
 var _ = Resource("quorum", func() {
-	BasePath("/accounts/:guid/quorum")
+	BasePath("/accounts/:uuid/quorum")
 	Params(func() {
-		Param("guid", String, func() {
-			Pattern(base64Pattern)
-			Example(exampleTargetEncoded)
-			Description("GUID of URL-encoded account")
+		Param("uuid", String, func() {
+			Pattern(patternAccountUUID)
+			Example(exampleAccountUUID)
+			Description(descriptionAccountUUID)
 		})
-		Required("guid")
+		Required("uuid")
 	})
 
 	Action("update", func() {

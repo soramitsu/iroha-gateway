@@ -60,7 +60,7 @@ var Signature = Type("Signature", func() {
 	Attribute("publicKey", String, func() {
 		Description(descriptionTransactionPublicKey)
 		Example(exampleTransactionPublicKey)
-		Pattern(base64Pattern)
+		Pattern(patternBase64)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)

@@ -224,12 +224,12 @@ var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
 	Attribute("sender", String, func() {
 		Description(descriptionCurrencySender)
 		Example(exampleCurrencySender)
-		Pattern(base64Pattern)
+		Pattern(patternBase64)
 	})
 	Attribute("receiver", String, func() {
 		Description(descriptionCurrencyReceiver)
 		Example(exampleCurrencyReceiver)
-		Pattern(base64Pattern)
+		Pattern(patternBase64)
 	})
 	Attribute("target", String, func() {
 		Pattern(`[0-9a-zA-Z-_.~]+`)

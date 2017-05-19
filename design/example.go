@@ -27,6 +27,9 @@ const (
 	exampleTransactionPublicKey = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
 	exampleAccountGUID          = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
 	exampleAccountGUIDEncoded   = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D"
+	exampleAccountUUID          = "2aaf2527-8021-4afd-829b-89e8de608b36" // TODO
+	exampleDomainURI            = "dummy.domain.com"                     // TODO
+	exampleAccountUsername      = "serizawa"
 )
 
 var (

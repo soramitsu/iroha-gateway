@@ -6,21 +6,21 @@ import (
 )
 
 var _ = Resource("signatories", func() {
-	BasePath("/accounts/:guid")
+	BasePath("/accounts/:uuid")
 	Params(func() {
-		Param("guid", String, func() {
-			Pattern(base64Pattern)
-			Example(exampleTargetEncoded)
-			Description("GUID of URL-encoded account")
+		Param("uuid", String, func() {
+			Pattern(patternAccountUUID)
+			Example(exampleAccountUUID)
+			Description(descriptionAccountUUID)
 		})
-		Required("guid")
+		Required("uuid")
 	})
 
 	Action("getAll", func() {
 		Routing(GET("/signatories"))
 		Params(func() {
 			Param("creator_pubkey", String, func() {
-				Pattern(urlEncodedPattern)
+				Pattern(patternURLEncoded)
 				Example(exampleTargetEncoded)
 				Description("Public key of URL-encoded creator's account")
 
@@ -51,7 +51,7 @@ var _ = Resource("signatories", func() {
 			Param("sig", String, func() {
 				Description(descriptionSignatory)
 				Example(exampleSignatory)
-				Pattern(urlEncodedPattern)
+				Pattern(patternURLEncoded)
 			})
 			Required("sig")
 		})
@@ -70,17 +70,17 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 	Attribute("creator_pubkey", String, func() {
 		Example(exampleCreator)
 		Description(descriptionCreator)
-		Pattern(base64Pattern)
+		Pattern(patternBase64)
 	})
 	Attribute("signature", String, func() {
 		Example(exampleSignature)
 		Description(descriptionSignature)
-		Pattern(base64Pattern)
+		Pattern(patternBase64)
 	})
 	Attribute("timestamp", String, func() {
 		Example(exampleTimestamp)
 		Description(descriptionTimestamp)
-		Pattern(timestampPattern)
+		Pattern(patternTimestamp)
 	})
 
 	Required("signatories", "creator_pubkey", "signature", "timestamp")

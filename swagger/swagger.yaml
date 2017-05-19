@@ -6,21 +6,16 @@ consumes:
 definitions:
   Account:
     example:
-      guid: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
       quorum: 1
       signatories:
       - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
       - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
     properties:
-      guid:
-        description: account's guid
-        example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-        pattern: '[0-9a-zA-Z+/=]+'
-        type: string
       quorum:
         description: 最低限必要な数
         example: 1
-        maximum: 65535
+        maximum: 32
         minimum: 1
         type: integer
       signatories:
@@ -32,8 +27,13 @@ definitions:
           example: Ut eius.
           type: string
         type: array
+      uuid:
+        description: account's guid
+        example: 2aaf2527-8021-4afd-829b-89e8de608b36
+        pattern: ^[0-9a-zA-Z+/=]+$
+        type: string
     required:
-    - guid
+    - uuid
     - signatories
     - quorum
     title: Account
@@ -42,32 +42,32 @@ definitions:
     description: Accounts media type (default view)
     example:
       accounts:
-      - guid: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-        quorum: 1
+      - quorum: 1
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-      - guid: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-        quorum: 1
+        uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
+      - quorum: 1
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
       code: 0
       message: message
     properties:
       accounts:
         description: accounts
         example:
-        - guid: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-          quorum: 1
+        - quorum: 1
           signatories:
           - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
           - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        - guid: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-          quorum: 1
+          uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
+        - quorum: 1
           signatories:
           - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
           - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
         items:
           $ref: '#/definitions/Account'
         type: array
@@ -89,11 +89,11 @@ definitions:
   AddAccountRequest:
     example:
       account:
-        guid: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         quorum: 1
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
       creator_pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
@@ -214,12 +214,12 @@ definitions:
       receiver:
         description: receiver's public key
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        pattern: '[0-9a-zA-Z+/=]+'
+        pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       sender:
         description: sender's public key
         example: aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-        pattern: '[0-9a-zA-Z+/=]+'
+        pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signature:
         description: Transaction signature
@@ -428,7 +428,7 @@ definitions:
       creator_pubkey:
         description: Public key of creator's account
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        pattern: '[0-9a-zA-Z+/=]+'
+        pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signatories:
         description: Account Signatories
@@ -442,12 +442,12 @@ definitions:
       signature:
         description: Transaction signature
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
-        pattern: '[0-9a-zA-Z+/=]+'
+        pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       timestamp:
         description: Transaction timestamp
         example: "1494693347"
-        pattern: '[0-9]{1,18}'
+        pattern: ^[0-9]{1,18}$
         type: string
     required:
     - signatories
@@ -465,7 +465,7 @@ definitions:
       publicKey:
         description: transaction's public key
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        pattern: '[0-9a-zA-Z+/=]+'
+        pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signature:
         description: Transaction signature
@@ -660,7 +660,7 @@ definitions:
       timestamp:
         description: Transaction timestamp
         example: "1494693347"
-        pattern: '[0-9]{1,18}'
+        pattern: ^[0-9]{1,18}$
         type: string
     required:
     - alias
@@ -740,7 +740,7 @@ paths:
   /accounts:
     get:
       description: get all accounts
-      operationId: accounts#getAll
+      operationId: account#getAll
       produces:
       - application/vnd.message+json
       - application/vnd.accounts+json
@@ -759,12 +759,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: getAll accounts
+      summary: getAll account
       tags:
-      - accounts
+      - account
     post:
       description: add an account
-      operationId: accounts#add
+      operationId: account#add
       parameters:
       - in: body
         name: payload
@@ -788,18 +788,18 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: add accounts
+      summary: add account
       tags:
-      - accounts
-  /accounts/{guid}:
+      - account
+  /accounts/{uuid}:
     delete:
       description: delete an account
-      operationId: accounts#delete
+      operationId: account#delete
       parameters:
-      - description: GUID of URL-encoded account
+      - description: account's guid
         in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
         required: true
         type: string
       - in: body
@@ -824,31 +824,25 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: delete accounts
+      summary: delete account
       tags:
-      - accounts
+      - account
     get:
-      description: get an account by public key
-      operationId: accounts#get
+      description: get an account by account's UUID
+      operationId: account#getByUUID
       parameters:
-      - description: Public key of URL-encoded creator's account
-        in: query
-        name: creator_pubkey
-        pattern: '[0-9a-zA-Z-_.~]+'
-        required: false
-        type: string
-      - description: GUID of URL-encoded account
-        in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
-        required: true
-        type: string
       - description: If this value is true, you can only get transactions committed
           to ametsuchi
         in: query
         name: is_committed
         required: false
         type: boolean
+      - description: account's UUID
+        in: path
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
+        required: true
+        type: string
       produces:
       - application/vnd.message+json
       - application/vnd.account+json
@@ -867,17 +861,17 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: get accounts
+      summary: getByUUID account
       tags:
-      - accounts
+      - account
     put:
       description: update an account
-      operationId: accounts#update
+      operationId: account#update
       parameters:
-      - description: GUID of URL-encoded account
+      - description: account's guid
         in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
         required: true
         type: string
       - in: body
@@ -902,17 +896,17 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: update accounts
+      summary: update account
       tags:
-      - accounts
-  /accounts/{guid}/quorum:
+      - account
+  /accounts/{uuid}/quorum:
     put:
       operationId: quorum#update
       parameters:
-      - description: GUID of URL-encoded account
+      - description: account's guid
         in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
         required: true
         type: string
       - in: body
@@ -940,21 +934,15 @@ paths:
       summary: update quorum
       tags:
       - quorum
-  /accounts/{guid}/signatories:
+  /accounts/{uuid}/signatories:
     get:
       operationId: signatories#getAll
       parameters:
       - description: Public key of URL-encoded creator's account
         in: query
         name: creator_pubkey
-        pattern: '[0-9a-zA-Z-_.~]+'
+        pattern: ^[0-9a-zA-Z-_.~]+$
         required: false
-        type: string
-      - description: GUID of URL-encoded account
-        in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
-        required: true
         type: string
       - description: If this value is true, you can only get transactions committed
           to ametsuchi
@@ -962,9 +950,15 @@ paths:
         name: is_committed
         required: false
         type: boolean
+      - description: account's guid
+        in: path
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
+        required: true
+        type: string
       produces:
-      - application/vnd.message+json
       - application/vnd.signatories+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
@@ -986,10 +980,10 @@ paths:
     post:
       operationId: signatories#add
       parameters:
-      - description: GUID of URL-encoded account
+      - description: account's guid
         in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
         required: true
         type: string
       - in: body
@@ -1017,20 +1011,20 @@ paths:
       summary: add signatories
       tags:
       - signatories
-  /accounts/{guid}/signatories/{sig}:
+  /accounts/{uuid}/signatories/{sig}:
     delete:
       operationId: signatories#delete
       parameters:
-      - description: GUID of URL-encoded account
-        in: path
-        name: guid
-        pattern: '[0-9a-zA-Z+/=]+'
-        required: true
-        type: string
       - description: URL encoded signatory
         in: path
         name: sig
-        pattern: '[0-9a-zA-Z-_.~]+'
+        pattern: ^[0-9a-zA-Z-_.~]+$
+        required: true
+        type: string
+      - description: account's guid
+        in: path
+        name: uuid
+        pattern: ^[0-9a-f]{32}$
         required: true
         type: string
       - in: body
@@ -1302,6 +1296,88 @@ paths:
       summary: transfer currency
       tags:
       - currency
+  /domains/{domain_uri}/accounts/{username}:
+    get:
+      description: get an account by account's domain and username
+      operationId: account#getByUsername
+      parameters:
+      - description: domain's uri
+        in: path
+        name: domain_uri
+        pattern: ^$
+        required: true
+        type: string
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: account's username
+        in: path
+        name: username
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        required: true
+        type: string
+      produces:
+      - application/vnd.message+json
+      - application/vnd.account+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Account'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getByUsername account
+      tags:
+      - account
+  /domains/default/accounts/{username}:
+    get:
+      description: get an account by account's username from default domain
+      operationId: account#getByUsernameFromDefaultDomain
+      parameters:
+      - description: If this value is true, you can only get transactions committed
+          to ametsuchi
+        in: query
+        name: is_committed
+        required: false
+        type: boolean
+      - description: account's username
+        in: path
+        name: username
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        required: true
+        type: string
+      produces:
+      - application/vnd.account+json
+      - application/vnd.message+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Account'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Message'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Message'
+      schemes:
+      - http
+      summary: getByUsernameFromDefaultDomain account
+      tags:
+      - account
   /transactions/{currency_uri}:
     get:
       operationId: transactions#getAll
