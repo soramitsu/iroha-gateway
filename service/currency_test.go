@@ -4,13 +4,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/soramitsu/iroha-gateway/command"
+	"github.com/soramitsu/iroha-gateway/action"
 	"github.com/soramitsu/iroha-gateway/model"
 )
 
 func TestCreateCurrency(t *testing.T) {
 	tx := &model.Transaction{
-		Command: &command.Currency{
+		Command: &action.Currency{
 			CurrencyName: "test_currency",
 			DomainName:   "test_domain",
 			LedgerName:   "test_ledger_name",

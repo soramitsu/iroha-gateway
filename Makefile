@@ -2,6 +2,7 @@ SHELL=/bin/bash
 BASE_PACKAGE=github.com/soramitsu/doberman-server
 
 run-iroha:
+	docker-compose -f iroha-docker-compose.yaml down
 	docker-compose -f iroha-docker-compose.yaml up -d && docker-compose -f iroha-docker-compose.yaml logs -f
 
 install-glide:

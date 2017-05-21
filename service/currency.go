@@ -1,13 +1,11 @@
 package service
 
 import (
-	"context"
 	"fmt"
 
 	flatbuffers "github.com/google/flatbuffers/go"
 	"github.com/soramitsu/iroha-gateway/iroha"
 	"github.com/soramitsu/iroha-gateway/model"
-	"google.golang.org/grpc"
 )
 
 func CreateCurrency(tx *model.Transaction) (*TransactionResponse, error) {
@@ -28,19 +26,13 @@ func CreateCurrency(tx *model.Transaction) (*TransactionResponse, error) {
 	transaction := iroha.TransactionEnd(builder)
 	builder.Finish(transaction)
 
-	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
-	if err != nil {
-		return nil, fmt.Errorf("gRPC dial failed: %s", err)
-	}
-	client := iroha.NewSumeragiClient(cc)
-	ctx := context.Background()
-	res, err := client.Torii(ctx, builder)
+	client, err := NewSumeragiClient(builder)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect torii: %s", err)
 	}
 
-	return &TransactionResponse{
-		Code:    res.Code(),
-		Message: string(res.Message()),
-	}, nil
+	// client := iroha.NewSumeragiClient(cc)
+	// ctx := context.Background()
+	// res, err := client.Torii(ctx, builder)
+	return client.Torii()
 }
