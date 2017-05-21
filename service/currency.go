@@ -26,13 +26,10 @@ func CreateCurrency(tx *model.Transaction) (*TransactionResponse, error) {
 	transaction := iroha.TransactionEnd(builder)
 	builder.Finish(transaction)
 
-	client, err := NewSumeragiClient(builder)
+	client, err := newSumeragiClient(builder)
 	if err != nil {
-		return nil, fmt.Errorf("failed to connect torii: %s", err)
+		return nil, fmt.Errorf("failed to connect Torii: %s", err)
 	}
 
-	// client := iroha.NewSumeragiClient(cc)
-	// ctx := context.Background()
-	// res, err := client.Torii(ctx, builder)
 	return client.Torii()
 }

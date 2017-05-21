@@ -10,23 +10,13 @@ import (
 	"github.com/soramitsu/iroha-gateway/iroha"
 )
 
-type SumeragiClient interface {
-	Torii() (*TransactionResponse, error)
-}
-
-type TestSumeragiClient struct{}
-
-func (c *TestSumeragiClient) Torii() (*TransactionResponse, error) {
-	return &TransactionResponse{}, nil
-}
-
-type SumeragiClientAdapter struct {
+type sumeragiClient struct {
 	// ctx     context.Context
 	builder *flatbuffers.Builder
 	client  iroha.SumeragiClient
 }
 
-func (c *SumeragiClientAdapter) Torii() (*TransactionResponse, error) {
+func (c *sumeragiClient) Torii() (*TransactionResponse, error) {
 	ctx := context.Background()
 
 	res, err := c.client.Torii(ctx, c.builder)
@@ -40,14 +30,14 @@ func (c *SumeragiClientAdapter) Torii() (*TransactionResponse, error) {
 	}, nil
 }
 
-func NewSumeragiClient(builder *flatbuffers.Builder) (SumeragiClient, error) {
+func newSumeragiClient(builder *flatbuffers.Builder) (*sumeragiClient, error) {
 	cc, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
 		return nil, fmt.Errorf("gRPC dial failed: %s", err)
 	}
 	client := iroha.NewSumeragiClient(cc)
 
-	return &SumeragiClientAdapter{
+	return &sumeragiClient{
 		builder: builder,
 		client:  client,
 	}, nil
