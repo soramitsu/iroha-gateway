@@ -15,35 +15,6 @@ import (
 	"net/http"
 )
 
-// Account media type (default view)
-//
-// Identifier: application/vnd.account+json; view=default
-type Account struct {
-	// account
-	Account *Account `form:"account" json:"account" xml:"account"`
-	// response code
-	Code int `form:"code" json:"code" xml:"code"`
-	// response message
-	Message string `form:"message" json:"message" xml:"message"`
-}
-
-// Validate validates the Account media type instance.
-func (mt *Account) Validate() (err error) {
-	if mt.Message == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
-	}
-
-	if mt.Account == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "account"))
-	}
-	if mt.Account != nil {
-		if err2 := mt.Account.Validate(); err2 != nil {
-			err = goa.MergeErrors(err, err2)
-		}
-	}
-	return
-}
-
 // DecodeAccount decodes the Account instance encoded in resp body.
 func (c *Client) DecodeAccount(resp *http.Response) (*Account, error) {
 	var decoded Account
@@ -89,35 +60,6 @@ func (c *Client) DecodeAccounts(resp *http.Response) (*Accounts, error) {
 	return &decoded, err
 }
 
-// Currency media type (default view)
-//
-// Identifier: application/vnd.currency+json; view=default
-type Currency struct {
-	// response code
-	Code     int         `form:"code" json:"code" xml:"code"`
-	Currency []*Currency `form:"currency" json:"currency" xml:"currency"`
-	// response message
-	Message string `form:"message" json:"message" xml:"message"`
-}
-
-// Validate validates the Currency media type instance.
-func (mt *Currency) Validate() (err error) {
-	if mt.Message == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
-	}
-
-	if mt.Currency == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "currency"))
-	}
-	for _, e := range mt.Currency {
-		if e != nil {
-			if err2 := e.Validate(); err2 != nil {
-				err = goa.MergeErrors(err, err2)
-			}
-		}
-	}
-	return
-}
 
 // DecodeCurrency decodes the Currency instance encoded in resp body.
 func (c *Client) DecodeCurrency(resp *http.Response) (*Currency, error) {

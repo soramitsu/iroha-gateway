@@ -14,35 +14,6 @@ import (
 	"github.com/goadesign/goa"
 )
 
-// Account media type (default view)
-//
-// Identifier: application/vnd.account+json; view=default
-type Account struct {
-	// account
-	Account *Account `form:"account" json:"account" xml:"account"`
-	// response code
-	Code int `form:"code" json:"code" xml:"code"`
-	// response message
-	Message string `form:"message" json:"message" xml:"message"`
-}
-
-// Validate validates the Account media type instance.
-func (mt *Account) Validate() (err error) {
-	if mt.Message == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
-	}
-
-	if mt.Account == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "account"))
-	}
-	if mt.Account != nil {
-		if err2 := mt.Account.Validate(); err2 != nil {
-			err = goa.MergeErrors(err, err2)
-		}
-	}
-	return
-}
-
 // Accounts media type (default view)
 //
 // Identifier: application/vnd.accounts+json; view=default
@@ -65,36 +36,6 @@ func (mt *Accounts) Validate() (err error) {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "accounts"))
 	}
 	for _, e := range mt.Accounts {
-		if e != nil {
-			if err2 := e.Validate(); err2 != nil {
-				err = goa.MergeErrors(err, err2)
-			}
-		}
-	}
-	return
-}
-
-// Currency media type (default view)
-//
-// Identifier: application/vnd.currency+json; view=default
-type Currency struct {
-	// response code
-	Code     int         `form:"code" json:"code" xml:"code"`
-	Currency []*Currency `form:"currency" json:"currency" xml:"currency"`
-	// response message
-	Message string `form:"message" json:"message" xml:"message"`
-}
-
-// Validate validates the Currency media type instance.
-func (mt *Currency) Validate() (err error) {
-	if mt.Message == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
-	}
-
-	if mt.Currency == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "currency"))
-	}
-	for _, e := range mt.Currency {
 		if e != nil {
 			if err2 := e.Validate(); err2 != nil {
 				err = goa.MergeErrors(err, err2)

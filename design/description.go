@@ -6,8 +6,8 @@ const (
 	descriptionSignature                       = "The signature, which can be verified with pubkey"
 	descriptionTimestamp                       = "Transaction timestamp"
 	descriptionPubkey                          = "Account Public Key"
-	descriptionSignatories                     = "Account Signatories"
-	descriptionQuorum                          = "最低限必要な数" // TODO
+	descriptionSignatories                     = "Account signatories."
+	descriptionQuorum                          = "Minimum number of signatures required to issue valid transaction."
 	descriptionMessage                         = "response message"
 	descriptionCode                            = "response code"
 	descriptionAccount                         = "account"

@@ -13,13 +13,13 @@ definitions:
       uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
     properties:
       quorum:
-        description: 最低限必要な数
+        description: Minimum number of signatures required to issue valid transaction.
         example: 1
         maximum: 32
         minimum: 1
         type: integer
       signatories:
-        description: Account Signatories
+        description: Account signatories.
         example:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -95,7 +95,7 @@ definitions:
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
       meta_transaction:
-        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         timestamp: "1494693347"
     properties:
@@ -280,7 +280,7 @@ definitions:
   DeleteAccountRequest:
     example:
       meta_transaction:
-        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         timestamp: "1494693347"
     properties:
@@ -407,7 +407,7 @@ definitions:
         pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signatories:
-        description: Account Signatories
+        description: Account signatories.
         example:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -498,11 +498,11 @@ definitions:
     type: object
   TransactionRequest:
     example:
-      publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      publicKey:
+      pubkey:
         description: ed25519 public key, which should be used to validate the signature
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         pattern: ^[0-9a-zA-Z+/=]+$
@@ -517,7 +517,7 @@ definitions:
         pattern: '[0-9]{1,18}'
         type: string
     required:
-    - publicKey
+    - pubkey
     - signature
     - timestamp
     title: TransactionRequest
@@ -612,7 +612,7 @@ definitions:
   UpdateAccountRequest:
     example:
       meta_transaction:
-        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         timestamp: "1494693347"
       username: serizawa
@@ -672,7 +672,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       quorum:
-        description: 最低限必要な数
+        description: Minimum number of signatures required to issue valid transaction.
         example: 1
         format: int64
         type: integer
@@ -1321,8 +1321,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.message+json
       - application/vnd.account+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK

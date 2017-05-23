@@ -74,7 +74,7 @@ var Signature = Type("Signature", func() {
 })
 
 var TransactionRequest = Type("TransactionRequest", func() {
-	Attribute("publicKey", String, func() {
+	Attribute("pubkey", String, func() {
 		Description(descriptionTransactionPublicKey)
 		Example(exampleTransactionPublicKey)
 		Pattern(patternBase64)
@@ -89,7 +89,7 @@ var TransactionRequest = Type("TransactionRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("publicKey", "signature", "timestamp")
+	Required("pubkey", "signature", "timestamp")
 
 })
 
