@@ -31,17 +31,17 @@ var _ = Resource("currency", func() {
 			Required("currency_uri", "target", "creator_pubkey")
 		})
 
-		Response(OK, CurrencyResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Currency)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("add", func() {
 		Routing(POST("/"))
 		Payload(CreateCurrencyRequest)
-		Response(Created, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(Created, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("update", func() {
@@ -55,9 +55,9 @@ var _ = Resource("currency", func() {
 
 		Payload(UpdateCurrencyRequest)
 
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("delete", func() {
@@ -71,9 +71,9 @@ var _ = Resource("currency", func() {
 
 		Payload(DeleteCurrencyRequest)
 
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("addValue", func() {
@@ -87,9 +87,9 @@ var _ = Resource("currency", func() {
 
 		Payload(CurrencyValueRequest)
 
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("subtractValue", func() {
@@ -103,9 +103,9 @@ var _ = Resource("currency", func() {
 
 		Payload(CurrencyValueRequest)
 
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("transfer", func() {
@@ -119,9 +119,9 @@ var _ = Resource("currency", func() {
 
 		Payload(CurrencyTransferRequest)
 
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 })
 
@@ -144,7 +144,7 @@ var CreateCurrencyRequest = Type("CreateCurrencyRequest", func() {
 		Example(exampleTimestamp)
 		Pattern(`[0-9]{1,18}`)
 	})
-	Attribute("currency", Currency)
+	Attribute("currency", CurrencyPayload)
 
 	Required("target", "creator_pubkey", "signature", "timestamp", "currency")
 })
@@ -254,7 +254,7 @@ var CurrencyTransferRequest = Type("CurrencyTransferRequest", func() {
 
 })
 
-var CurrencyResponse = MediaType("application/vnd.currencyResponse+json", func() {
+var Currency = MediaType("application/vnd.currency+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -264,7 +264,7 @@ var CurrencyResponse = MediaType("application/vnd.currencyResponse+json", func()
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("currency", ArrayOf(Currency))
+		Attribute("currency", ArrayOf(CurrencyPayload))
 
 		Required("message", "code", "currency")
 	})
@@ -276,7 +276,7 @@ var CurrencyResponse = MediaType("application/vnd.currencyResponse+json", func()
 	})
 })
 
-var Currency = Type("Currency", func() {
+var CurrencyPayload = Type("CurrencyPayload", func() {
 	Attribute("name", String, func() {
 		Example(exampleCurrencyName)
 		Description(descriptionCurrencyName)

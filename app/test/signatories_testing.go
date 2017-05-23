@@ -28,7 +28,7 @@ import (
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, payload *app.SignatoryRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, payload *app.SignatoryRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -88,12 +88,12 @@ func AddSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -109,7 +109,7 @@ func AddSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, payload *app.SignatoryRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, payload *app.SignatoryRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -169,12 +169,12 @@ func AddSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -190,7 +190,7 @@ func AddSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, payload *app.SignatoryRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, payload *app.SignatoryRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -250,12 +250,12 @@ func AddSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -271,7 +271,7 @@ func AddSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, sig string, payload *app.DeleteSignatoryRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, sig string, payload *app.DeleteSignatoryRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -332,12 +332,12 @@ func DeleteSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, serv
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -353,7 +353,7 @@ func DeleteSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, serv
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, sig string, payload *app.DeleteSignatoryRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, sig string, payload *app.DeleteSignatoryRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -414,12 +414,12 @@ func DeleteSignatoriesInternalServerError(t goatest.TInterface, ctx context.Cont
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -435,7 +435,7 @@ func DeleteSignatoriesInternalServerError(t goatest.TInterface, ctx context.Cont
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, sig string, payload *app.DeleteSignatoryRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, sig string, payload *app.DeleteSignatoryRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -496,12 +496,12 @@ func DeleteSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -517,7 +517,7 @@ func DeleteSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, creatorPubkey *string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, creatorPubkey *string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -583,12 +583,12 @@ func GetAllSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, serv
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -604,7 +604,7 @@ func GetAllSignatoriesBadRequest(t goatest.TInterface, ctx context.Context, serv
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, creatorPubkey *string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllSignatoriesInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, creatorPubkey *string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -670,12 +670,12 @@ func GetAllSignatoriesInternalServerError(t goatest.TInterface, ctx context.Cont
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -691,7 +691,7 @@ func GetAllSignatoriesInternalServerError(t goatest.TInterface, ctx context.Cont
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, creatorPubkey *string, isCommitted *bool) (http.ResponseWriter, *app.Signatoriesresponse) {
+func GetAllSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.SignatoriesController, uuid string, creatorPubkey *string, isCommitted *bool) (http.ResponseWriter, *app.Signatories) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -757,12 +757,12 @@ func GetAllSignatoriesOK(t goatest.TInterface, ctx context.Context, service *goa
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Signatoriesresponse
+	var mt *app.Signatories
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Signatoriesresponse)
+		mt, ok = resp.(*app.Signatories)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Signatoriesresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Signatories", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {

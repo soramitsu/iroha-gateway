@@ -22,6 +22,6 @@ func (c *QuorumController) Update(ctx *app.UpdateQuorumContext) error {
 	// Put your logic here
 
 	// QuorumController_Update: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }

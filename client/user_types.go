@@ -14,8 +14,8 @@ import (
 	"github.com/goadesign/goa"
 )
 
-// account user type.
-type account struct {
+// accountPayload user type.
+type accountPayload struct {
 	// Minimum number of signatures required to issue valid transaction.
 	Quorum *int `form:"quorum,omitempty" json:"quorum,omitempty" xml:"quorum,omitempty"`
 	// Account signatories.
@@ -26,8 +26,8 @@ type account struct {
 	UUID *string `form:"uuid,omitempty" json:"uuid,omitempty" xml:"uuid,omitempty"`
 }
 
-// Validate validates the account type instance.
-func (ut *account) Validate() (err error) {
+// Validate validates the accountPayload type instance.
+func (ut *accountPayload) Validate() (err error) {
 	if ut.UUID == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "uuid"))
 	}
@@ -60,9 +60,9 @@ func (ut *account) Validate() (err error) {
 	return
 }
 
-// Publicize creates Account from account
-func (ut *account) Publicize() *Account {
-	var pub Account
+// Publicize creates AccountPayload from accountPayload
+func (ut *accountPayload) Publicize() *AccountPayload {
+	var pub AccountPayload
 	if ut.Quorum != nil {
 		pub.Quorum = *ut.Quorum
 	}
@@ -78,8 +78,8 @@ func (ut *account) Publicize() *Account {
 	return &pub
 }
 
-// Account user type.
-type Account struct {
+// AccountPayload user type.
+type AccountPayload struct {
 	// Minimum number of signatures required to issue valid transaction.
 	Quorum int `form:"quorum" json:"quorum" xml:"quorum"`
 	// Account signatories.
@@ -90,8 +90,8 @@ type Account struct {
 	UUID string `form:"uuid" json:"uuid" xml:"uuid"`
 }
 
-// Validate validates the Account type instance.
-func (ut *Account) Validate() (err error) {
+// Validate validates the AccountPayload type instance.
+func (ut *AccountPayload) Validate() (err error) {
 	if ut.UUID == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "uuid"))
 	}
@@ -118,7 +118,7 @@ func (ut *Account) Validate() (err error) {
 
 // addAccountRequest user type.
 type addAccountRequest struct {
-	Account         *account            `form:"account,omitempty" json:"account,omitempty" xml:"account,omitempty"`
+	Account         *accountPayload     `form:"account,omitempty" json:"account,omitempty" xml:"account,omitempty"`
 	MetaTransaction *transactionRequest `form:"meta_transaction,omitempty" json:"meta_transaction,omitempty" xml:"meta_transaction,omitempty"`
 }
 
@@ -157,7 +157,7 @@ func (ut *addAccountRequest) Publicize() *AddAccountRequest {
 
 // AddAccountRequest user type.
 type AddAccountRequest struct {
-	Account         *Account            `form:"account" json:"account" xml:"account"`
+	Account         *AccountPayload     `form:"account" json:"account" xml:"account"`
 	MetaTransaction *TransactionRequest `form:"meta_transaction" json:"meta_transaction" xml:"meta_transaction"`
 }
 
@@ -185,8 +185,8 @@ func (ut *AddAccountRequest) Validate() (err error) {
 // createCurrencyRequest user type.
 type createCurrencyRequest struct {
 	// Public key of creator's account
-	CreatorPubkey *string   `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	Currency      *currency `form:"currency,omitempty" json:"currency,omitempty" xml:"currency,omitempty"`
+	CreatorPubkey *string          `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
+	Currency      *currencyPayload `form:"currency,omitempty" json:"currency,omitempty" xml:"currency,omitempty"`
 	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Public key of URL-encoded target's account
@@ -254,8 +254,8 @@ func (ut *createCurrencyRequest) Publicize() *CreateCurrencyRequest {
 // CreateCurrencyRequest user type.
 type CreateCurrencyRequest struct {
 	// Public key of creator's account
-	CreatorPubkey string    `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	Currency      *Currency `form:"currency" json:"currency" xml:"currency"`
+	CreatorPubkey string           `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
+	Currency      *CurrencyPayload `form:"currency" json:"currency" xml:"currency"`
 	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Public key of URL-encoded target's account
@@ -295,8 +295,8 @@ func (ut *CreateCurrencyRequest) Validate() (err error) {
 	return
 }
 
-// currency user type.
-type currency struct {
+// currencyPayload user type.
+type currencyPayload struct {
 	// currency's description
 	Description *string `form:"description,omitempty" json:"description,omitempty" xml:"description,omitempty"`
 	// domain name to which currency belongs
@@ -309,8 +309,8 @@ type currency struct {
 	Value *float64 `form:"value,omitempty" json:"value,omitempty" xml:"value,omitempty"`
 }
 
-// Validate validates the currency type instance.
-func (ut *currency) Validate() (err error) {
+// Validate validates the currencyPayload type instance.
+func (ut *currencyPayload) Validate() (err error) {
 	if ut.Name == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "name"))
 	}
@@ -326,9 +326,9 @@ func (ut *currency) Validate() (err error) {
 	return
 }
 
-// Publicize creates Currency from currency
-func (ut *currency) Publicize() *Currency {
-	var pub Currency
+// Publicize creates CurrencyPayload from currencyPayload
+func (ut *currencyPayload) Publicize() *CurrencyPayload {
+	var pub CurrencyPayload
 	if ut.Description != nil {
 		pub.Description = ut.Description
 	}
@@ -347,8 +347,8 @@ func (ut *currency) Publicize() *Currency {
 	return &pub
 }
 
-// Currency user type.
-type Currency struct {
+// CurrencyPayload user type.
+type CurrencyPayload struct {
 	// currency's description
 	Description *string `form:"description,omitempty" json:"description,omitempty" xml:"description,omitempty"`
 	// domain name to which currency belongs
@@ -361,8 +361,8 @@ type Currency struct {
 	Value float64 `form:"value" json:"value" xml:"value"`
 }
 
-// Validate validates the Currency type instance.
-func (ut *Currency) Validate() (err error) {
+// Validate validates the CurrencyPayload type instance.
+func (ut *CurrencyPayload) Validate() (err error) {
 	if ut.Name == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "name"))
 	}

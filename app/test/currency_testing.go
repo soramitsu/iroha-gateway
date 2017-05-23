@@ -28,7 +28,7 @@ import (
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, payload *app.CreateCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, payload *app.CreateCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -87,12 +87,12 @@ func AddCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *g
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -108,7 +108,7 @@ func AddCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *g
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddCurrencyCreated(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, payload *app.CreateCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddCurrencyCreated(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, payload *app.CreateCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -167,12 +167,12 @@ func AddCurrencyCreated(t goatest.TInterface, ctx context.Context, service *goa.
 	if rw.Code != 201 {
 		t.Errorf("invalid response status code: got %+v, expected 201", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -188,7 +188,7 @@ func AddCurrencyCreated(t goatest.TInterface, ctx context.Context, service *goa.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, payload *app.CreateCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, payload *app.CreateCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -247,12 +247,12 @@ func AddCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, s
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -268,7 +268,7 @@ func AddCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, s
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -328,12 +328,12 @@ func AddValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, servi
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -349,7 +349,7 @@ func AddValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, servi
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddValueCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddValueCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -409,12 +409,12 @@ func AddValueCurrencyInternalServerError(t goatest.TInterface, ctx context.Conte
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -430,7 +430,7 @@ func AddValueCurrencyInternalServerError(t goatest.TInterface, ctx context.Conte
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddValueCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddValueCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -490,12 +490,12 @@ func AddValueCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -511,7 +511,7 @@ func AddValueCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.DeleteCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.DeleteCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -571,12 +571,12 @@ func DeleteCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -592,7 +592,7 @@ func DeleteCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.DeleteCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.DeleteCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -652,12 +652,12 @@ func DeleteCurrencyInternalServerError(t goatest.TInterface, ctx context.Context
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -673,7 +673,7 @@ func DeleteCurrencyInternalServerError(t goatest.TInterface, ctx context.Context
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.DeleteCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.DeleteCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -733,12 +733,12 @@ func DeleteCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -754,7 +754,7 @@ func DeleteCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -828,12 +828,12 @@ func GetAllCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -849,7 +849,7 @@ func GetAllCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -923,12 +923,12 @@ func GetAllCurrencyInternalServerError(t goatest.TInterface, ctx context.Context
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -944,7 +944,7 @@ func GetAllCurrencyInternalServerError(t goatest.TInterface, ctx context.Context
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Currencyresponse) {
+func GetAllCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Currency) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1018,12 +1018,12 @@ func GetAllCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Currencyresponse
+	var mt *app.Currency
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Currencyresponse)
+		mt, ok = resp.(*app.Currency)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Currencyresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Currency", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1039,7 +1039,7 @@ func GetAllCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func SubtractValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Messageresponse) {
+func SubtractValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1099,12 +1099,12 @@ func SubtractValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, 
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1120,7 +1120,7 @@ func SubtractValueCurrencyBadRequest(t goatest.TInterface, ctx context.Context, 
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func SubtractValueCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Messageresponse) {
+func SubtractValueCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1180,12 +1180,12 @@ func SubtractValueCurrencyInternalServerError(t goatest.TInterface, ctx context.
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1201,7 +1201,7 @@ func SubtractValueCurrencyInternalServerError(t goatest.TInterface, ctx context.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func SubtractValueCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Messageresponse) {
+func SubtractValueCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyValueRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1261,12 +1261,12 @@ func SubtractValueCurrencyOK(t goatest.TInterface, ctx context.Context, service 
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1282,7 +1282,7 @@ func SubtractValueCurrencyOK(t goatest.TInterface, ctx context.Context, service 
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func TransferCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyTransferRequest) (http.ResponseWriter, *app.Messageresponse) {
+func TransferCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyTransferRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1342,12 +1342,12 @@ func TransferCurrencyBadRequest(t goatest.TInterface, ctx context.Context, servi
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1363,7 +1363,7 @@ func TransferCurrencyBadRequest(t goatest.TInterface, ctx context.Context, servi
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func TransferCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyTransferRequest) (http.ResponseWriter, *app.Messageresponse) {
+func TransferCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyTransferRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1423,12 +1423,12 @@ func TransferCurrencyInternalServerError(t goatest.TInterface, ctx context.Conte
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1444,7 +1444,7 @@ func TransferCurrencyInternalServerError(t goatest.TInterface, ctx context.Conte
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func TransferCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyTransferRequest) (http.ResponseWriter, *app.Messageresponse) {
+func TransferCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.CurrencyTransferRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1504,12 +1504,12 @@ func TransferCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1525,7 +1525,7 @@ func TransferCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.UpdateCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.UpdateCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1585,12 +1585,12 @@ func UpdateCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1606,7 +1606,7 @@ func UpdateCurrencyBadRequest(t goatest.TInterface, ctx context.Context, service
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.UpdateCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateCurrencyInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.UpdateCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1666,12 +1666,12 @@ func UpdateCurrencyInternalServerError(t goatest.TInterface, ctx context.Context
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1687,7 +1687,7 @@ func UpdateCurrencyInternalServerError(t goatest.TInterface, ctx context.Context
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.UpdateCurrencyRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.CurrencyController, currencyURI string, payload *app.UpdateCurrencyRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1747,12 +1747,12 @@ func UpdateCurrencyOK(t goatest.TInterface, ctx context.Context, service *goa.Se
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {

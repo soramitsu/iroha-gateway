@@ -30,9 +30,9 @@ var _ = Resource("transactions", func() {
 			Required("currency_uri", "target", "creator_pubkey")
 		})
 
-		Response(OK, TransactionsResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Transactions)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 })
@@ -93,7 +93,7 @@ var TransactionRequest = Type("TransactionRequest", func() {
 
 })
 
-var TransactionsResponse = MediaType("application/vnd.transactionsResponse+json", func() {
+var Transactions = MediaType("application/vnd.transactions+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

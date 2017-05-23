@@ -22,6 +22,6 @@ func (c *TransactionsController) GetAll(ctx *app.GetAllTransactionsContext) erro
 	// Put your logic here
 
 	// TransactionsController_GetAll: end_implement
-	res := &app.Transactionsresponse{}
+	res := &app.Transactions{}
 	return ctx.OK(res)
 }

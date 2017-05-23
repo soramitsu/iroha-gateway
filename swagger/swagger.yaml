@@ -5,6 +5,36 @@ consumes:
 - application/x-gob
 definitions:
   Account:
+    description: Account media type (default view)
+    example:
+      account:
+        quorum: 1
+        signatories:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        username: serizawa
+        uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
+      code: 0
+      message: message
+    properties:
+      account:
+        $ref: '#/definitions/AccountPayload'
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: message
+        type: string
+    required:
+    - message
+    - code
+    - account
+    title: 'Mediatype identifier: application/vnd.account+json; view=default'
+    type: object
+  AccountPayload:
     example:
       quorum: 1
       signatories:
@@ -42,40 +72,10 @@ definitions:
     - uuid
     - signatories
     - quorum
-    title: Account
+    title: AccountPayload
     type: object
-  Accountresponse:
-    description: Accountresponse media type (default view)
-    example:
-      account:
-        quorum: 1
-        signatories:
-        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
-        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
-        username: serizawa
-        uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
-      code: 0
-      message: message
-    properties:
-      account:
-        $ref: '#/definitions/Account'
-      code:
-        description: response code
-        example: 0
-        format: int64
-        type: integer
-      message:
-        description: response message
-        example: message
-        type: string
-    required:
-    - message
-    - code
-    - account
-    title: 'Mediatype identifier: application/vnd.accountresponse+json; view=default'
-    type: object
-  Accountsresponse:
-    description: Accountsresponse media type (default view)
+  Accounts:
+    description: Accounts media type (default view)
     example:
       accounts:
       - quorum: 1
@@ -109,7 +109,7 @@ definitions:
           username: serizawa
           uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
         items:
-          $ref: '#/definitions/Account'
+          $ref: '#/definitions/AccountPayload'
         type: array
       code:
         description: response code
@@ -124,7 +124,7 @@ definitions:
     - message
     - code
     - accounts
-    title: 'Mediatype identifier: application/vnd.accountsresponse+json; view=default'
+    title: 'Mediatype identifier: application/vnd.accounts+json; view=default'
     type: object
   AddAccountRequest:
     example:
@@ -141,7 +141,7 @@ definitions:
         timestamp: "1494693347"
     properties:
       account:
-        $ref: '#/definitions/Account'
+        $ref: '#/definitions/AccountPayload'
       meta_transaction:
         $ref: '#/definitions/TransactionRequest'
     required:
@@ -167,7 +167,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       currency:
-        $ref: '#/definitions/Currency'
+        $ref: '#/definitions/CurrencyPayload'
       signature:
         description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
@@ -191,6 +191,63 @@ definitions:
     title: CreateCurrencyRequest
     type: object
   Currency:
+    description: Currency media type (default view)
+    example:
+      code: 0
+      currency:
+      - description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      - description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      - description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      message: message
+    properties:
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      currency:
+        example:
+        - description: This is sample currency description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleCurrencyName
+          value: 10.1
+        - description: This is sample currency description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleCurrencyName
+          value: 10.1
+        - description: This is sample currency description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleCurrencyName
+          value: 10.1
+        items:
+          $ref: '#/definitions/CurrencyPayload'
+        type: array
+      message:
+        description: response message
+        example: message
+        type: string
+    required:
+    - message
+    - code
+    - currency
+    title: 'Mediatype identifier: application/vnd.currency+json; view=default'
+    type: object
+  CurrencyPayload:
     example:
       description: This is sample currency description.
       domain_name: sampleDomainName
@@ -224,7 +281,7 @@ definitions:
     - domain_name
     - ledger_name
     - value
-    title: Currency
+    title: CurrencyPayload
     type: object
   CurrencyTransferRequest:
     example:
@@ -318,63 +375,6 @@ definitions:
     - timestamp
     title: CurrencyValueRequest
     type: object
-  Currencyresponse:
-    description: Currencyresponse media type (default view)
-    example:
-      code: 0
-      currency:
-      - description: This is sample currency description.
-        domain_name: sampleDomainName
-        ledger_name: sampleLedgerName
-        name: sampleCurrencyName
-        value: 10.1
-      - description: This is sample currency description.
-        domain_name: sampleDomainName
-        ledger_name: sampleLedgerName
-        name: sampleCurrencyName
-        value: 10.1
-      - description: This is sample currency description.
-        domain_name: sampleDomainName
-        ledger_name: sampleLedgerName
-        name: sampleCurrencyName
-        value: 10.1
-      message: message
-    properties:
-      code:
-        description: response code
-        example: 0
-        format: int64
-        type: integer
-      currency:
-        example:
-        - description: This is sample currency description.
-          domain_name: sampleDomainName
-          ledger_name: sampleLedgerName
-          name: sampleCurrencyName
-          value: 10.1
-        - description: This is sample currency description.
-          domain_name: sampleDomainName
-          ledger_name: sampleLedgerName
-          name: sampleCurrencyName
-          value: 10.1
-        - description: This is sample currency description.
-          domain_name: sampleDomainName
-          ledger_name: sampleLedgerName
-          name: sampleCurrencyName
-          value: 10.1
-        items:
-          $ref: '#/definitions/Currency'
-        type: array
-      message:
-        description: response message
-        example: message
-        type: string
-    required:
-    - message
-    - code
-    - currency
-    title: 'Mediatype identifier: application/vnd.currencyresponse+json; view=default'
-    type: object
   DeleteAccountRequest:
     example:
       meta_transaction:
@@ -438,7 +438,7 @@ definitions:
     - timestamp
     title: DeleteSignatoryRequest
     type: object
-  Messageresponse:
+  Message:
     description: Basic response (default view)
     example:
       code: 0
@@ -456,10 +456,10 @@ definitions:
     required:
     - message
     - code
-    title: 'Mediatype identifier: application/vnd.messageresponse+json; view=default'
+    title: 'Mediatype identifier: application/vnd.message+json; view=default'
     type: object
-  Signatoriesresponse:
-    description: Signatoriesresponse media type (default view)
+  Signatories:
+    description: Signatories media type (default view)
     example:
       code: 0
       message: message
@@ -488,7 +488,7 @@ definitions:
     - message
     - code
     - signatories
-    title: 'Mediatype identifier: application/vnd.signatoriesresponse+json; view=default'
+    title: 'Mediatype identifier: application/vnd.signatories+json; view=default'
     type: object
   SignatoryRequest:
     example:
@@ -620,8 +620,8 @@ definitions:
     - timestamp
     title: TransactionRequest
     type: object
-  Transactionsresponse:
-    description: Transactionsresponse media type (default view)
+  Transactions:
+    description: Transactions media type (default view)
     example:
       code: 0
       message: message
@@ -705,7 +705,7 @@ definitions:
     - message
     - code
     - transactions
-    title: 'Mediatype identifier: application/vnd.transactionsresponse+json; view=default'
+    title: 'Mediatype identifier: application/vnd.transactions+json; view=default'
     type: object
   UpdateAccountRequest:
     example:
@@ -800,21 +800,21 @@ paths:
       description: get all accounts
       operationId: account#get all
       produces:
-      - application/vnd.accountsresponse+json
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
+      - application/vnd.accounts+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Accountsresponse'
+            $ref: '#/definitions/Accounts'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: get all account
@@ -830,20 +830,20 @@ paths:
         schema:
           $ref: '#/definitions/AddAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: add account
@@ -866,20 +866,20 @@ paths:
         schema:
           $ref: '#/definitions/DeleteAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: delete by UUID account
@@ -902,21 +902,21 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.messageresponse+json
-      - application/vnd.accountresponse+json
+      - application/vnd.account+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Accountresponse'
+            $ref: '#/definitions/Account'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: get by UUID account
@@ -938,20 +938,20 @@ paths:
         schema:
           $ref: '#/definitions/UpdateAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: update by UUID account
@@ -973,20 +973,20 @@ paths:
         schema:
           $ref: '#/definitions/UpdateQuorumRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: update quorum
@@ -1015,21 +1015,21 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.messageresponse+json
-      - application/vnd.signatoriesresponse+json
+      - application/vnd.message+json
+      - application/vnd.signatories+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Signatoriesresponse'
+            $ref: '#/definitions/Signatories'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: getAll signatories
@@ -1050,20 +1050,20 @@ paths:
         schema:
           $ref: '#/definitions/SignatoryRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: add signatories
@@ -1091,20 +1091,20 @@ paths:
         schema:
           $ref: '#/definitions/DeleteSignatoryRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: delete signatories
@@ -1120,20 +1120,20 @@ paths:
         schema:
           $ref: '#/definitions/CreateCurrencyRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: add currency
@@ -1154,20 +1154,20 @@ paths:
         schema:
           $ref: '#/definitions/DeleteCurrencyRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: delete currency
@@ -1199,21 +1199,21 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.messageresponse+json
-      - application/vnd.currencyresponse+json
+      - application/vnd.message+json
+      - application/vnd.currency+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Currencyresponse'
+            $ref: '#/definitions/Currency'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: getAll currency
@@ -1233,20 +1233,20 @@ paths:
         schema:
           $ref: '#/definitions/UpdateCurrencyRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: update currency
@@ -1267,20 +1267,20 @@ paths:
         schema:
           $ref: '#/definitions/CurrencyValueRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: addValue currency
@@ -1301,20 +1301,20 @@ paths:
         schema:
           $ref: '#/definitions/CurrencyValueRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: subtractValue currency
@@ -1335,20 +1335,20 @@ paths:
         schema:
           $ref: '#/definitions/CurrencyTransferRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: transfer currency
@@ -1377,20 +1377,20 @@ paths:
         schema:
           $ref: '#/definitions/DeleteAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: delete by username account
@@ -1419,21 +1419,21 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.messageresponse+json
-      - application/vnd.accountresponse+json
+      - application/vnd.message+json
+      - application/vnd.account+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Accountresponse'
+            $ref: '#/definitions/Account'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: get by username account
@@ -1461,20 +1461,20 @@ paths:
         schema:
           $ref: '#/definitions/UpdateAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: update by username account
@@ -1497,20 +1497,20 @@ paths:
         schema:
           $ref: '#/definitions/DeleteAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: delete by username from default domain account
@@ -1533,21 +1533,21 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.messageresponse+json
-      - application/vnd.accountresponse+json
+      - application/vnd.message+json
+      - application/vnd.account+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Accountresponse'
+            $ref: '#/definitions/Account'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: get by username from default domain account
@@ -1569,20 +1569,20 @@ paths:
         schema:
           $ref: '#/definitions/UpdateAccountRequest'
       produces:
-      - application/vnd.messageresponse+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: update by username from default domain account
@@ -1615,21 +1615,21 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.messageresponse+json
-      - application/vnd.transactionsresponse+json
+      - application/vnd.message+json
+      - application/vnd.transactions+json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/Transactionsresponse'
+            $ref: '#/definitions/Transactions'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/Messageresponse'
+            $ref: '#/definitions/Message'
       schemes:
       - http
       summary: getAll transactions

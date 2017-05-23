@@ -14,20 +14,20 @@ import (
 	"github.com/goadesign/goa"
 )
 
-// Accountresponse media type (default view)
+// Account media type (default view)
 //
-// Identifier: application/vnd.accountresponse+json; view=default
-type Accountresponse struct {
+// Identifier: application/vnd.account+json; view=default
+type Account struct {
 	// account
-	Account *Account `form:"account" json:"account" xml:"account"`
+	Account *AccountPayload `form:"account" json:"account" xml:"account"`
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
 	Message string `form:"message" json:"message" xml:"message"`
 }
 
-// Validate validates the Accountresponse media type instance.
-func (mt *Accountresponse) Validate() (err error) {
+// Validate validates the Account media type instance.
+func (mt *Account) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -43,20 +43,20 @@ func (mt *Accountresponse) Validate() (err error) {
 	return
 }
 
-// Accountsresponse media type (default view)
+// Accounts media type (default view)
 //
-// Identifier: application/vnd.accountsresponse+json; view=default
-type Accountsresponse struct {
+// Identifier: application/vnd.accounts+json; view=default
+type Accounts struct {
 	// accounts
-	Accounts []*Account `form:"accounts" json:"accounts" xml:"accounts"`
+	Accounts []*AccountPayload `form:"accounts" json:"accounts" xml:"accounts"`
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
 	Message string `form:"message" json:"message" xml:"message"`
 }
 
-// Validate validates the Accountsresponse media type instance.
-func (mt *Accountsresponse) Validate() (err error) {
+// Validate validates the Accounts media type instance.
+func (mt *Accounts) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -74,19 +74,19 @@ func (mt *Accountsresponse) Validate() (err error) {
 	return
 }
 
-// Currencyresponse media type (default view)
+// Currency media type (default view)
 //
-// Identifier: application/vnd.currencyresponse+json; view=default
-type Currencyresponse struct {
+// Identifier: application/vnd.currency+json; view=default
+type Currency struct {
 	// response code
-	Code     int         `form:"code" json:"code" xml:"code"`
-	Currency []*Currency `form:"currency" json:"currency" xml:"currency"`
+	Code     int                `form:"code" json:"code" xml:"code"`
+	Currency []*CurrencyPayload `form:"currency" json:"currency" xml:"currency"`
 	// response message
 	Message string `form:"message" json:"message" xml:"message"`
 }
 
-// Validate validates the Currencyresponse media type instance.
-func (mt *Currencyresponse) Validate() (err error) {
+// Validate validates the Currency media type instance.
+func (mt *Currency) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -106,16 +106,16 @@ func (mt *Currencyresponse) Validate() (err error) {
 
 // Basic response (default view)
 //
-// Identifier: application/vnd.messageresponse+json; view=default
-type Messageresponse struct {
+// Identifier: application/vnd.message+json; view=default
+type Message struct {
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
 	Message string `form:"message" json:"message" xml:"message"`
 }
 
-// Validate validates the Messageresponse media type instance.
-func (mt *Messageresponse) Validate() (err error) {
+// Validate validates the Message media type instance.
+func (mt *Message) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -123,10 +123,10 @@ func (mt *Messageresponse) Validate() (err error) {
 	return
 }
 
-// Signatoriesresponse media type (default view)
+// Signatories media type (default view)
 //
-// Identifier: application/vnd.signatoriesresponse+json; view=default
-type Signatoriesresponse struct {
+// Identifier: application/vnd.signatories+json; view=default
+type Signatories struct {
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
@@ -134,8 +134,8 @@ type Signatoriesresponse struct {
 	Signatories []string `form:"signatories" json:"signatories" xml:"signatories"`
 }
 
-// Validate validates the Signatoriesresponse media type instance.
-func (mt *Signatoriesresponse) Validate() (err error) {
+// Validate validates the Signatories media type instance.
+func (mt *Signatories) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -146,10 +146,10 @@ func (mt *Signatoriesresponse) Validate() (err error) {
 	return
 }
 
-// Transactionsresponse media type (default view)
+// Transactions media type (default view)
 //
-// Identifier: application/vnd.transactionsresponse+json; view=default
-type Transactionsresponse struct {
+// Identifier: application/vnd.transactions+json; view=default
+type Transactions struct {
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
@@ -157,8 +157,8 @@ type Transactionsresponse struct {
 	Transactions []*Transaction `form:"transactions" json:"transactions" xml:"transactions"`
 }
 
-// Validate validates the Transactionsresponse media type instance.
-func (mt *Transactionsresponse) Validate() (err error) {
+// Validate validates the Transactions media type instance.
+func (mt *Transactions) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}

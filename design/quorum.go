@@ -19,9 +19,9 @@ var _ = Resource("quorum", func() {
 	Action("update", func() {
 		Routing(PUT("/"))
 		Payload(UpdateQuorumRequest)
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 })
 

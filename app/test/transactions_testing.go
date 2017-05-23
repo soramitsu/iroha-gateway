@@ -28,7 +28,7 @@ import (
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllTransactionsBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TransactionsController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllTransactionsBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TransactionsController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -102,12 +102,12 @@ func GetAllTransactionsBadRequest(t goatest.TInterface, ctx context.Context, ser
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -123,7 +123,7 @@ func GetAllTransactionsBadRequest(t goatest.TInterface, ctx context.Context, ser
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllTransactionsInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TransactionsController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllTransactionsInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TransactionsController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -197,12 +197,12 @@ func GetAllTransactionsInternalServerError(t goatest.TInterface, ctx context.Con
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -218,7 +218,7 @@ func GetAllTransactionsInternalServerError(t goatest.TInterface, ctx context.Con
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllTransactionsOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TransactionsController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Transactionsresponse) {
+func GetAllTransactionsOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TransactionsController, currencyURI string, creatorPubkey string, isCommitted *bool, target string) (http.ResponseWriter, *app.Transactions) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -292,12 +292,12 @@ func GetAllTransactionsOK(t goatest.TInterface, ctx context.Context, service *go
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Transactionsresponse
+	var mt *app.Transactions
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Transactionsresponse)
+		mt, ok = resp.(*app.Transactions)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Transactionsresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Transactions", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {

@@ -31,18 +31,18 @@ var _ = Resource("signatories", func() {
 			})
 		})
 
-		Response(OK, SignatoriesResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Signatories)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("add", func() {
 		Routing(POST("/signatories"))
 		Payload(SignatoriesRequest)
 
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 	Action("delete", func() {
@@ -56,9 +56,9 @@ var _ = Resource("signatories", func() {
 			Required("sig")
 		})
 		Payload(DeleteSignatoryRequest)
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 })
 
@@ -86,7 +86,7 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 	Required("signatories", "creator_pubkey", "signature", "timestamp")
 })
 
-var SignatoriesResponse = MediaType("application/vnd.signatoriesResponse+json", func() {
+var Signatories = MediaType("application/vnd.signatories+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

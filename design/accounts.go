@@ -11,7 +11,7 @@ var _ = Resource("account", func() {
 	Action("get all", func() {
 		Routing(GET("/accounts/"))
 		Description("get all accounts")
-		Response(OK, AccountsResponse)
+		Response(OK, Accounts)
 	})
 
 	Action("get by UUID", func() {
@@ -29,7 +29,7 @@ var _ = Resource("account", func() {
 			})
 			Required("uuid")
 		})
-		Response(OK, AccountResponse)
+		Response(OK, Account)
 	})
 
 	Action("get by username", func() {
@@ -52,7 +52,7 @@ var _ = Resource("account", func() {
 			})
 			Required("domain_uri", "username")
 		})
-		Response(OK, AccountResponse)
+		Response(OK, Account)
 	})
 
 	// TODO: Consider a good URL path when get an account with only a user name from the default domain
@@ -71,7 +71,7 @@ var _ = Resource("account", func() {
 			})
 			Required("domain_uri", "username")
 		})
-		Response(OK, AccountResponse)
+		Response(OK, Account)
 	})
 
 	// UPDATE
@@ -87,7 +87,7 @@ var _ = Resource("account", func() {
 			Required("uuid")
 		})
 		Payload(UpdateAccountRequest)
-		Response(OK, MessageResponse)
+		Response(OK, Message)
 	})
 
 	Action("update by username", func() {
@@ -107,7 +107,7 @@ var _ = Resource("account", func() {
 			Required("domain_uri", "username")
 		})
 		Payload(UpdateAccountRequest)
-		Response(OK, MessageResponse)
+		Response(OK, Message)
 	})
 
 	// TODO: Consider a good URL path when update an account with only a user name from the default domain
@@ -123,7 +123,7 @@ var _ = Resource("account", func() {
 			Required("username")
 		})
 		Payload(UpdateAccountRequest)
-		Response(OK, MessageResponse)
+		Response(OK, Message)
 	})
 
 	// DELETE
@@ -138,7 +138,7 @@ var _ = Resource("account", func() {
 			})
 		})
 		Payload(DeleteAccountRequest)
-		Response(OK, MessageResponse)
+		Response(OK, Message)
 	})
 
 	Action("delete by username", func() {
@@ -158,7 +158,7 @@ var _ = Resource("account", func() {
 			Required("domain_uri", "username")
 		})
 		Payload(DeleteAccountRequest)
-		Response(OK, MessageResponse)
+		Response(OK, Message)
 	})
 
 	// TODO: Consider a good URL path when delete an account with only a user name from the default domain
@@ -174,7 +174,7 @@ var _ = Resource("account", func() {
 			Required("username")
 		})
 		Payload(DeleteAccountRequest)
-		Response(OK, MessageResponse)
+		Response(OK, Message)
 	})
 
 	// CREATE
@@ -182,11 +182,11 @@ var _ = Resource("account", func() {
 		Routing(POST("/accounts"))
 		Description("add an account")
 		Payload(AddAccountRequest)
-		Response(Created, MessageResponse)
+		Response(Created, Message)
 	})
 
-	Response(BadRequest, MessageResponse)
-	Response(InternalServerError, MessageResponse)
+	Response(BadRequest, Message)
+	Response(InternalServerError, Message)
 })
 
 var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
@@ -215,12 +215,12 @@ var AddAccountRequest = Type("AddAccountRequest", func() {
 	Attribute("meta_transaction", TransactionRequest, func() {
 		Description(descriptionMetaTransaction)
 	})
-	Attribute("account", Account)
+	Attribute("account", AccountPayload)
 
 	Required("meta_transaction", "account")
 })
 
-var Account = Type("Account", func() {
+var AccountPayload = Type("AccountPayload", func() {
 	Attribute("uuid", String, func() {
 		Description(descriptionAccountUUID)
 		Example(exampleAccountUUID)
@@ -245,7 +245,7 @@ var Account = Type("Account", func() {
 	Required("uuid", "signatories", "quorum")
 })
 
-var AccountResponse = MediaType("application/vnd.accountResponse+json", func() {
+var Account = MediaType("application/vnd.account+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -255,7 +255,7 @@ var AccountResponse = MediaType("application/vnd.accountResponse+json", func() {
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("account", Account, func() {
+		Attribute("account", AccountPayload, func() {
 			Description(descriptionAccount)
 		})
 
@@ -269,7 +269,7 @@ var AccountResponse = MediaType("application/vnd.accountResponse+json", func() {
 	})
 })
 
-var AccountsResponse = MediaType("application/vnd.accountsResponse+json", func() {
+var Accounts = MediaType("application/vnd.accounts+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -279,7 +279,7 @@ var AccountsResponse = MediaType("application/vnd.accountsResponse+json", func()
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("accounts", ArrayOf(Account), func() {
+		Attribute("accounts", ArrayOf(AccountPayload), func() {
 			Description(descriptionAccounts)
 		})
 

@@ -28,7 +28,7 @@ import (
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, payload *app.AddAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, payload *app.AddAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -87,12 +87,12 @@ func AddAccountBadRequest(t goatest.TInterface, ctx context.Context, service *go
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -108,7 +108,7 @@ func AddAccountBadRequest(t goatest.TInterface, ctx context.Context, service *go
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddAccountCreated(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, payload *app.AddAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddAccountCreated(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, payload *app.AddAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -167,12 +167,12 @@ func AddAccountCreated(t goatest.TInterface, ctx context.Context, service *goa.S
 	if rw.Code != 201 {
 		t.Errorf("invalid response status code: got %+v, expected 201", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -188,7 +188,7 @@ func AddAccountCreated(t goatest.TInterface, ctx context.Context, service *goa.S
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func AddAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, payload *app.AddAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func AddAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, payload *app.AddAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -247,12 +247,12 @@ func AddAccountInternalServerError(t goatest.TInterface, ctx context.Context, se
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -268,7 +268,7 @@ func AddAccountInternalServerError(t goatest.TInterface, ctx context.Context, se
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -328,12 +328,12 @@ func DeleteByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, se
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -349,7 +349,7 @@ func DeleteByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, se
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -409,12 +409,12 @@ func DeleteByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Co
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -430,7 +430,7 @@ func DeleteByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Co
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -490,12 +490,12 @@ func DeleteByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *g
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -511,7 +511,7 @@ func DeleteByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *g
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -572,12 +572,12 @@ func DeleteByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -593,7 +593,7 @@ func DeleteByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -654,12 +654,12 @@ func DeleteByUsernameAccountInternalServerError(t goatest.TInterface, ctx contex
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -675,7 +675,7 @@ func DeleteByUsernameAccountInternalServerError(t goatest.TInterface, ctx contex
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -736,12 +736,12 @@ func DeleteByUsernameAccountOK(t goatest.TInterface, ctx context.Context, servic
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -757,7 +757,7 @@ func DeleteByUsernameAccountOK(t goatest.TInterface, ctx context.Context, servic
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -817,12 +817,12 @@ func DeleteByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ct
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -838,7 +838,7 @@ func DeleteByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ct
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -898,12 +898,12 @@ func DeleteByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInte
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -919,7 +919,7 @@ func DeleteByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInte
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func DeleteByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func DeleteByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.DeleteAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -979,12 +979,12 @@ func DeleteByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx contex
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1000,7 +1000,7 @@ func DeleteByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx contex
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1047,12 +1047,12 @@ func GetAllAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1068,7 +1068,7 @@ func GetAllAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController) (http.ResponseWriter, *app.Messageresponse) {
+func GetAllAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1115,12 +1115,12 @@ func GetAllAccountInternalServerError(t goatest.TInterface, ctx context.Context,
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1136,7 +1136,7 @@ func GetAllAccountInternalServerError(t goatest.TInterface, ctx context.Context,
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetAllAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController) (http.ResponseWriter, *app.Accountsresponse) {
+func GetAllAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController) (http.ResponseWriter, *app.Accounts) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1183,12 +1183,12 @@ func GetAllAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Ser
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Accountsresponse
+	var mt *app.Accounts
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Accountsresponse)
+		mt, ok = resp.(*app.Accounts)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Accountsresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Accounts", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1204,7 +1204,7 @@ func GetAllAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Ser
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1262,12 +1262,12 @@ func GetByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, servi
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1283,7 +1283,7 @@ func GetByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, servi
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1341,12 +1341,12 @@ func GetByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Conte
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1362,7 +1362,7 @@ func GetByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Conte
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, isCommitted *bool) (http.ResponseWriter, *app.Accountresponse) {
+func GetByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, isCommitted *bool) (http.ResponseWriter, *app.Account) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1420,12 +1420,12 @@ func GetByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Accountresponse
+	var mt *app.Account
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Accountresponse)
+		mt, ok = resp.(*app.Account)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Accountresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Account", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1441,7 +1441,7 @@ func GetByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1500,12 +1500,12 @@ func GetByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, s
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1521,7 +1521,7 @@ func GetByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, s
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1580,12 +1580,12 @@ func GetByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.C
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1601,7 +1601,7 @@ func GetByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.C
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, isCommitted *bool) (http.ResponseWriter, *app.Accountresponse) {
+func GetByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, isCommitted *bool) (http.ResponseWriter, *app.Account) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1660,12 +1660,12 @@ func GetByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Accountresponse
+	var mt *app.Account
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Accountresponse)
+		mt, ok = resp.(*app.Account)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Accountresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Account", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1681,7 +1681,7 @@ func GetByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1739,12 +1739,12 @@ func GetByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx c
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1760,7 +1760,7 @@ func GetByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx c
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, isCommitted *bool) (http.ResponseWriter, *app.Messageresponse) {
+func GetByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, isCommitted *bool) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1818,12 +1818,12 @@ func GetByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterfa
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Messageresponse)
+		mt, ok = resp.(*app.Message)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1839,7 +1839,7 @@ func GetByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterfa
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func GetByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, isCommitted *bool) (http.ResponseWriter, *app.Accountresponse) {
+func GetByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, isCommitted *bool) (http.ResponseWriter, *app.Account) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1897,12 +1897,12 @@ func GetByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.C
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Accountresponse
+	var mt *app.Account
 	if resp != nil {
 		var ok bool
-		mt, ok = resp.(*app.Accountresponse)
+		mt, ok = resp.(*app.Account)
 		if !ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Accountresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Account", resp)
 		}
 		_err = mt.Validate()
 		if _err != nil {
@@ -1918,7 +1918,7 @@ func GetByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.C
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -1978,12 +1978,12 @@ func UpdateByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, se
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -1999,7 +1999,7 @@ func UpdateByUUIDAccountBadRequest(t goatest.TInterface, ctx context.Context, se
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2059,12 +2059,12 @@ func UpdateByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Co
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2080,7 +2080,7 @@ func UpdateByUUIDAccountInternalServerError(t goatest.TInterface, ctx context.Co
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, uuid string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2140,12 +2140,12 @@ func UpdateByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *g
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2161,7 +2161,7 @@ func UpdateByUUIDAccountOK(t goatest.TInterface, ctx context.Context, service *g
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2222,12 +2222,12 @@ func UpdateByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2243,7 +2243,7 @@ func UpdateByUsernameAccountBadRequest(t goatest.TInterface, ctx context.Context
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUsernameAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2304,12 +2304,12 @@ func UpdateByUsernameAccountInternalServerError(t goatest.TInterface, ctx contex
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2325,7 +2325,7 @@ func UpdateByUsernameAccountInternalServerError(t goatest.TInterface, ctx contex
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUsernameAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, domainURI string, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2386,12 +2386,12 @@ func UpdateByUsernameAccountOK(t goatest.TInterface, ctx context.Context, servic
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2407,7 +2407,7 @@ func UpdateByUsernameAccountOK(t goatest.TInterface, ctx context.Context, servic
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2467,12 +2467,12 @@ func UpdateByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ct
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2488,7 +2488,7 @@ func UpdateByUsernameFromDefaultDomainAccountBadRequest(t goatest.TInterface, ct
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2548,12 +2548,12 @@ func UpdateByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInte
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -2569,7 +2569,7 @@ func UpdateByUsernameFromDefaultDomainAccountInternalServerError(t goatest.TInte
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Messageresponse) {
+func UpdateByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.AccountController, username string, payload *app.UpdateAccountRequest) (http.ResponseWriter, *app.Message) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -2629,12 +2629,12 @@ func UpdateByUsernameFromDefaultDomainAccountOK(t goatest.TInterface, ctx contex
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Messageresponse
+	var mt *app.Message
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Messageresponse)
+		mt, _ok = resp.(*app.Message)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {

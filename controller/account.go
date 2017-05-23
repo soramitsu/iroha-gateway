@@ -32,7 +32,7 @@ func (c *AccountController) DeleteByUsername(ctx *app.DeleteByUsernameAccountCon
 	// Put your logic here
 
 	// AccountController_Delete: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }
 
@@ -42,7 +42,7 @@ func (c *AccountController) DeleteByUUID(ctx *app.DeleteByUUIDAccountContext) er
 	// Put your logic here
 
 	// AccountController_Delete: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }
 
@@ -52,7 +52,7 @@ func (c *AccountController) DeleteByUsernameFromDefaultDomain(ctx *app.DeleteByU
 	// Put your logic here
 
 	// AccountController_Delete: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }
 
@@ -63,7 +63,7 @@ func (c *AccountController) GetAll(ctx *app.GetAllAccountContext) error {
 	// Put your logic here
 
 	// AccountController_GetAll: end_implement
-	res := &app.Accountsresponse{}
+	res := &app.Accounts{}
 	return ctx.OK(res)
 }
 
@@ -74,7 +74,7 @@ func (c *AccountController) GetByUUID(ctx *app.GetByUUIDAccountContext) error {
 	// Put your logic here
 
 	// AccountController_GetByUUID: end_implement
-	res := &app.Accountresponse{}
+	res := &app.Account{}
 	return ctx.OK(res)
 }
 
@@ -85,7 +85,7 @@ func (c *AccountController) GetByUsername(ctx *app.GetByUsernameAccountContext) 
 	// Put your logic here
 
 	// AccountController_GetByUsername: end_implement
-	res := &app.Accountresponse{}
+	res := &app.Account{}
 	return ctx.OK(res)
 }
 
@@ -96,7 +96,7 @@ func (c *AccountController) GetByUsernameFromDefaultDomain(ctx *app.GetByUsernam
 	// Put your logic here
 
 	// AccountController_Get: end_implement
-	res := &app.Accountresponse{}
+	res := &app.Account{}
 	return ctx.OK(res)
 }
 
@@ -107,7 +107,7 @@ func (c *AccountController) UpdateByUsername(ctx *app.UpdateByUsernameAccountCon
 	// Put your logic here
 
 	// AccountController_Update: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }
 
@@ -118,7 +118,7 @@ func (c *AccountController) UpdateByUUID(ctx *app.UpdateByUUIDAccountContext) er
 	// Put your logic here
 
 	// AccountController_Update: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }
 
@@ -129,7 +129,7 @@ func (c *AccountController) UpdateByUsernameFromDefaultDomain(ctx *app.UpdateByU
 	// Put your logic here
 
 	// AccountController_Update: end_implement
-	res := &app.Messageresponse{}
+	res := &app.Message{}
 	return ctx.OK(res)
 }
 
