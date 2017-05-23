@@ -26,7 +26,27 @@ func (c *AccountController) Add(ctx *app.AddAccountContext) error {
 }
 
 // Delete runs the delete action.
-func (c *AccountController) Delete(ctx *app.DeleteAccountContext) error {
+func (c *AccountController) DeleteByUsername(ctx *app.DeleteByUsernameAccountContext) error {
+	// AccountController_Delete: start_implement
+
+	// Put your logic here
+
+	// AccountController_Delete: end_implement
+	res := &app.Message{}
+	return ctx.OK(res)
+}
+
+func (c *AccountController) DeleteByUUID(ctx *app.DeleteByUUIDAccountContext) error {
+	// AccountController_Delete: start_implement
+
+	// Put your logic here
+
+	// AccountController_Delete: end_implement
+	res := &app.Message{}
+	return ctx.OK(res)
+}
+
+func (c *AccountController) DeleteByUsernameFromDefaultDomain(ctx *app.DeleteByUsernameFromDefaultDomainAccountContext) error {
 	// AccountController_Delete: start_implement
 
 	// Put your logic here
@@ -70,7 +90,18 @@ func (c *AccountController) GetByUsername(ctx *app.GetByUsernameAccountContext) 
 }
 
 // Update runs the update action.
-func (c *AccountController) Update(ctx *app.UpdateAccountContext) error {
+func (c *AccountController) GetByUsernameFromDefaultDomain(ctx *app.GetByUsernameFromDefaultDomainAccountContext) error {
+	// AccountController_Update: start_implement
+
+	// Put your logic here
+
+	// AccountController_Get: end_implement
+	res := &app.Account{}
+	return ctx.OK(res)
+}
+
+// Update runs the update action.
+func (c *AccountController) UpdateByUsername(ctx *app.UpdateByUsernameAccountContext) error {
 	// AccountController_Update: start_implement
 
 	// Put your logic here
@@ -79,3 +110,26 @@ func (c *AccountController) Update(ctx *app.UpdateAccountContext) error {
 	res := &app.Message{}
 	return ctx.OK(res)
 }
+
+// Update runs the update action.
+func (c *AccountController) UpdateByUUID(ctx *app.UpdateByUUIDAccountContext) error {
+	// AccountController_Update: start_implement
+
+	// Put your logic here
+
+	// AccountController_Update: end_implement
+	res := &app.Message{}
+	return ctx.OK(res)
+}
+
+// Update runs the update action.
+func (c *AccountController) UpdateByUsernameFromDefaultDomain(ctx *app.UpdateByUsernameFromDefaultDomainAccountContext) error {
+	// AccountController_Update: start_implement
+
+	// Put your logic here
+
+	// AccountController_Update: end_implement
+	res := &app.Message{}
+	return ctx.OK(res)
+}
+

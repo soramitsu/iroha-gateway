@@ -5,21 +5,52 @@ consumes:
 - application/x-gob
 definitions:
   Account:
+    description: Account media type (default view)
+    example:
+      account:
+        quorum: 1
+        signatories:
+        - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
+        - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        username: serizawa
+        uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
+      code: 0
+      message: message
+    properties:
+      account:
+        $ref: '#/definitions/AccountPayload'
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      message:
+        description: response message
+        example: message
+        type: string
+    required:
+    - message
+    - code
+    - account
+    title: 'Mediatype identifier: application/vnd.account+json; view=default'
+    type: object
+  AccountPayload:
     example:
       quorum: 1
       signatories:
       - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
       - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      username: serizawa
       uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
     properties:
       quorum:
-        description: 最低限必要な数
+        description: Minimum number of signatures required to issue valid transaction.
         example: 1
         maximum: 32
         minimum: 1
         type: integer
       signatories:
-        description: Account Signatories
+        description: Account signatories.
         example:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -27,6 +58,11 @@ definitions:
           example: Ut eius.
           type: string
         type: array
+      username:
+        description: account's username
+        example: serizawa
+        pattern: ^[a-zA-Z0-9\_\-\.]{4,32}$
+        type: string
       uuid:
         description: account's guid
         example: 2aaf2527-8021-4afd-829b-89e8de608b36
@@ -36,7 +72,7 @@ definitions:
     - uuid
     - signatories
     - quorum
-    title: Account
+    title: AccountPayload
     type: object
   Accounts:
     description: Accounts media type (default view)
@@ -46,11 +82,13 @@ definitions:
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        username: serizawa
         uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
       - quorum: 1
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        username: serizawa
         uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
       code: 0
       message: message
@@ -62,14 +100,16 @@ definitions:
           signatories:
           - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
           - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          username: serizawa
           uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
         - quorum: 1
           signatories:
           - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
           - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+          username: serizawa
           uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
         items:
-          $ref: '#/definitions/Account'
+          $ref: '#/definitions/AccountPayload'
         type: array
       code:
         description: response code
@@ -93,14 +133,15 @@ definitions:
         signatories:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        username: serizawa
         uuid: 2aaf2527-8021-4afd-829b-89e8de608b36
       meta_transaction:
-        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         timestamp: "1494693347"
     properties:
       account:
-        $ref: '#/definitions/Account'
+        $ref: '#/definitions/AccountPayload'
       meta_transaction:
         $ref: '#/definitions/TransactionRequest'
     required:
@@ -126,7 +167,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       currency:
-        $ref: '#/definitions/Currency'
+        $ref: '#/definitions/CurrencyPayload'
       signature:
         description: The signature, which can be verified with pubkey
         example: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
@@ -150,6 +191,63 @@ definitions:
     title: CreateCurrencyRequest
     type: object
   Currency:
+    description: Currency media type (default view)
+    example:
+      code: 0
+      currency:
+      - description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      - description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      - description: This is sample currency description.
+        domain_name: sampleDomainName
+        ledger_name: sampleLedgerName
+        name: sampleCurrencyName
+        value: 10.1
+      message: message
+    properties:
+      code:
+        description: response code
+        example: 0
+        format: int64
+        type: integer
+      currency:
+        example:
+        - description: This is sample currency description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleCurrencyName
+          value: 10.1
+        - description: This is sample currency description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleCurrencyName
+          value: 10.1
+        - description: This is sample currency description.
+          domain_name: sampleDomainName
+          ledger_name: sampleLedgerName
+          name: sampleCurrencyName
+          value: 10.1
+        items:
+          $ref: '#/definitions/CurrencyPayload'
+        type: array
+      message:
+        description: response message
+        example: message
+        type: string
+    required:
+    - message
+    - code
+    - currency
+    title: 'Mediatype identifier: application/vnd.currency+json; view=default'
+    type: object
+  CurrencyPayload:
     example:
       description: This is sample currency description.
       domain_name: sampleDomainName
@@ -183,7 +281,7 @@ definitions:
     - domain_name
     - ledger_name
     - value
-    title: Currency
+    title: CurrencyPayload
     type: object
   CurrencyTransferRequest:
     example:
@@ -280,7 +378,7 @@ definitions:
   DeleteAccountRequest:
     example:
       meta_transaction:
-        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         timestamp: "1494693347"
     properties:
@@ -407,7 +505,7 @@ definitions:
         pattern: ^[0-9a-zA-Z+/=]+$
         type: string
       signatories:
-        description: Account Signatories
+        description: Account signatories.
         example:
         - aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=
         - rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
@@ -498,11 +596,11 @@ definitions:
     type: object
   TransactionRequest:
     example:
-      publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+      pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
       signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
       timestamp: "1494693347"
     properties:
-      publicKey:
+      pubkey:
         description: ed25519 public key, which should be used to validate the signature
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         pattern: ^[0-9a-zA-Z+/=]+$
@@ -517,7 +615,7 @@ definitions:
         pattern: '[0-9]{1,18}'
         type: string
     required:
-    - publicKey
+    - pubkey
     - signature
     - timestamp
     title: TransactionRequest
@@ -612,7 +710,7 @@ definitions:
   UpdateAccountRequest:
     example:
       meta_transaction:
-        publicKey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
+        pubkey: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         signature: XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==
         timestamp: "1494693347"
       username: serizawa
@@ -672,7 +770,7 @@ definitions:
         example: rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=
         type: string
       quorum:
-        description: 最低限必要な数
+        description: Minimum number of signatures required to issue valid transaction.
         example: 1
         format: int64
         type: integer
@@ -804,8 +902,8 @@ paths:
         required: true
         type: string
       produces:
-      - application/vnd.message+json
       - application/vnd.account+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK

@@ -30,9 +30,9 @@ var _ = Resource("transactions", func() {
 			Required("currency_uri", "target", "creator_pubkey")
 		})
 
-		Response(OK, TransactionsResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Transactions)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 })
@@ -74,7 +74,7 @@ var Signature = Type("Signature", func() {
 })
 
 var TransactionRequest = Type("TransactionRequest", func() {
-	Attribute("publicKey", String, func() {
+	Attribute("pubkey", String, func() {
 		Description(descriptionTransactionPublicKey)
 		Example(exampleTransactionPublicKey)
 		Pattern(patternBase64)
@@ -89,11 +89,11 @@ var TransactionRequest = Type("TransactionRequest", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("publicKey", "signature", "timestamp")
+	Required("pubkey", "signature", "timestamp")
 
 })
 
-var TransactionsResponse = MediaType("application/vnd.transactions+json", func() {
+var Transactions = MediaType("application/vnd.transactions+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

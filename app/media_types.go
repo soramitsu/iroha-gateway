@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package app
 
@@ -19,7 +19,7 @@ import (
 // Identifier: application/vnd.account+json; view=default
 type Account struct {
 	// account
-	Account *Account `form:"account" json:"account" xml:"account"`
+	Account *AccountPayload `form:"account" json:"account" xml:"account"`
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
@@ -48,7 +48,7 @@ func (mt *Account) Validate() (err error) {
 // Identifier: application/vnd.accounts+json; view=default
 type Accounts struct {
 	// accounts
-	Accounts []*Account `form:"accounts" json:"accounts" xml:"accounts"`
+	Accounts []*AccountPayload `form:"accounts" json:"accounts" xml:"accounts"`
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
@@ -79,8 +79,8 @@ func (mt *Accounts) Validate() (err error) {
 // Identifier: application/vnd.currency+json; view=default
 type Currency struct {
 	// response code
-	Code     int         `form:"code" json:"code" xml:"code"`
-	Currency []*Currency `form:"currency" json:"currency" xml:"currency"`
+	Code     int                `form:"code" json:"code" xml:"code"`
+	Currency []*CurrencyPayload `form:"currency" json:"currency" xml:"currency"`
 	// response message
 	Message string `form:"message" json:"message" xml:"message"`
 }

@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package test
 

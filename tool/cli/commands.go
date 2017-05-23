@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package cli
 
@@ -268,10 +268,11 @@ Payload example:
          "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=",
          "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
       ],
+      "username": "serizawa",
       "uuid": "2aaf2527-8021-4afd-829b-89e8de608b36"
    },
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    }
@@ -410,7 +411,7 @@ Payload example:
 
 {
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    }
@@ -435,7 +436,7 @@ Payload example:
 
 {
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    }
@@ -460,7 +461,7 @@ Payload example:
 
 {
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    }
@@ -663,7 +664,7 @@ Payload example:
 
 {
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    },
@@ -689,7 +690,7 @@ Payload example:
 
 {
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    },
@@ -715,7 +716,7 @@ Payload example:
 
 {
    "meta_transaction": {
-      "publicKey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
+      "pubkey": "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc=",
       "signature": "XcBUqbLdYfANEZAXFrZJ5KQvsOYKdLwuDTu+izwxHw/gwXtU5b4JNDWtwA5zahx61y0saSjmu67RteTG4jlPCw==",
       "timestamp": "1494693347"
    },
