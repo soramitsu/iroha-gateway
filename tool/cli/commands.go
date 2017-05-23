@@ -268,6 +268,7 @@ Payload example:
          "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk=",
          "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
       ],
+      "username": "serizawa",
       "uuid": "2aaf2527-8021-4afd-829b-89e8de608b36"
    },
    "meta_transaction": {

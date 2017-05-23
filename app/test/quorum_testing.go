@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package test
 
@@ -28,7 +28,7 @@ import (
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateQuorumBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.QuorumController, uuid string, payload *app.UpdateQuorumRequest) (http.ResponseWriter, *app.Message) {
+func UpdateQuorumBadRequest(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.QuorumController, uuid string, payload *app.UpdateQuorumRequest) (http.ResponseWriter, *app.Messageresponse) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -88,12 +88,12 @@ func UpdateQuorumBadRequest(t goatest.TInterface, ctx context.Context, service *
 	if rw.Code != 400 {
 		t.Errorf("invalid response status code: got %+v, expected 400", rw.Code)
 	}
-	var mt *app.Message
+	var mt *app.Messageresponse
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Message)
+		mt, _ok = resp.(*app.Messageresponse)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -109,7 +109,7 @@ func UpdateQuorumBadRequest(t goatest.TInterface, ctx context.Context, service *
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateQuorumInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.QuorumController, uuid string, payload *app.UpdateQuorumRequest) (http.ResponseWriter, *app.Message) {
+func UpdateQuorumInternalServerError(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.QuorumController, uuid string, payload *app.UpdateQuorumRequest) (http.ResponseWriter, *app.Messageresponse) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -169,12 +169,12 @@ func UpdateQuorumInternalServerError(t goatest.TInterface, ctx context.Context, 
 	if rw.Code != 500 {
 		t.Errorf("invalid response status code: got %+v, expected 500", rw.Code)
 	}
-	var mt *app.Message
+	var mt *app.Messageresponse
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Message)
+		mt, _ok = resp.(*app.Messageresponse)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {
@@ -190,7 +190,7 @@ func UpdateQuorumInternalServerError(t goatest.TInterface, ctx context.Context, 
 // It returns the response writer so it's possible to inspect the response headers and the media type struct written to the response.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func UpdateQuorumOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.QuorumController, uuid string, payload *app.UpdateQuorumRequest) (http.ResponseWriter, *app.Message) {
+func UpdateQuorumOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.QuorumController, uuid string, payload *app.UpdateQuorumRequest) (http.ResponseWriter, *app.Messageresponse) {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -250,12 +250,12 @@ func UpdateQuorumOK(t goatest.TInterface, ctx context.Context, service *goa.Serv
 	if rw.Code != 200 {
 		t.Errorf("invalid response status code: got %+v, expected 200", rw.Code)
 	}
-	var mt *app.Message
+	var mt *app.Messageresponse
 	if resp != nil {
 		var _ok bool
-		mt, _ok = resp.(*app.Message)
+		mt, _ok = resp.(*app.Messageresponse)
 		if !_ok {
-			t.Fatalf("invalid response media: got %+v, expected instance of app.Message", resp)
+			t.Fatalf("invalid response media: got %+v, expected instance of app.Messageresponse", resp)
 		}
 		__err = mt.Validate()
 		if __err != nil {

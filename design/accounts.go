@@ -226,6 +226,11 @@ var Account = Type("Account", func() {
 		Example(exampleAccountUUID)
 		Pattern(patternBase64)
 	})
+	Attribute("username", String, func() {
+		Description(descriptionAccountUsername)
+		Example(exampleAccountUsername)
+		Pattern(patternAccountUsername)
+	})
 	Attribute("signatories", ArrayOf(String), func() {
 		Description(descriptionSignatories)
 		Example(exampleSignatories)
@@ -240,7 +245,7 @@ var Account = Type("Account", func() {
 	Required("uuid", "signatories", "quorum")
 })
 
-var AccountResponse = MediaType("application/vnd.account+json", func() {
+var AccountResponse = MediaType("application/vnd.accountResponse+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -264,7 +269,7 @@ var AccountResponse = MediaType("application/vnd.account+json", func() {
 	})
 })
 
-var AccountsResponse = MediaType("application/vnd.accounts+json", func() {
+var AccountsResponse = MediaType("application/vnd.accountsResponse+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

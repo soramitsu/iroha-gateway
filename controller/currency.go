@@ -32,7 +32,7 @@ func (c *CurrencyController) AddValue(ctx *app.AddValueCurrencyContext) error {
 	// Put your logic here
 
 	// CurrencyController_AddValue: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }
 
@@ -43,7 +43,7 @@ func (c *CurrencyController) Delete(ctx *app.DeleteCurrencyContext) error {
 	// Put your logic here
 
 	// CurrencyController_Delete: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }
 
@@ -54,7 +54,7 @@ func (c *CurrencyController) GetAll(ctx *app.GetAllCurrencyContext) error {
 	// Put your logic here
 
 	// CurrencyController_GetAll: end_implement
-	res := &app.Currency{}
+	res := &app.Currencyresponse{}
 	return ctx.OK(res)
 }
 
@@ -65,7 +65,7 @@ func (c *CurrencyController) SubtractValue(ctx *app.SubtractValueCurrencyContext
 	// Put your logic here
 
 	// CurrencyController_SubtractValue: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }
 
@@ -76,7 +76,7 @@ func (c *CurrencyController) Transfer(ctx *app.TransferCurrencyContext) error {
 	// Put your logic here
 
 	// CurrencyController_Transfer: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }
 
@@ -87,6 +87,6 @@ func (c *CurrencyController) Update(ctx *app.UpdateCurrencyContext) error {
 	// Put your logic here
 
 	// CurrencyController_Update: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }

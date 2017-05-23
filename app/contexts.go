@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package app
 
@@ -38,20 +38,20 @@ func NewAddAccountContext(ctx context.Context, r *http.Request, service *goa.Ser
 }
 
 // Created sends a HTTP response with status code 201.
-func (ctx *AddAccountContext) Created(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddAccountContext) Created(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 201, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *AddAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *AddAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -85,20 +85,20 @@ func NewDeleteByUUIDAccountContext(ctx context.Context, r *http.Request, service
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *DeleteByUUIDAccountContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUUIDAccountContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *DeleteByUUIDAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUUIDAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *DeleteByUUIDAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUUIDAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -141,20 +141,20 @@ func NewDeleteByUsernameAccountContext(ctx context.Context, r *http.Request, ser
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *DeleteByUsernameAccountContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUsernameAccountContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *DeleteByUsernameAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUsernameAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *DeleteByUsernameAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUsernameAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -188,20 +188,20 @@ func NewDeleteByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -225,20 +225,20 @@ func NewGetAllAccountContext(ctx context.Context, r *http.Request, service *goa.
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetAllAccountContext) OK(r *Accounts) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.accounts+json")
+func (ctx *GetAllAccountContext) OK(r *Accountsresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.accountsresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetAllAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetAllAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -282,20 +282,20 @@ func NewGetByUUIDAccountContext(ctx context.Context, r *http.Request, service *g
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetByUUIDAccountContext) OK(r *Account) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.account+json")
+func (ctx *GetByUUIDAccountContext) OK(r *Accountresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.accountresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetByUUIDAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetByUUIDAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetByUUIDAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetByUUIDAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -348,20 +348,20 @@ func NewGetByUsernameAccountContext(ctx context.Context, r *http.Request, servic
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetByUsernameAccountContext) OK(r *Account) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.account+json")
+func (ctx *GetByUsernameAccountContext) OK(r *Accountresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.accountresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetByUsernameAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetByUsernameAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetByUsernameAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetByUsernameAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -405,20 +405,20 @@ func NewGetByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *htt
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetByUsernameFromDefaultDomainAccountContext) OK(r *Account) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.account+json")
+func (ctx *GetByUsernameFromDefaultDomainAccountContext) OK(r *Accountresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.accountresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetByUsernameFromDefaultDomainAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetByUsernameFromDefaultDomainAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -452,20 +452,20 @@ func NewUpdateByUUIDAccountContext(ctx context.Context, r *http.Request, service
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *UpdateByUUIDAccountContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUUIDAccountContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *UpdateByUUIDAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUUIDAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *UpdateByUUIDAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUUIDAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -508,20 +508,20 @@ func NewUpdateByUsernameAccountContext(ctx context.Context, r *http.Request, ser
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *UpdateByUsernameAccountContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUsernameAccountContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *UpdateByUsernameAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUsernameAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *UpdateByUsernameAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUsernameAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -555,20 +555,20 @@ func NewUpdateByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateByUsernameFromDefaultDomainAccountContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -593,20 +593,20 @@ func NewAddCurrencyContext(ctx context.Context, r *http.Request, service *goa.Se
 }
 
 // Created sends a HTTP response with status code 201.
-func (ctx *AddCurrencyContext) Created(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddCurrencyContext) Created(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 201, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *AddCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *AddCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -637,20 +637,20 @@ func NewAddValueCurrencyContext(ctx context.Context, r *http.Request, service *g
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *AddValueCurrencyContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddValueCurrencyContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *AddValueCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddValueCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *AddValueCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddValueCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -681,20 +681,20 @@ func NewDeleteCurrencyContext(ctx context.Context, r *http.Request, service *goa
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *DeleteCurrencyContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteCurrencyContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *DeleteCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *DeleteCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -754,20 +754,20 @@ func NewGetAllCurrencyContext(ctx context.Context, r *http.Request, service *goa
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetAllCurrencyContext) OK(r *Currency) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.currency+json")
+func (ctx *GetAllCurrencyContext) OK(r *Currencyresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.currencyresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetAllCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetAllCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -798,20 +798,20 @@ func NewSubtractValueCurrencyContext(ctx context.Context, r *http.Request, servi
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *SubtractValueCurrencyContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *SubtractValueCurrencyContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *SubtractValueCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *SubtractValueCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *SubtractValueCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *SubtractValueCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -842,20 +842,20 @@ func NewTransferCurrencyContext(ctx context.Context, r *http.Request, service *g
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *TransferCurrencyContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *TransferCurrencyContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *TransferCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *TransferCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *TransferCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *TransferCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -886,20 +886,20 @@ func NewUpdateCurrencyContext(ctx context.Context, r *http.Request, service *goa
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *UpdateCurrencyContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateCurrencyContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *UpdateCurrencyContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateCurrencyContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *UpdateCurrencyContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateCurrencyContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -933,20 +933,20 @@ func NewUpdateQuorumContext(ctx context.Context, r *http.Request, service *goa.S
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *UpdateQuorumContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateQuorumContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *UpdateQuorumContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateQuorumContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *UpdateQuorumContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *UpdateQuorumContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -980,20 +980,20 @@ func NewAddSignatoriesContext(ctx context.Context, r *http.Request, service *goa
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *AddSignatoriesContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddSignatoriesContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *AddSignatoriesContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddSignatoriesContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *AddSignatoriesContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *AddSignatoriesContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -1036,20 +1036,20 @@ func NewDeleteSignatoriesContext(ctx context.Context, r *http.Request, service *
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *DeleteSignatoriesContext) OK(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteSignatoriesContext) OK(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *DeleteSignatoriesContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteSignatoriesContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *DeleteSignatoriesContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *DeleteSignatoriesContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -1104,20 +1104,20 @@ func NewGetAllSignatoriesContext(ctx context.Context, r *http.Request, service *
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetAllSignatoriesContext) OK(r *Signatories) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.signatories+json")
+func (ctx *GetAllSignatoriesContext) OK(r *Signatoriesresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.signatoriesresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetAllSignatoriesContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllSignatoriesContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetAllSignatoriesContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllSignatoriesContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
@@ -1177,19 +1177,19 @@ func NewGetAllTransactionsContext(ctx context.Context, r *http.Request, service 
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *GetAllTransactionsContext) OK(r *Transactions) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.transactions+json")
+func (ctx *GetAllTransactionsContext) OK(r *Transactionsresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.transactionsresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // BadRequest sends a HTTP response with status code 400.
-func (ctx *GetAllTransactionsContext) BadRequest(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllTransactionsContext) BadRequest(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 400, r)
 }
 
 // InternalServerError sends a HTTP response with status code 500.
-func (ctx *GetAllTransactionsContext) InternalServerError(r *Message) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.message+json")
+func (ctx *GetAllTransactionsContext) InternalServerError(r *Messageresponse) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.messageresponse+json")
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }

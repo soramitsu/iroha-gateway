@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package client
 
@@ -15,17 +15,46 @@ import (
 	"net/http"
 )
 
-// DecodeAccount decodes the Account instance encoded in resp body.
-func (c *Client) DecodeAccount(resp *http.Response) (*Account, error) {
-	var decoded Account
+// Accountresponse media type (default view)
+//
+// Identifier: application/vnd.accountresponse+json; view=default
+type Accountresponse struct {
+	// account
+	Account *Account `form:"account" json:"account" xml:"account"`
+	// response code
+	Code int `form:"code" json:"code" xml:"code"`
+	// response message
+	Message string `form:"message" json:"message" xml:"message"`
+}
+
+// Validate validates the Accountresponse media type instance.
+func (mt *Accountresponse) Validate() (err error) {
+	if mt.Message == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
+	}
+
+	if mt.Account == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "account"))
+	}
+	if mt.Account != nil {
+		if err2 := mt.Account.Validate(); err2 != nil {
+			err = goa.MergeErrors(err, err2)
+		}
+	}
+	return
+}
+
+// DecodeAccountresponse decodes the Accountresponse instance encoded in resp body.
+func (c *Client) DecodeAccountresponse(resp *http.Response) (*Accountresponse, error) {
+	var decoded Accountresponse
 	err := c.Decoder.Decode(&decoded, resp.Body, resp.Header.Get("Content-Type"))
 	return &decoded, err
 }
 
-// Accounts media type (default view)
+// Accountsresponse media type (default view)
 //
-// Identifier: application/vnd.accounts+json; view=default
-type Accounts struct {
+// Identifier: application/vnd.accountsresponse+json; view=default
+type Accountsresponse struct {
 	// accounts
 	Accounts []*Account `form:"accounts" json:"accounts" xml:"accounts"`
 	// response code
@@ -34,8 +63,8 @@ type Accounts struct {
 	Message string `form:"message" json:"message" xml:"message"`
 }
 
-// Validate validates the Accounts media type instance.
-func (mt *Accounts) Validate() (err error) {
+// Validate validates the Accountsresponse media type instance.
+func (mt *Accountsresponse) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -53,33 +82,62 @@ func (mt *Accounts) Validate() (err error) {
 	return
 }
 
-// DecodeAccounts decodes the Accounts instance encoded in resp body.
-func (c *Client) DecodeAccounts(resp *http.Response) (*Accounts, error) {
-	var decoded Accounts
+// DecodeAccountsresponse decodes the Accountsresponse instance encoded in resp body.
+func (c *Client) DecodeAccountsresponse(resp *http.Response) (*Accountsresponse, error) {
+	var decoded Accountsresponse
 	err := c.Decoder.Decode(&decoded, resp.Body, resp.Header.Get("Content-Type"))
 	return &decoded, err
 }
 
+// Currencyresponse media type (default view)
+//
+// Identifier: application/vnd.currencyresponse+json; view=default
+type Currencyresponse struct {
+	// response code
+	Code     int         `form:"code" json:"code" xml:"code"`
+	Currency []*Currency `form:"currency" json:"currency" xml:"currency"`
+	// response message
+	Message string `form:"message" json:"message" xml:"message"`
+}
 
-// DecodeCurrency decodes the Currency instance encoded in resp body.
-func (c *Client) DecodeCurrency(resp *http.Response) (*Currency, error) {
-	var decoded Currency
+// Validate validates the Currencyresponse media type instance.
+func (mt *Currencyresponse) Validate() (err error) {
+	if mt.Message == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
+	}
+
+	if mt.Currency == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "currency"))
+	}
+	for _, e := range mt.Currency {
+		if e != nil {
+			if err2 := e.Validate(); err2 != nil {
+				err = goa.MergeErrors(err, err2)
+			}
+		}
+	}
+	return
+}
+
+// DecodeCurrencyresponse decodes the Currencyresponse instance encoded in resp body.
+func (c *Client) DecodeCurrencyresponse(resp *http.Response) (*Currencyresponse, error) {
+	var decoded Currencyresponse
 	err := c.Decoder.Decode(&decoded, resp.Body, resp.Header.Get("Content-Type"))
 	return &decoded, err
 }
 
 // Basic response (default view)
 //
-// Identifier: application/vnd.message+json; view=default
-type Message struct {
+// Identifier: application/vnd.messageresponse+json; view=default
+type Messageresponse struct {
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
 	Message string `form:"message" json:"message" xml:"message"`
 }
 
-// Validate validates the Message media type instance.
-func (mt *Message) Validate() (err error) {
+// Validate validates the Messageresponse media type instance.
+func (mt *Messageresponse) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -87,17 +145,17 @@ func (mt *Message) Validate() (err error) {
 	return
 }
 
-// DecodeMessage decodes the Message instance encoded in resp body.
-func (c *Client) DecodeMessage(resp *http.Response) (*Message, error) {
-	var decoded Message
+// DecodeMessageresponse decodes the Messageresponse instance encoded in resp body.
+func (c *Client) DecodeMessageresponse(resp *http.Response) (*Messageresponse, error) {
+	var decoded Messageresponse
 	err := c.Decoder.Decode(&decoded, resp.Body, resp.Header.Get("Content-Type"))
 	return &decoded, err
 }
 
-// Signatories media type (default view)
+// Signatoriesresponse media type (default view)
 //
-// Identifier: application/vnd.signatories+json; view=default
-type Signatories struct {
+// Identifier: application/vnd.signatoriesresponse+json; view=default
+type Signatoriesresponse struct {
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
@@ -105,8 +163,8 @@ type Signatories struct {
 	Signatories []string `form:"signatories" json:"signatories" xml:"signatories"`
 }
 
-// Validate validates the Signatories media type instance.
-func (mt *Signatories) Validate() (err error) {
+// Validate validates the Signatoriesresponse media type instance.
+func (mt *Signatoriesresponse) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -117,17 +175,17 @@ func (mt *Signatories) Validate() (err error) {
 	return
 }
 
-// DecodeSignatories decodes the Signatories instance encoded in resp body.
-func (c *Client) DecodeSignatories(resp *http.Response) (*Signatories, error) {
-	var decoded Signatories
+// DecodeSignatoriesresponse decodes the Signatoriesresponse instance encoded in resp body.
+func (c *Client) DecodeSignatoriesresponse(resp *http.Response) (*Signatoriesresponse, error) {
+	var decoded Signatoriesresponse
 	err := c.Decoder.Decode(&decoded, resp.Body, resp.Header.Get("Content-Type"))
 	return &decoded, err
 }
 
-// Transactions media type (default view)
+// Transactionsresponse media type (default view)
 //
-// Identifier: application/vnd.transactions+json; view=default
-type Transactions struct {
+// Identifier: application/vnd.transactionsresponse+json; view=default
+type Transactionsresponse struct {
 	// response code
 	Code int `form:"code" json:"code" xml:"code"`
 	// response message
@@ -135,8 +193,8 @@ type Transactions struct {
 	Transactions []*Transaction `form:"transactions" json:"transactions" xml:"transactions"`
 }
 
-// Validate validates the Transactions media type instance.
-func (mt *Transactions) Validate() (err error) {
+// Validate validates the Transactionsresponse media type instance.
+func (mt *Transactionsresponse) Validate() (err error) {
 	if mt.Message == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "message"))
 	}
@@ -154,9 +212,9 @@ func (mt *Transactions) Validate() (err error) {
 	return
 }
 
-// DecodeTransactions decodes the Transactions instance encoded in resp body.
-func (c *Client) DecodeTransactions(resp *http.Response) (*Transactions, error) {
-	var decoded Transactions
+// DecodeTransactionsresponse decodes the Transactionsresponse instance encoded in resp body.
+func (c *Client) DecodeTransactionsresponse(resp *http.Response) (*Transactionsresponse, error) {
+	var decoded Transactionsresponse
 	err := c.Decoder.Decode(&decoded, resp.Body, resp.Header.Get("Content-Type"))
 	return &decoded, err
 }

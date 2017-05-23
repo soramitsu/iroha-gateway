@@ -86,7 +86,7 @@ var SignatoriesRequest = Type("SignatoryRequest", func() {
 	Required("signatories", "creator_pubkey", "signature", "timestamp")
 })
 
-var SignatoriesResponse = MediaType("application/vnd.signatories+json", func() {
+var SignatoriesResponse = MediaType("application/vnd.signatoriesResponse+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

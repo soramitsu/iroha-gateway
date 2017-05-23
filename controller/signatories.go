@@ -22,7 +22,7 @@ func (c *SignatoriesController) Add(ctx *app.AddSignatoriesContext) error {
 	// Put your logic here
 
 	// SignatoriesController_Add: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }
 
@@ -33,7 +33,7 @@ func (c *SignatoriesController) Delete(ctx *app.DeleteSignatoriesContext) error 
 	// Put your logic here
 
 	// SignatoriesController_Delete: end_implement
-	res := &app.Message{}
+	res := &app.Messageresponse{}
 	return ctx.OK(res)
 }
 
@@ -44,6 +44,6 @@ func (c *SignatoriesController) GetAll(ctx *app.GetAllSignatoriesContext) error 
 	// Put your logic here
 
 	// SignatoriesController_GetAll: end_implement
-	res := &app.Signatories{}
+	res := &app.Signatoriesresponse{}
 	return ctx.OK(res)
 }

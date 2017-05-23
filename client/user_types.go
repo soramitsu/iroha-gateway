@@ -6,7 +6,7 @@
 // $ goagen
 // --design=github.com/soramitsu/iroha-gateway/design
 // --out=$(GOPATH)/src/github.com/soramitsu/iroha-gateway
-// --version=v1.2.0-dirty
+// --version=v1.2.0
 
 package client
 
@@ -16,10 +16,12 @@ import (
 
 // account user type.
 type account struct {
-	// 最低限必要な数
+	// Minimum number of signatures required to issue valid transaction.
 	Quorum *int `form:"quorum,omitempty" json:"quorum,omitempty" xml:"quorum,omitempty"`
-	// Account Signatories
+	// Account signatories.
 	Signatories []string `form:"signatories,omitempty" json:"signatories,omitempty" xml:"signatories,omitempty"`
+	// account's username
+	Username *string `form:"username,omitempty" json:"username,omitempty" xml:"username,omitempty"`
 	// account's guid
 	UUID *string `form:"uuid,omitempty" json:"uuid,omitempty" xml:"uuid,omitempty"`
 }
@@ -45,6 +47,11 @@ func (ut *account) Validate() (err error) {
 			err = goa.MergeErrors(err, goa.InvalidRangeError(`response.quorum`, *ut.Quorum, 32, false))
 		}
 	}
+	if ut.Username != nil {
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, *ut.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.username`, *ut.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
+		}
+	}
 	if ut.UUID != nil {
 		if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, *ut.UUID); !ok {
 			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.uuid`, *ut.UUID, `^[0-9a-zA-Z+/=]+$`))
@@ -62,6 +69,9 @@ func (ut *account) Publicize() *Account {
 	if ut.Signatories != nil {
 		pub.Signatories = ut.Signatories
 	}
+	if ut.Username != nil {
+		pub.Username = ut.Username
+	}
 	if ut.UUID != nil {
 		pub.UUID = *ut.UUID
 	}
@@ -70,10 +80,12 @@ func (ut *account) Publicize() *Account {
 
 // Account user type.
 type Account struct {
-	// 最低限必要な数
+	// Minimum number of signatures required to issue valid transaction.
 	Quorum int `form:"quorum" json:"quorum" xml:"quorum"`
-	// Account Signatories
+	// Account signatories.
 	Signatories []string `form:"signatories" json:"signatories" xml:"signatories"`
+	// account's username
+	Username *string `form:"username,omitempty" json:"username,omitempty" xml:"username,omitempty"`
 	// account's guid
 	UUID string `form:"uuid" json:"uuid" xml:"uuid"`
 }
@@ -92,6 +104,11 @@ func (ut *Account) Validate() (err error) {
 	}
 	if ut.Quorum > 32 {
 		err = goa.MergeErrors(err, goa.InvalidRangeError(`response.quorum`, ut.Quorum, 32, false))
+	}
+	if ut.Username != nil {
+		if ok := goa.ValidatePattern(`^[a-zA-Z0-9\_\-\.]{4,32}$`, *ut.Username); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.username`, *ut.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
+		}
 	}
 	if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, ut.UUID); !ok {
 		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.uuid`, ut.UUID, `^[0-9a-zA-Z+/=]+$`))
@@ -1221,7 +1238,7 @@ func (ut *Permissions) Validate() (err error) {
 type signatoryRequest struct {
 	// Public key of creator's account
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// Account Signatories
+	// Account signatories.
 	Signatories []string `form:"signatories,omitempty" json:"signatories,omitempty" xml:"signatories,omitempty"`
 	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
@@ -1283,7 +1300,7 @@ func (ut *signatoryRequest) Publicize() *SignatoryRequest {
 type SignatoryRequest struct {
 	// Public key of creator's account
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// Account Signatories
+	// Account signatories.
 	Signatories []string `form:"signatories" json:"signatories" xml:"signatories"`
 	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
@@ -1475,7 +1492,7 @@ func (ut *Transaction) Validate() (err error) {
 // transactionRequest user type.
 type transactionRequest struct {
 	// ed25519 public key, which should be used to validate the signature
-	PublicKey *string `form:"publicKey,omitempty" json:"publicKey,omitempty" xml:"publicKey,omitempty"`
+	Pubkey *string `form:"pubkey,omitempty" json:"pubkey,omitempty" xml:"pubkey,omitempty"`
 	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
 	// Transaction timestamp
@@ -1484,8 +1501,8 @@ type transactionRequest struct {
 
 // Validate validates the transactionRequest type instance.
 func (ut *transactionRequest) Validate() (err error) {
-	if ut.PublicKey == nil {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "publicKey"))
+	if ut.Pubkey == nil {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "pubkey"))
 	}
 	if ut.Signature == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
@@ -1493,9 +1510,9 @@ func (ut *transactionRequest) Validate() (err error) {
 	if ut.Timestamp == nil {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
 	}
-	if ut.PublicKey != nil {
-		if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, *ut.PublicKey); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.publicKey`, *ut.PublicKey, `^[0-9a-zA-Z+/=]+$`))
+	if ut.Pubkey != nil {
+		if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, *ut.Pubkey); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.pubkey`, *ut.Pubkey, `^[0-9a-zA-Z+/=]+$`))
 		}
 	}
 	if ut.Timestamp != nil {
@@ -1509,8 +1526,8 @@ func (ut *transactionRequest) Validate() (err error) {
 // Publicize creates TransactionRequest from transactionRequest
 func (ut *transactionRequest) Publicize() *TransactionRequest {
 	var pub TransactionRequest
-	if ut.PublicKey != nil {
-		pub.PublicKey = *ut.PublicKey
+	if ut.Pubkey != nil {
+		pub.Pubkey = *ut.Pubkey
 	}
 	if ut.Signature != nil {
 		pub.Signature = *ut.Signature
@@ -1524,7 +1541,7 @@ func (ut *transactionRequest) Publicize() *TransactionRequest {
 // TransactionRequest user type.
 type TransactionRequest struct {
 	// ed25519 public key, which should be used to validate the signature
-	PublicKey string `form:"publicKey" json:"publicKey" xml:"publicKey"`
+	Pubkey string `form:"pubkey" json:"pubkey" xml:"pubkey"`
 	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`
 	// Transaction timestamp
@@ -1533,8 +1550,8 @@ type TransactionRequest struct {
 
 // Validate validates the TransactionRequest type instance.
 func (ut *TransactionRequest) Validate() (err error) {
-	if ut.PublicKey == "" {
-		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "publicKey"))
+	if ut.Pubkey == "" {
+		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "pubkey"))
 	}
 	if ut.Signature == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "signature"))
@@ -1542,8 +1559,8 @@ func (ut *TransactionRequest) Validate() (err error) {
 	if ut.Timestamp == "" {
 		err = goa.MergeErrors(err, goa.MissingAttributeError(`response`, "timestamp"))
 	}
-	if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, ut.PublicKey); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.publicKey`, ut.PublicKey, `^[0-9a-zA-Z+/=]+$`))
+	if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, ut.Pubkey); !ok {
+		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.pubkey`, ut.Pubkey, `^[0-9a-zA-Z+/=]+$`))
 	}
 	if ok := goa.ValidatePattern(`[0-9]{1,18}`, ut.Timestamp); !ok {
 		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.timestamp`, ut.Timestamp, `[0-9]{1,18}`))
@@ -1705,7 +1722,7 @@ func (ut *UpdateCurrencyRequest) Validate() (err error) {
 type updateQuorumRequest struct {
 	// Public key of creator's account
 	CreatorPubkey *string `form:"creator_pubkey,omitempty" json:"creator_pubkey,omitempty" xml:"creator_pubkey,omitempty"`
-	// 最低限必要な数
+	// Minimum number of signatures required to issue valid transaction.
 	Quorum *int `form:"quorum,omitempty" json:"quorum,omitempty" xml:"quorum,omitempty"`
 	// The signature, which can be verified with pubkey
 	Signature *string `form:"signature,omitempty" json:"signature,omitempty" xml:"signature,omitempty"`
@@ -1757,7 +1774,7 @@ func (ut *updateQuorumRequest) Publicize() *UpdateQuorumRequest {
 type UpdateQuorumRequest struct {
 	// Public key of creator's account
 	CreatorPubkey string `form:"creator_pubkey" json:"creator_pubkey" xml:"creator_pubkey"`
-	// 最低限必要な数
+	// Minimum number of signatures required to issue valid transaction.
 	Quorum int `form:"quorum" json:"quorum" xml:"quorum"`
 	// The signature, which can be verified with pubkey
 	Signature string `form:"signature" json:"signature" xml:"signature"`

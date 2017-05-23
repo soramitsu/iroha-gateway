@@ -93,7 +93,7 @@ var TransactionRequest = Type("TransactionRequest", func() {
 
 })
 
-var TransactionsResponse = MediaType("application/vnd.transactions+json", func() {
+var TransactionsResponse = MediaType("application/vnd.transactionsResponse+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
