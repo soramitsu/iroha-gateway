@@ -22,7 +22,8 @@ func (c *CurrencyController) Add(ctx *app.AddCurrencyContext) error {
 	// Put your logic here
 
 	// CurrencyController_Add: end_implement
-	return nil
+	res := &app.Message{}
+	return ctx.Created(res)
 }
 
 // AddValue runs the addValue action.
@@ -55,6 +56,7 @@ func (c *CurrencyController) GetAll(ctx *app.GetAllCurrencyContext) error {
 
 	// CurrencyController_GetAll: end_implement
 	res := &app.Currency{}
+	res.Currency = []*app.CurrencyPayload{ &app.CurrencyPayload{} }
 	return ctx.OK(res)
 }
 

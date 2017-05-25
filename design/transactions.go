@@ -30,37 +30,54 @@ var _ = Resource("transactions", func() {
 			Required("currency_uri", "target", "creator_pubkey")
 		})
 
-		Response(OK, TransactionsResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Transactions)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 
 })
 
 var Transaction = Type("Transaction", func() {
-	Attribute("command", String, func() {
-		Description(descriptionTransactionCommand)
-		Example(exampleTransactionCommand)
-	})
-	Attribute("creator_pubkey", String, func() {
-		Description(descriptionCreator)
-		Example(exampleCreator)
-	})
-	Attribute("signatures", ArrayOf(Signature))
-	Attribute("timestamp", String, func() {
-		Description(descriptionTimestamp)
-		Example(exampleTimestamp)
-		Pattern(`[0-9]{1,18}`)
+	Attribute("creator_signature", String, func() {
+		Description(descriptionTransactionSignature)
+		Example(exampleSignature)
 	})
 
-	Required("command", "creator_pubkey", "signatures", "timestamp")
+	Attribute("signatures", ArrayOf(Signature))
+
+	Attribute("created_at", String, func() {
+		Description(descriptionTransactionTimestamp)
+		Example(exampleTimestamp)
+		Pattern(patternTimestamp)
+	})
+
+	Attribute("nonce", Integer, func() {
+		Description(descriptionTransactionNonce)
+		Example(exampleTransactionNonce)
+	})
+
+	Required("creator_signature", "signatures", "created_at", "nonce")
 })
 
 var Signature = Type("Signature", func() {
-	Attribute("publicKey", String, func() {
+	Attribute("pubkey", String, func() {
 		Description(descriptionTransactionPublicKey)
 		Example(exampleTransactionPublicKey)
-		Pattern(base64Pattern)
+		Pattern(patternBase64)
+	})
+	Attribute("signature", String, func() {
+		Description(descriptionSignature)
+		Example(exampleSignature)
+	})
+
+	Required("pubkey", "signature")
+})
+
+var TransactionRequest = Type("TransactionRequest", func() {
+	Attribute("pubkey", String, func() {
+		Description(descriptionTransactionPublicKey)
+		Example(exampleTransactionPublicKey)
+		Pattern(patternBase64)
 	})
 	Attribute("signature", String, func() {
 		Description(descriptionSignature)
@@ -72,10 +89,11 @@ var Signature = Type("Signature", func() {
 		Pattern(`[0-9]{1,18}`)
 	})
 
-	Required("publicKey", "signature", "timestamp")
+	Required("pubkey", "signature", "timestamp")
+
 })
 
-var TransactionsResponse = MediaType("application/vnd.transactions+json", func() {
+var Transactions = MediaType("application/vnd.transactions+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)

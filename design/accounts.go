@@ -5,156 +5,231 @@ import (
 	. "github.com/goadesign/goa/design/apidsl"
 )
 
-var _ = Resource("accounts", func() {
-	BasePath("/accounts")
+var _ = Resource("account", func() {
+
+	// GET
 	Action("getAll", func() {
-		Routing(GET("/"))
+		Routing(GET("/accounts/"))
 		Description("get all accounts")
-		Response(OK, AccountsResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Accounts)
 	})
 
-	Action("get", func() {
-		Routing(GET("/:target"))
-		Description("get an account by public key")
+	Action("getByUUID", func() {
+		Routing(GET("/accounts/:uuid"))
+		Description("get an account by account's UUID")
 		Params(func() {
-			Param("target", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
-				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded target's account")
-			})
-			Param("creator_pubkey", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
-				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded creator's account")
-
+			Param("uuid", String, func() {
+				Pattern(patternAccountUUID)
+				Example(exampleAccountUUID)
+				Description("account's UUID")
 			})
 			Param("is_committed", Boolean, func() {
 				Description("If this value is true, you can only get transactions committed to ametsuchi")
 				Example(false)
 			})
-
-			Required("target")
+			Required("uuid")
 		})
-		Response(OK, AccountResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Account)
 	})
 
-	Action("update", func() {
-		Routing(PUT("/:target"))
-		Description("update an account")
+	Action("getByUsername", func() {
+		Routing(GET("/domains/:domain_uri/accounts/:username"))
+		Description("get an account by account's domain and username")
 		Params(func() {
-			Param("target", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
-				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded target's account")
+			Param("domain_uri", String, func() {
+				Pattern(patternDomainURI)
+				Example(exampleDomainURI)
+				Description(descriptionDomainURI)
 			})
+			Param("username", String, func() {
+				Pattern(patternAccountUsername)
+				Example(exampleAccountUsername)
+				Description(descriptionAccountUsername)
+			})
+			Param("is_committed", Boolean, func() {
+				Description("If this value is true, you can only get transactions committed to ametsuchi")
+				Example(false)
+			})
+			Required("domain_uri", "username")
+		})
+		Response(OK, Account)
+	})
+
+	// TODO: Consider a good URL path when get an account with only a user name from the default domain
+	Action("getByUsernameFromDefaultDomain", func() {
+		Routing(GET("/domains/default/accounts/:username"))
+		Description("get an account by account's username from default domain")
+		Params(func() {
+			Param("username", String, func() {
+				Pattern(patternAccountUsername)
+				Example(exampleAccountUsername)
+				Description(descriptionAccountUsername)
+			})
+			Param("is_committed", Boolean, func() {
+				Description("If this value is true, you can only get transactions committed to ametsuchi")
+				Example(false)
+			})
+			Required("domain_uri", "username")
+		})
+		Response(OK, Account)
+	})
+
+	// UPDATE
+	Action("updateByUUID", func() {
+		Routing(PUT("/accounts/:uuid"))
+		Description("update an account by account's uuid")
+		Params(func() {
+			Param("uuid", String, func() {
+				Pattern(patternAccountUUID)
+				Example(exampleAccountUUID)
+				Description(descriptionAccountUUID)
+			})
+			Required("uuid")
 		})
 		Payload(UpdateAccountRequest)
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
 	})
 
-	Action("delete", func() {
-		Routing(DELETE("/:target"))
+	Action("updateByUsername", func() {
+		Routing(PUT("/domains/:domain_uri/accounts/:username"))
+		Description("update an account by account's domain and username")
+		Params(func() {
+			Param("domain_uri", String, func() {
+				Pattern(patternDomainURI)
+				Example(exampleDomainURI)
+				Description(descriptionDomainURI)
+			})
+			Param("username", String, func() {
+				Pattern(patternAccountUsername)
+				Example(exampleAccountUsername)
+				Description(descriptionAccountUsername)
+			})
+			Required("domain_uri", "username")
+		})
+		Payload(UpdateAccountRequest)
+		Response(OK, Message)
+	})
+
+	// TODO: Consider a good URL path when update an account with only a user name from the default domain
+	Action("updateByUsernameFromDefaultDomain", func() {
+		Routing(PUT("/domains/default/accounts/:username"))
+		Description("update an account by account's username from default domain")
+		Params(func() {
+			Param("username", String, func() {
+				Pattern(patternAccountUsername)
+				Example(exampleAccountUsername)
+				Description(descriptionAccountUsername)
+			})
+			Required("username")
+		})
+		Payload(UpdateAccountRequest)
+		Response(OK, Message)
+	})
+
+	// DELETE
+	Action("deleteByUUID", func() {
+		Routing(DELETE("/accounts/:uuid"))
 		Description("delete an account")
 		Params(func() {
-			Param("target", String, func() {
-				Pattern(`[0-9a-zA-Z-_.~]+`)
-				Example(exampleTargetEncoded)
-				Description("Public key of URL-encoded target's account")
+			Param("uuid", String, func() {
+				Pattern(patternAccountUUID)
+				Example(exampleAccountUUID)
+				Description(descriptionAccountUUID)
 			})
 		})
 		Payload(DeleteAccountRequest)
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
 	})
 
+	Action("deleteByUsername", func() {
+		Routing(DELETE("/domains/:domain_uri/accounts/:username"))
+		Description("delete an account by account's domain and username")
+		Params(func() {
+			Param("domain_uri", String, func() {
+				Pattern(patternDomainURI)
+				Example(exampleDomainURI)
+				Description(descriptionDomainURI)
+			})
+			Param("username", String, func() {
+				Pattern(patternAccountUsername)
+				Example(exampleAccountUsername)
+				Description(descriptionAccountUsername)
+			})
+			Required("domain_uri", "username")
+		})
+		Payload(DeleteAccountRequest)
+		Response(OK, Message)
+	})
+
+	// TODO: Consider a good URL path when delete an account with only a user name from the default domain
+	Action("deleteByUsernameFromDefaultDomain", func() {
+		Routing(DELETE("/domains/default/accounts/:username"))
+		Description("delete an account by account's username from default domain")
+		Params(func() {
+			Param("username", String, func() {
+				Pattern(patternAccountUsername)
+				Example(exampleAccountUsername)
+				Description(descriptionAccountUsername)
+			})
+			Required("username")
+		})
+		Payload(DeleteAccountRequest)
+		Response(OK, Message)
+	})
+
+	// CREATE
 	Action("add", func() {
-		Routing(POST("/"))
+		Routing(POST("/accounts"))
 		Description("add an account")
 		Payload(AddAccountRequest)
-		Response(Created, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(Created, Message)
 	})
+
+	Response(BadRequest, Message)
+	Response(InternalServerError, Message)
 })
 
 var UpdateAccountRequest = Type("UpdateAccountRequest", func() {
-	Attribute("alias", String, func() {
-		Description(descriptionAlias)
-		Example(exampleAlias)
-		Pattern(`[0-9a-zA-Z]+`)
-	})
-	Attribute("creator_pubkey", String, func() {
-		Description(descriptionCreator)
-		Example(exampleCreator)
-	})
-	Attribute("signature", String, func() {
-		Description(descriptionSignature)
-		Example(exampleSignature)
-	})
-	Attribute("timestamp", String, func() {
-		Description(descriptionTimestamp)
-		Example(exampleTimestamp)
-		Pattern(timestampPattern)
+	Attribute("username", String, func() {
+		Description(descriptionAccountUsername)
+		Example(exampleAccountUsername)
+		Pattern(patternAccountUsername)
 	})
 
-	Required("alias", "creator_pubkey", "signature", "timestamp")
+	Attribute("meta_transaction", TransactionRequest, func() {
+		Description(descriptionMetaTransaction)
+	})
+
+	Required("username", "meta_transaction")
 })
 
 var DeleteAccountRequest = Type("DeleteAccountRequest", func() {
-	Attribute("creator_pubkey", String, func() {
-		Description(descriptionCreator)
-		Example(exampleCreator)
-	})
-	Attribute("signature", String, func() {
-		Description(descriptionSignature)
-		Example(exampleSignature)
-	})
-	Attribute("timestamp", String, func() {
-		Description(descriptionTimestamp)
-		Example(exampleTimestamp)
-		Pattern(`[0-9]{1,18}`)
+	Attribute("meta_transaction", TransactionRequest, func() {
+		Description(descriptionMetaTransaction)
 	})
 
-	Required("creator_pubkey", "signature", "timestamp")
-
+	Required("meta_transaction")
 })
 
 var AddAccountRequest = Type("AddAccountRequest", func() {
-	Attribute("creator_pubkey", String, func() {
-		Description(descriptionCreator)
-		Example(exampleCreator)
+	Attribute("meta_transaction", TransactionRequest, func() {
+		Description(descriptionMetaTransaction)
 	})
-	Attribute("signature", String, func() {
-		Description(descriptionSignature)
-		Example(exampleSignature)
-	})
-	Attribute("timestamp", String, func() {
-		Description(descriptionTimestamp)
-		Example(exampleTimestamp)
-		Pattern(`[0-9]{1,18}`)
-	})
-	Attribute("account", Account)
+	Attribute("account", AccountPayload)
 
-	Required("creator_pubkey", "signature", "timestamp", "account")
+	Required("meta_transaction", "account")
 })
 
-var Account = Type("Account", func() {
-	Attribute("alias", String, func() {
-		Description(descriptionAlias)
-		Example(exampleAlias)
-		Pattern(`[0-9a-zA-Z]+`)
+var AccountPayload = Type("AccountPayload", func() {
+	Attribute("uuid", String, func() {
+		Description(descriptionAccountUUID)
+		Example(exampleAccountUUID)
+		Pattern(patternAccountUUID) // TODO: UUID? base64? see: https://soramitsu.atlassian.net/wiki/display/IS/Account
 	})
-	Attribute("pubkey", String, func() {
-		Description(descriptionPubkey)
-		Example(examplePubkey)
-		Pattern(base64Pattern)
+	Attribute("username", String, func() {
+		Description(descriptionAccountUsername)
+		Example(exampleAccountUsername)
+		Pattern(patternAccountUsername)
 	})
 	Attribute("signatories", ArrayOf(String), func() {
 		Description(descriptionSignatories)
@@ -164,41 +239,13 @@ var Account = Type("Account", func() {
 		Description(descriptionQuorum)
 		Example(exampleQuorum)
 		Minimum(1)
-		Maximum(65535)
+		Maximum(32)
 	})
 
-	Required("alias", "pubkey", "signatories", "quorum")
+	Required("uuid", "signatories", "quorum")
 })
 
-var AccountFull = Type("AccountFull", func() {
-	Attribute("alias", String, func() {
-		Description(descriptionAlias)
-		Example(exampleAlias)
-		Pattern(`[0-9a-zA-Z]+`)
-	})
-	Attribute("pubkey", String, func() {
-		Description(descriptionPubkey)
-		Example(examplePubkey)
-		Pattern(base64Pattern)
-	})
-	Attribute("signatories", ArrayOf(String), func() {
-		Description(descriptionSignatories)
-		Example(exampleSignatories)
-	})
-	Attribute("quorum", Integer, func() {
-		Description(descriptionQuorum)
-		Example(exampleQuorum)
-		Minimum(1)
-		Maximum(65535)
-	})
-	Attribute("permissions", Permissions, func() {
-		Description("account permissions")
-	})
-
-	Required("alias", "pubkey", "signatories", "quorum", "permissions")
-})
-
-var AccountResponse = MediaType("application/vnd.account+json", func() {
+var Account = MediaType("application/vnd.account+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -208,7 +255,7 @@ var AccountResponse = MediaType("application/vnd.account+json", func() {
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("account", AccountFull, func() {
+		Attribute("account", AccountPayload, func() {
 			Description(descriptionAccount)
 		})
 
@@ -222,7 +269,7 @@ var AccountResponse = MediaType("application/vnd.account+json", func() {
 	})
 })
 
-var AccountsResponse = MediaType("application/vnd.accounts+json", func() {
+var Accounts = MediaType("application/vnd.accounts+json", func() {
 	Attributes(func() {
 		Attribute("message", String, func() {
 			Description(descriptionMessage)
@@ -232,7 +279,7 @@ var AccountsResponse = MediaType("application/vnd.accounts+json", func() {
 			Description(descriptionCode)
 			Example(exampleCode)
 		})
-		Attribute("accounts", ArrayOf(AccountFull), func() {
+		Attribute("accounts", ArrayOf(AccountPayload), func() {
 			Description(descriptionAccounts)
 		})
 

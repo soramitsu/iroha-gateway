@@ -15,16 +15,22 @@ const (
 	examplePermissionLedgerName = "sampledomain"    // TODO
 	examplePermissionAssetName  = "sampleassetname" // TODO
 	exampleSignatory            = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D"
-	exampleCurrencyURI             = "ledger.domain.currency"
-	exampleCurrencyName            = "sampleCurrencyName"
-	exampleCurrencyDomainName      = "sampleDomainName"
-	exampleCurrencyLedgerName      = "sampleLedgerName"
-	exampleCurrencyDescription     = "This is sample currency description."
-	exampleCurrencyValue           = 10.1
-	exampleCurrencySender          = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
-	exampleCurrencyReceiver        = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
+	exampleCurrencyURI          = "ledger.domain.currency"
+	exampleCurrencyName         = "sampleCurrencyName"
+	exampleCurrencyDomainName   = "sampleDomainName"
+	exampleCurrencyLedgerName   = "sampleLedgerName"
+	exampleCurrencyDescription  = "This is sample currency description."
+	exampleCurrencyValue        = 10.1
+	exampleCurrencySender       = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
+	exampleCurrencyReceiver     = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
 	exampleTransactionCommand   = "PUT/accounts"
 	exampleTransactionPublicKey = "rI9Bks2reclulb+3/RENiouWSNaBHbRH6wo7BUoQ1Tc="
+	exampleAccountGUID          = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm//8eGGkB4uXk="
+	exampleAccountGUIDEncoded   = "aTXzJZauERQ0SkQqARwVWd8vrl3lOpm%2F%2F8eGGkB4uXk%3D"
+	exampleAccountUUID          = "2aaf2527-8021-4afd-829b-89e8de608b36" // TODO
+	exampleDomainURI            = "dummy.domain.com"                     // TODO
+	exampleAccountUsername      = "serizawa"
+	exampleTransactionNonce     = 1234
 )
 
 var (

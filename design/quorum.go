@@ -6,22 +6,22 @@ import (
 )
 
 var _ = Resource("quorum", func() {
-	BasePath("/accounts/:target/quorum")
+	BasePath("/accounts/:uuid/quorum")
 	Params(func() {
-		Param("target", String, func() {
-			Pattern(`[0-9a-zA-Z-_.~]+`)
-			Example(exampleTargetEncoded)
-			Description("Public key of URL-encoded target's account")
+		Param("uuid", String, func() {
+			Pattern(patternAccountUUID)
+			Example(exampleAccountUUID)
+			Description(descriptionAccountUUID)
 		})
-		Required("target")
+		Required("uuid")
 	})
 
 	Action("update", func() {
 		Routing(PUT("/"))
 		Payload(UpdateQuorumRequest)
-		Response(OK, MessageResponse)
-		Response(BadRequest, MessageResponse)
-		Response(InternalServerError, MessageResponse)
+		Response(OK, Message)
+		Response(BadRequest, Message)
+		Response(InternalServerError, Message)
 	})
 })
 

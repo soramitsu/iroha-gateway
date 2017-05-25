@@ -5,7 +5,7 @@ import (
 	. "github.com/goadesign/goa/design/apidsl"
 )
 
-var MessageResponse = MediaType("application/vnd.message+json", func() {
+var Message = MediaType("application/vnd.message+json", func() {
 	Description("Basic response")
 	Attributes(func() {
 		Attribute("message", String, func() {
