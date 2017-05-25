@@ -22,7 +22,8 @@ func (c *AccountController) Add(ctx *app.AddAccountContext) error {
 	// Put your logic here
 
 	// AccountController_Add: end_implement
-	return nil
+	res := &app.Message{}
+	return ctx.Created(res)
 }
 
 // Delete runs the delete action.
@@ -86,6 +87,7 @@ func (c *AccountController) GetByUsername(ctx *app.GetByUsernameAccountContext) 
 
 	// AccountController_GetByUsername: end_implement
 	res := &app.Account{}
+	res.Account = &app.AccountPayload{}
 	return ctx.OK(res)
 }
 
