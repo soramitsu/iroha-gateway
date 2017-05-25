@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"github.com/goadesign/goa"
 	goaclient "github.com/goadesign/goa/client"
-	"github.com/goadesign/goa/uuid"
+	uuid "github.com/goadesign/goa/uuid"
 	"github.com/soramitsu/iroha-gateway/client"
 	"github.com/spf13/cobra"
 	"log"
