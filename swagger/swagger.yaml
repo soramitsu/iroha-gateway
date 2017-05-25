@@ -66,7 +66,7 @@ definitions:
       uuid:
         description: account's guid
         example: 2aaf2527-8021-4afd-829b-89e8de608b36
-        pattern: ^[0-9a-zA-Z+/=]+$
+        pattern: ^[0-9a-f-]{32}$
         type: string
     required:
     - uuid
@@ -798,10 +798,10 @@ paths:
   /accounts:
     get:
       description: get all accounts
-      operationId: account#get all
+      operationId: account#getAll
       produces:
-      - application/vnd.message+json
       - application/vnd.accounts+json
+      - application/vnd.message+json
       responses:
         "200":
           description: OK
@@ -817,7 +817,7 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: get all account
+      summary: getAll account
       tags:
       - account
     post:
@@ -852,12 +852,12 @@ paths:
   /accounts/{uuid}:
     delete:
       description: delete an account
-      operationId: account#delete by UUID
+      operationId: account#deleteByUUID
       parameters:
       - description: account's guid
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       - in: body
@@ -882,12 +882,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: delete by UUID account
+      summary: deleteByUUID account
       tags:
       - account
     get:
       description: get an account by account's UUID
-      operationId: account#get by UUID
+      operationId: account#getByUUID
       parameters:
       - description: If this value is true, you can only get transactions committed
           to ametsuchi
@@ -898,12 +898,12 @@ paths:
       - description: account's UUID
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       produces:
-      - application/vnd.account+json
       - application/vnd.message+json
+      - application/vnd.account+json
       responses:
         "200":
           description: OK
@@ -919,17 +919,17 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: get by UUID account
+      summary: getByUUID account
       tags:
       - account
     put:
       description: update an account by account's uuid
-      operationId: account#update by UUID
+      operationId: account#updateByUUID
       parameters:
       - description: account's guid
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       - in: body
@@ -954,7 +954,7 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: update by UUID account
+      summary: updateByUUID account
       tags:
       - account
   /accounts/{uuid}/quorum:
@@ -964,7 +964,7 @@ paths:
       - description: account's guid
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       - in: body
@@ -1011,7 +1011,7 @@ paths:
       - description: account's guid
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       produces:
@@ -1041,7 +1041,7 @@ paths:
       - description: account's guid
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       - in: body
@@ -1082,7 +1082,7 @@ paths:
       - description: account's guid
         in: path
         name: uuid
-        pattern: ^[0-9a-f]{32}$
+        pattern: ^[0-9a-f-]{32}$
         required: true
         type: string
       - in: body
@@ -1357,12 +1357,12 @@ paths:
   /domains/{domain_uri}/accounts/{username}:
     delete:
       description: delete an account by account's domain and username
-      operationId: account#delete by username
+      operationId: account#deleteByUsername
       parameters:
       - description: domain's uri
         in: path
         name: domain_uri
-        pattern: ^$
+        pattern: ^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$
         required: true
         type: string
       - description: account's username
@@ -1393,17 +1393,17 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: delete by username account
+      summary: deleteByUsername account
       tags:
       - account
     get:
       description: get an account by account's domain and username
-      operationId: account#get by username
+      operationId: account#getByUsername
       parameters:
       - description: domain's uri
         in: path
         name: domain_uri
-        pattern: ^$
+        pattern: ^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$
         required: true
         type: string
       - description: If this value is true, you can only get transactions committed
@@ -1436,17 +1436,17 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: get by username account
+      summary: getByUsername account
       tags:
       - account
     put:
       description: update an account by account's domain and username
-      operationId: account#update by username
+      operationId: account#updateByUsername
       parameters:
       - description: domain's uri
         in: path
         name: domain_uri
-        pattern: ^$
+        pattern: ^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$
         required: true
         type: string
       - description: account's username
@@ -1477,13 +1477,13 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: update by username account
+      summary: updateByUsername account
       tags:
       - account
   /domains/default/accounts/{username}:
     delete:
       description: delete an account by account's username from default domain
-      operationId: account#delete by username from default domain
+      operationId: account#deleteByUsernameFromDefaultDomain
       parameters:
       - description: account's username
         in: path
@@ -1513,12 +1513,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: delete by username from default domain account
+      summary: deleteByUsernameFromDefaultDomain account
       tags:
       - account
     get:
       description: get an account by account's username from default domain
-      operationId: account#get by username from default domain
+      operationId: account#getByUsernameFromDefaultDomain
       parameters:
       - description: If this value is true, you can only get transactions committed
           to ametsuchi
@@ -1550,12 +1550,12 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: get by username from default domain account
+      summary: getByUsernameFromDefaultDomain account
       tags:
       - account
     put:
       description: update an account by account's username from default domain
-      operationId: account#update by username from default domain
+      operationId: account#updateByUsernameFromDefaultDomain
       parameters:
       - description: account's username
         in: path
@@ -1585,7 +1585,7 @@ paths:
             $ref: '#/definitions/Message'
       schemes:
       - http
-      summary: update by username from default domain account
+      summary: updateByUsernameFromDefaultDomain account
       tags:
       - account
   /transactions/{currency_uri}:

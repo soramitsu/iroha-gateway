@@ -53,8 +53,8 @@ func (ut *accountPayload) Validate() (err error) {
 		}
 	}
 	if ut.UUID != nil {
-		if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, *ut.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.uuid`, *ut.UUID, `^[0-9a-zA-Z+/=]+$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, *ut.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.uuid`, *ut.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return
@@ -110,8 +110,8 @@ func (ut *AccountPayload) Validate() (err error) {
 			err = goa.MergeErrors(err, goa.InvalidPatternError(`response.username`, *ut.Username, `^[a-zA-Z0-9\_\-\.]{4,32}$`))
 		}
 	}
-	if ok := goa.ValidatePattern(`^[0-9a-zA-Z+/=]+$`, ut.UUID); !ok {
-		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.uuid`, ut.UUID, `^[0-9a-zA-Z+/=]+$`))
+	if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, ut.UUID); !ok {
+		err = goa.MergeErrors(err, goa.InvalidPatternError(`response.uuid`, ut.UUID, `^[0-9a-f-]{32}$`))
 	}
 	return
 }

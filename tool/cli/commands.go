@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"github.com/goadesign/goa"
 	goaclient "github.com/goadesign/goa/client"
-	uuid "github.com/goadesign/goa/uuid"
+	"github.com/goadesign/goa/uuid"
 	"github.com/soramitsu/iroha-gateway/client"
 	"github.com/spf13/cobra"
 	"log"
@@ -35,7 +35,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// DeleteByUUIDAccountCommand is the command line data structure for the delete by UUID action of account
+	// DeleteByUUIDAccountCommand is the command line data structure for the deleteByUUID action of account
 	DeleteByUUIDAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -44,7 +44,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// DeleteByUsernameAccountCommand is the command line data structure for the delete by username action of account
+	// DeleteByUsernameAccountCommand is the command line data structure for the deleteByUsername action of account
 	DeleteByUsernameAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -55,7 +55,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// DeleteByUsernameFromDefaultDomainAccountCommand is the command line data structure for the delete by username from default domain action of account
+	// DeleteByUsernameFromDefaultDomainAccountCommand is the command line data structure for the deleteByUsernameFromDefaultDomain action of account
 	DeleteByUsernameFromDefaultDomainAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -64,12 +64,12 @@ type (
 		PrettyPrint bool
 	}
 
-	// GetAllAccountCommand is the command line data structure for the get all action of account
+	// GetAllAccountCommand is the command line data structure for the getAll action of account
 	GetAllAccountCommand struct {
 		PrettyPrint bool
 	}
 
-	// GetByUUIDAccountCommand is the command line data structure for the get by UUID action of account
+	// GetByUUIDAccountCommand is the command line data structure for the getByUUID action of account
 	GetByUUIDAccountCommand struct {
 		// account's UUID
 		UUID string
@@ -78,7 +78,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// GetByUsernameAccountCommand is the command line data structure for the get by username action of account
+	// GetByUsernameAccountCommand is the command line data structure for the getByUsername action of account
 	GetByUsernameAccountCommand struct {
 		// domain's uri
 		DomainURI string
@@ -89,7 +89,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// GetByUsernameFromDefaultDomainAccountCommand is the command line data structure for the get by username from default domain action of account
+	// GetByUsernameFromDefaultDomainAccountCommand is the command line data structure for the getByUsernameFromDefaultDomain action of account
 	GetByUsernameFromDefaultDomainAccountCommand struct {
 		// account's username
 		Username string
@@ -98,7 +98,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// UpdateByUUIDAccountCommand is the command line data structure for the update by UUID action of account
+	// UpdateByUUIDAccountCommand is the command line data structure for the updateByUUID action of account
 	UpdateByUUIDAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -107,7 +107,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// UpdateByUsernameAccountCommand is the command line data structure for the update by username action of account
+	// UpdateByUsernameAccountCommand is the command line data structure for the updateByUsername action of account
 	UpdateByUsernameAccountCommand struct {
 		Payload     string
 		ContentType string
@@ -118,7 +118,7 @@ type (
 		PrettyPrint bool
 	}
 
-	// UpdateByUsernameFromDefaultDomainAccountCommand is the command line data structure for the update by username from default domain action of account
+	// UpdateByUsernameFromDefaultDomainAccountCommand is the command line data structure for the updateByUsernameFromDefaultDomain action of account
 	UpdateByUsernameFromDefaultDomainAccountCommand struct {
 		Payload     string
 		ContentType string

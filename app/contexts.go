@@ -55,7 +55,7 @@ func (ctx *AddAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// DeleteByUUIDAccountContext provides the account delete by UUID action context.
+// DeleteByUUIDAccountContext provides the account deleteByUUID action context.
 type DeleteByUUIDAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -65,7 +65,7 @@ type DeleteByUUIDAccountContext struct {
 }
 
 // NewDeleteByUUIDAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller delete by UUID action.
+// context used by the account controller deleteByUUID action.
 func NewDeleteByUUIDAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUUIDAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -77,8 +77,8 @@ func NewDeleteByUUIDAccountContext(ctx context.Context, r *http.Request, service
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
@@ -102,7 +102,7 @@ func (ctx *DeleteByUUIDAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// DeleteByUsernameAccountContext provides the account delete by username action context.
+// DeleteByUsernameAccountContext provides the account deleteByUsername action context.
 type DeleteByUsernameAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -113,7 +113,7 @@ type DeleteByUsernameAccountContext struct {
 }
 
 // NewDeleteByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller delete by username action.
+// context used by the account controller deleteByUsername action.
 func NewDeleteByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUsernameAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -125,8 +125,8 @@ func NewDeleteByUsernameAccountContext(ctx context.Context, r *http.Request, ser
 	if len(paramDomainURI) > 0 {
 		rawDomainURI := paramDomainURI[0]
 		rctx.DomainURI = rawDomainURI
-		if ok := goa.ValidatePattern(`^$`, rctx.DomainURI); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^$`))
+		if ok := goa.ValidatePattern(`^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$`, rctx.DomainURI); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$`))
 		}
 	}
 	paramUsername := req.Params["username"]
@@ -158,7 +158,7 @@ func (ctx *DeleteByUsernameAccountContext) InternalServerError(r *Message) error
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// DeleteByUsernameFromDefaultDomainAccountContext provides the account delete by username from default domain action context.
+// DeleteByUsernameFromDefaultDomainAccountContext provides the account deleteByUsernameFromDefaultDomain action context.
 type DeleteByUsernameFromDefaultDomainAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -168,7 +168,7 @@ type DeleteByUsernameFromDefaultDomainAccountContext struct {
 }
 
 // NewDeleteByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller delete by username from default domain action.
+// context used by the account controller deleteByUsernameFromDefaultDomain action.
 func NewDeleteByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*DeleteByUsernameFromDefaultDomainAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -205,7 +205,7 @@ func (ctx *DeleteByUsernameFromDefaultDomainAccountContext) InternalServerError(
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetAllAccountContext provides the account get all action context.
+// GetAllAccountContext provides the account getAll action context.
 type GetAllAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -213,7 +213,7 @@ type GetAllAccountContext struct {
 }
 
 // NewGetAllAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller get all action.
+// context used by the account controller getAll action.
 func NewGetAllAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetAllAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -242,7 +242,7 @@ func (ctx *GetAllAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetByUUIDAccountContext provides the account get by UUID action context.
+// GetByUUIDAccountContext provides the account getByUUID action context.
 type GetByUUIDAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -252,7 +252,7 @@ type GetByUUIDAccountContext struct {
 }
 
 // NewGetByUUIDAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller get by UUID action.
+// context used by the account controller getByUUID action.
 func NewGetByUUIDAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetByUUIDAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -274,8 +274,8 @@ func NewGetByUUIDAccountContext(ctx context.Context, r *http.Request, service *g
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
@@ -299,7 +299,7 @@ func (ctx *GetByUUIDAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetByUsernameAccountContext provides the account get by username action context.
+// GetByUsernameAccountContext provides the account getByUsername action context.
 type GetByUsernameAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -310,7 +310,7 @@ type GetByUsernameAccountContext struct {
 }
 
 // NewGetByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller get by username action.
+// context used by the account controller getByUsername action.
 func NewGetByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetByUsernameAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -322,8 +322,8 @@ func NewGetByUsernameAccountContext(ctx context.Context, r *http.Request, servic
 	if len(paramDomainURI) > 0 {
 		rawDomainURI := paramDomainURI[0]
 		rctx.DomainURI = rawDomainURI
-		if ok := goa.ValidatePattern(`^$`, rctx.DomainURI); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^$`))
+		if ok := goa.ValidatePattern(`^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$`, rctx.DomainURI); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$`))
 		}
 	}
 	paramIsCommitted := req.Params["is_committed"]
@@ -365,7 +365,7 @@ func (ctx *GetByUsernameAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// GetByUsernameFromDefaultDomainAccountContext provides the account get by username from default domain action context.
+// GetByUsernameFromDefaultDomainAccountContext provides the account getByUsernameFromDefaultDomain action context.
 type GetByUsernameFromDefaultDomainAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -375,7 +375,7 @@ type GetByUsernameFromDefaultDomainAccountContext struct {
 }
 
 // NewGetByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller get by username from default domain action.
+// context used by the account controller getByUsernameFromDefaultDomain action.
 func NewGetByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*GetByUsernameFromDefaultDomainAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -422,7 +422,7 @@ func (ctx *GetByUsernameFromDefaultDomainAccountContext) InternalServerError(r *
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// UpdateByUUIDAccountContext provides the account update by UUID action context.
+// UpdateByUUIDAccountContext provides the account updateByUUID action context.
 type UpdateByUUIDAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -432,7 +432,7 @@ type UpdateByUUIDAccountContext struct {
 }
 
 // NewUpdateByUUIDAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller update by UUID action.
+// context used by the account controller updateByUUID action.
 func NewUpdateByUUIDAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUUIDAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -444,8 +444,8 @@ func NewUpdateByUUIDAccountContext(ctx context.Context, r *http.Request, service
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
@@ -469,7 +469,7 @@ func (ctx *UpdateByUUIDAccountContext) InternalServerError(r *Message) error {
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// UpdateByUsernameAccountContext provides the account update by username action context.
+// UpdateByUsernameAccountContext provides the account updateByUsername action context.
 type UpdateByUsernameAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -480,7 +480,7 @@ type UpdateByUsernameAccountContext struct {
 }
 
 // NewUpdateByUsernameAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller update by username action.
+// context used by the account controller updateByUsername action.
 func NewUpdateByUsernameAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUsernameAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -492,8 +492,8 @@ func NewUpdateByUsernameAccountContext(ctx context.Context, r *http.Request, ser
 	if len(paramDomainURI) > 0 {
 		rawDomainURI := paramDomainURI[0]
 		rctx.DomainURI = rawDomainURI
-		if ok := goa.ValidatePattern(`^$`, rctx.DomainURI); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^$`))
+		if ok := goa.ValidatePattern(`^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$`, rctx.DomainURI); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`domain_uri`, rctx.DomainURI, `^(?:[0-9a-zA-Z-._~]|%[0-9][0-9])+$`))
 		}
 	}
 	paramUsername := req.Params["username"]
@@ -525,7 +525,7 @@ func (ctx *UpdateByUsernameAccountContext) InternalServerError(r *Message) error
 	return ctx.ResponseData.Service.Send(ctx.Context, 500, r)
 }
 
-// UpdateByUsernameFromDefaultDomainAccountContext provides the account update by username from default domain action context.
+// UpdateByUsernameFromDefaultDomainAccountContext provides the account updateByUsernameFromDefaultDomain action context.
 type UpdateByUsernameFromDefaultDomainAccountContext struct {
 	context.Context
 	*goa.ResponseData
@@ -535,7 +535,7 @@ type UpdateByUsernameFromDefaultDomainAccountContext struct {
 }
 
 // NewUpdateByUsernameFromDefaultDomainAccountContext parses the incoming request URL and body, performs validations and creates the
-// context used by the account controller update by username from default domain action.
+// context used by the account controller updateByUsernameFromDefaultDomain action.
 func NewUpdateByUsernameFromDefaultDomainAccountContext(ctx context.Context, r *http.Request, service *goa.Service) (*UpdateByUsernameFromDefaultDomainAccountContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -925,8 +925,8 @@ func NewUpdateQuorumContext(ctx context.Context, r *http.Request, service *goa.S
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
@@ -972,8 +972,8 @@ func NewAddSignatoriesContext(ctx context.Context, r *http.Request, service *goa
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
@@ -1028,8 +1028,8 @@ func NewDeleteSignatoriesContext(ctx context.Context, r *http.Request, service *
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
@@ -1096,8 +1096,8 @@ func NewGetAllSignatoriesContext(ctx context.Context, r *http.Request, service *
 	if len(paramUUID) > 0 {
 		rawUUID := paramUUID[0]
 		rctx.UUID = rawUUID
-		if ok := goa.ValidatePattern(`^[0-9a-f]{32}$`, rctx.UUID); !ok {
-			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f]{32}$`))
+		if ok := goa.ValidatePattern(`^[0-9a-f-]{32}$`, rctx.UUID); !ok {
+			err = goa.MergeErrors(err, goa.InvalidPatternError(`uuid`, rctx.UUID, `^[0-9a-f-]{32}$`))
 		}
 	}
 	return &rctx, err
